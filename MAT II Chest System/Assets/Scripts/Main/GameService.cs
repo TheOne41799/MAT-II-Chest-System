@@ -14,19 +14,23 @@ namespace ChestSystem.Main
         #endregion
 
         #region database variables
+        [Header("Database variables")]
         [SerializeField] private ChestModelDatabaseSO chestModelDatabaseSO;
         #endregion
 
         #region prefab variables
+        [Header("Prefab varibales")]
         [SerializeField] private ChestView chestViewPrefab;
         [SerializeField] private UIChestSystemViewController chestSystemViewControllerPrefab;
         [SerializeField] private UIGameplayViewController gameplayViewControllerPrefab;
         #endregion
 
+        [SerializeField] private Canvas canvas;
+
         private void Start()
         {
-            chestService = new ChestService(chestModelDatabaseSO, chestViewPrefab);
-            uiService = new UIService(chestSystemViewControllerPrefab, gameplayViewControllerPrefab);
+            uiService = new UIService(chestSystemViewControllerPrefab, gameplayViewControllerPrefab, canvas);
+            chestService = new ChestService(chestModelDatabaseSO, chestViewPrefab, canvas, uiService);
         }
     }
 }

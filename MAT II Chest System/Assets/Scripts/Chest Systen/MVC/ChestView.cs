@@ -8,8 +8,9 @@ namespace ChestSystem.Chests
     public class ChestView : MonoBehaviour
     {
         [SerializeField] private Image chestImage;
+        [SerializeField] private string chestTypeString;
 
-        private ChestType chestType;
+        //private ChestType chestType;
 
         private ChestController chestController;
 
@@ -18,8 +19,15 @@ namespace ChestSystem.Chests
             chestController = controller;
 
             // choose a proper function
-            chestType = chestController.chestModelSO.ChestType;
-            chestImage.sprite = chestController.chestModelSO.ChestSprite;
+            //chestType = chestController.chestModelSO.ChestType;
+            //chestImage.sprite = chestController.chestModelSO.ChestSprite;
+
+            //choose appropriate location to call
+        }
+
+        public void UpdateVariables()
+        {
+            chestTypeString = chestController.chestModelSO.ChestSprite.ToString();
         }
     }
 }

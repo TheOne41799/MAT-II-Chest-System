@@ -199,7 +199,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -293,7 +293,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -456,6 +456,7 @@ MonoBehaviour:
   chestViewPrefab: {fileID: 1555145220732299681, guid: d1c0a0e43d7c134468f7cff3498aff72, type: 3}
   chestSystemViewControllerPrefab: {fileID: 5758782424220799885, guid: 688e66ddc9a12c24f8b380f5fcad00fe, type: 3}
   gameplayViewControllerPrefab: {fileID: 3807957218380588554, guid: 453432318715ce54c890208eacc446d3, type: 3}
+  canvas: {fileID: 379827891}
 --- !u!4 &1516508716
 Transform:
   m_ObjectHideFlags: 0

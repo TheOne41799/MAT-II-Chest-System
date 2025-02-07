@@ -31,7 +31,6 @@ namespace ChestSystem.Chests
         {
             ////???????????
             chestTypeText.text = chestController.chestModel.chestModelSO.ChestType.ToString();
-            
         }
     }
 }

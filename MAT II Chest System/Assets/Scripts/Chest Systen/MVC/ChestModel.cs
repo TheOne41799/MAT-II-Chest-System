@@ -6,7 +6,7 @@ namespace ChestSystem.Chests
 {
     public class ChestModel
     {
-        private ChestModelSO chestModelSO;
+        public ChestModelSO chestModelSO {  get; private set; }
         private ChestController chestController;
 
         public ChestModel(ChestModelSO chestModelSO)

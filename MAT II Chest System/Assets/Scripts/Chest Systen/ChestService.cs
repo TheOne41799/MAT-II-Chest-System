@@ -22,16 +22,16 @@ namespace ChestSystem.Chests
             this.uiService = uiService;
 
             //PrintTest();
-            CreateChest();
+            //CreateChest();
+
+            EventService.Instance.OnGenerateChestButtonClicked.AddListener(CreateChest);
         }
 
-        public void CreateChest()
+        public void CreateChest(int currentEmptySlot)
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
             ChestController chestController = new ChestController(chestModelSO, chestView, uiService);
-
             
-
             chestControllers.Add(chestController);
         }
 

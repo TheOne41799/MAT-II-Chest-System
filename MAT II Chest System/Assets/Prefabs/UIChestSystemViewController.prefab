@@ -85,7 +85,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalNumberOfUIChestSlots: 4
-  UIChestSlot: {fileID: 4635256823283374490, guid: fc652ee92e0b59740b0aed4f10cbe355, type: 3}
+  emptyUIChestSlot: {fileID: 4635256823283374490, guid: fc652ee92e0b59740b0aed4f10cbe355, type: 3}
+  generateChestButton: {fileID: 2365340833310629580}
   uiChestSlotsContainer: {fileID: 4643377521850482895}
 --- !u!222 &857059743783849882
 CanvasRenderer:

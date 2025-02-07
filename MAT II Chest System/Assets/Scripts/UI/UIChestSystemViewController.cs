@@ -2,45 +2,75 @@ using ChestSystem.Chests;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using ChestSystem.Events;
 
 namespace ChestSystem.UI
 {
     public class UIChestSystemViewController : MonoBehaviour
     {
         [SerializeField] private int totalNumberOfUIChestSlots;
-        [SerializeField] private GameObject UIChestSlot;
+        //private int currentEmptySlot;
+
+        [SerializeField] private GameObject emptyUIChestSlot;
+        [SerializeField] private Button generateChestButton;
 
         [SerializeField] private Transform uiChestSlotsContainer;
-        public Transform UIChestSlotsContainer { get { return uiChestSlotsContainer; } }
+        //public Transform UIChestSlotsContainer { get { return uiChestSlotsContainer; } }
+
+        private List<GameObject> allUIChestSlots;
+
         
-        private List<GameObject> uiChestSlots = new List<GameObject>();
-        private List<ChestView> uiChestViewSlots = new List<ChestView>();
-        private int currentChestSlotNumber = 1;
+        
+
+        private int currentChestSlotNumber = 0;
 
         private void Start()
         {
-            CreateUIChestSlots();
+            InitializeVaribales();
+            CreateEmptyUIChestSlots();
         }
 
-        private void CreateUIChestSlots()
+        private void InitializeVaribales()
         {
+            generateChestButton.onClick.AddListener(GenerateChest);
+            allUIChestSlots = new List<GameObject>();
+            currentChestSlotNumber = 0;
+        }        
+
+        private void CreateEmptyUIChestSlots()
+        {
+
+
             for (int i = 0; i < totalNumberOfUIChestSlots; i++)
-            {
-                GameObject chestSlot = Instantiate(UIChestSlot, uiChestSlotsContainer);
-                uiChestSlots.Add(chestSlot);
+            {                
+                GameObject emptyChestSlot = Instantiate(emptyUIChestSlot, uiChestSlotsContainer);
+                allUIChestSlots.Add(emptyChestSlot);
             }
         }
 
-        /*public void ChestAdded(ChestView chestView)
+        public void GenerateChest()
         {
-            Debug.Log("Helo");
-            chestView.gameObject.transform.parent = uiChestSlotsContainer;
-            uiChestViewSlots.Add(chestView);            
-        }*/
+            EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent(currentChestSlotNumber);
+        }
 
-        private void ChestRemoved()
+        public void ChestAdded(ChestView chestView)
         {
+            Debug.Log("Chest has been aded");
+            Debug.Log(currentChestSlotNumber);
 
+            if (allUIChestSlots[currentChestSlotNumber] != null)
+            {
+                Destroy(allUIChestSlots[currentChestSlotNumber]);
+            }
+
+            allUIChestSlots[currentChestSlotNumber] = chestView.gameObject;
+
+            chestView.gameObject.transform.SetParent(uiChestSlotsContainer);
+
+            currentChestSlotNumber++;
+
+            Debug.Log(currentChestSlotNumber);
         }
     }
 }

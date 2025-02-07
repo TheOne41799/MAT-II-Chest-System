@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ChestSystem.Chests
 {
     public class ChestView : MonoBehaviour
     {
         [SerializeField] private Image chestImage;
-        [SerializeField] private string chestTypeString;
+        [SerializeField] private TextMeshProUGUI chestTypeText;
+        [SerializeField] private int timeToUnlockChest;
 
         //private ChestType chestType;
 
@@ -27,7 +29,9 @@ namespace ChestSystem.Chests
 
         public void UpdateVariables()
         {
-            chestTypeString = chestController.chestModelSO.ChestSprite.ToString();
+            ////???????????
+            chestTypeText.text = chestController.chestModel.chestModelSO.ChestType.ToString();
+            
         }
     }
 }

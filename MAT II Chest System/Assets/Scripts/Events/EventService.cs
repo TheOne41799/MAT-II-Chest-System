@@ -21,13 +21,15 @@ namespace ChestSystem.Events
             }
         }
 
-        public GameEventController<GameObject> OnChestCreated { get; private set; }
+        public GameEventController<int> OnGenerateChestButtonClicked { get; private set; }
+        public GameEventController<ChestView> OnChestCreated { get; private set; }
 
 
 
         public EventService()
         {
-            OnChestCreated = new GameEventController<GameObject>();
+            OnGenerateChestButtonClicked = new GameEventController<int>();
+            OnChestCreated = new GameEventController<ChestView>();
         }
     }
 }

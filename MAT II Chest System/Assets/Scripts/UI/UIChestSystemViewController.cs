@@ -20,8 +20,8 @@ namespace ChestSystem.UI
 
         private List<GameObject> allUIChestSlots;
 
-        
-        
+
+        private Dictionary<int, ChestView> chestSlots = new Dictionary<int, ChestView>();
 
         private int currentChestSlotNumber = 0;
 
@@ -51,10 +51,16 @@ namespace ChestSystem.UI
 
         public void GenerateChest()
         {
+            if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
+            {
+                Debug.LogWarning("No more available slots!");
+                return;
+            }
+
             EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent(currentChestSlotNumber);
         }
 
-        public void ChestAdded(ChestView chestView)
+        /*public void ChestAdded(ChestView chestView)
         {
             Debug.Log("Chest has been aded");
             Debug.Log(currentChestSlotNumber);
@@ -71,6 +77,29 @@ namespace ChestSystem.UI
             currentChestSlotNumber++;
 
             Debug.Log(currentChestSlotNumber);
+        }*/
+
+        public void ChestAdded(ChestView chestView)
+        {
+            Debug.Log("Chest has been added at index: " + currentChestSlotNumber);
+
+            /*if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
+            {
+                Debug.LogWarning("No more available slots!");
+                return;
+            }*/
+
+            if (allUIChestSlots[currentChestSlotNumber] != null)
+            {
+                Destroy(allUIChestSlots[currentChestSlotNumber]);
+            }
+
+            chestSlots[currentChestSlotNumber] = chestView;
+
+            chestView.transform.SetParent(uiChestSlotsContainer);
+            chestView.transform.SetSiblingIndex(currentChestSlotNumber);
+
+            currentChestSlotNumber++;
         }
     }
 }

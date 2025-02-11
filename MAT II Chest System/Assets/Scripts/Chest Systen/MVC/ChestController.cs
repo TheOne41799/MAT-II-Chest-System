@@ -15,6 +15,8 @@ namespace ChestSystem.Chests
 
         private ChestModelSO chestModelSO;
 
+        private ChestStateMachine chestStateMachine;
+
         public ChestController(ChestModelSO chestModelSO, ChestView chestViewPrefab, UIService uiService)
         {
             this.chestModelSO = chestModelSO;
@@ -25,10 +27,15 @@ namespace ChestSystem.Chests
 
             EventService.Instance.OnChestCreated.InvokeEvent(chestView);
 
+            InitializeVariables();
+        }
+
+        private void InitializeVariables()
+        {
             chestModel.SetChestController(this);
             chestView.SetChestController(this);
 
-            chestView.InitializeVariables();            
+            chestView.InitializeUI();
         }
     }
 }

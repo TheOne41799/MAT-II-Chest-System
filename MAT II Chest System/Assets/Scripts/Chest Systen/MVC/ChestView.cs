@@ -12,8 +12,6 @@ namespace ChestSystem.Chests
         [SerializeField] private TextMeshProUGUI chestTypeText;
         [SerializeField] private TextMeshProUGUI timeToUnlockChestText;
 
-        //private ChestType chestType;
-
         private ChestController chestController;
 
         public void SetChestController(ChestController controller)
@@ -21,7 +19,7 @@ namespace ChestSystem.Chests
             chestController = controller;
         }
 
-        public void InitializeVariables()
+        public void InitializeUI()
         {
             chestImage.sprite = chestController.chestModel.chestModelSO.ChestSprite;
             chestTypeText.text = chestController.chestModel.chestModelSO.ChestType.ToString();

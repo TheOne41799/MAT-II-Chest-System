@@ -8,8 +8,7 @@ using ChestSystem.Events;
 namespace ChestSystem.UI
 {
     public class UIChestSystemViewController : MonoBehaviour
-    {
-        
+    {        
         [SerializeField] private GameObject emptyUIChestSlot;
 
         [SerializeField] private Button generateChestButton;

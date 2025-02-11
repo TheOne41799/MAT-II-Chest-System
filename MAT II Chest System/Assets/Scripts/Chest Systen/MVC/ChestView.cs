@@ -10,7 +10,7 @@ namespace ChestSystem.Chests
     {
         [SerializeField] private Image chestImage;
         [SerializeField] private TextMeshProUGUI chestTypeText;
-        [SerializeField] private int timeToUnlockChest;
+        [SerializeField] private TextMeshProUGUI timeToUnlockChestText;
 
         //private ChestType chestType;
 
@@ -19,18 +19,15 @@ namespace ChestSystem.Chests
         public void SetChestController(ChestController controller)
         {
             chestController = controller;
-
-            // choose a proper function
-            //chestType = chestController.chestModelSO.ChestType;
-            //chestImage.sprite = chestController.chestModelSO.ChestSprite;
-
-            //choose appropriate location to call
         }
 
-        public void UpdateVariables()
+        public void InitializeVariables()
         {
-            ////???????????
+            chestImage.sprite = chestController.chestModel.chestModelSO.ChestSprite;
             chestTypeText.text = chestController.chestModel.chestModelSO.ChestType.ToString();
+
+            timeToUnlockChestText.gameObject.SetActive(false);
+            timeToUnlockChestText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " s";
         }
     }
 }

@@ -28,8 +28,7 @@ namespace ChestSystem.Chests
             chestModel.SetChestController(this);
             chestView.SetChestController(this);
 
-            chestView.UpdateVariables();
-            
+            chestView.InitializeVariables();            
         }
     }
 }

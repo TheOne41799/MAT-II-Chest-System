@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: LegendaryChest
   m_EditorClassIdentifier: 
   chestType: 4
-  chestSprite: {fileID: 0}
+  chestSprite: {fileID: 21300000, guid: 3210fb434f6df0f43a929086ac98614a, type: 3}
   minimumCoinsInChest: 0
   maximumCoinsInChest: 0
   minimumGemsInChest: 0
   maximumGemsInChest: 0
-  timeRequiredToUnlockChest: 0
+  timeRequiredToUnlockChest: 10
   gemsRequiredToUnlockChest: 0

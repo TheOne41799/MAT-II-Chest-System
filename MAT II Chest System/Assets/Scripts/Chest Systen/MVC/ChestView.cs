@@ -19,7 +19,7 @@ namespace ChestSystem.Chests
             chestController = controller;
         }
 
-        public void InitializeUI()
+        public void ChestLockedStateUI()
         {
             chestImage.sprite = chestController.chestModel.chestModelSO.ChestSprite;
             chestTypeText.text = chestController.chestModel.chestModelSO.ChestType.ToString();

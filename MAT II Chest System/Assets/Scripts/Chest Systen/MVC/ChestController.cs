@@ -31,11 +31,17 @@ namespace ChestSystem.Chests
         }
 
         private void InitializeVariables()
-        {
+        {        
             chestModel.SetChestController(this);
             chestView.SetChestController(this);
 
-            chestView.InitializeUI();
+            CreateStateMachine();
+            chestStateMachine.ChangeState(ChestState.LOCKED);
+        }
+
+        private void CreateStateMachine()
+        {
+            chestStateMachine = new ChestStateMachine(this);
         }
     }
 }

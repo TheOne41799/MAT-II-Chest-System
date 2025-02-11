@@ -24,9 +24,6 @@ namespace ChestSystem.Chests
             
         }
 
-        public void UpdateState()
-        {
-            
-        }
+        public void UpdateState() { }
     }
 }

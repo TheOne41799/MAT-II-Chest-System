@@ -16,7 +16,7 @@ namespace ChestSystem.Chests
 
         public void EnterState()
         {
-            
+            Debug.Log("Unlocked");
         }
 
         public void ExitState()

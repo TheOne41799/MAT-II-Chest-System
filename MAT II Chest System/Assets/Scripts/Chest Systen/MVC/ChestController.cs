@@ -35,6 +35,8 @@ namespace ChestSystem.Chests
             chestModel.SetChestController(this);
             chestView.SetChestController(this);
 
+            chestView.InitializeVariables();
+
             CreateStateMachine();
             chestStateMachine.ChangeState(ChestState.LOCKED);
         }
@@ -42,6 +44,16 @@ namespace ChestSystem.Chests
         private void CreateStateMachine()
         {
             chestStateMachine = new ChestStateMachine(this);
+        }
+
+        public void UnlockingChestWithTimer()
+        {
+            chestStateMachine.ChangeState(ChestState.UNLOCKING);
+        }
+
+        public void UnlockingChestWithGems()
+        {
+            chestStateMachine.ChangeState(ChestState.UNLOCKED);
         }
     }
 }

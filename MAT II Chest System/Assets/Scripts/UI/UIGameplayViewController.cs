@@ -32,16 +32,25 @@ namespace ChestSystem.UI
         public void ChestUnlockButtonClicked(ChestController chestController)
         {
             this.chestController = chestController;
+
+            timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
+            gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
+
             chestUnlockUIPopup?.SetActive(true);            
         }
 
         private void UnlockChestWithTimerButton()
         {
+            chestUnlockUIPopup?.SetActive(false);
             chestController?.UnlockingChestWithTimer();
         }
 
         private void UnlockChestWithGemsButton()
         {
+            // first look for an if condition - does player has required gems
+            // just create an event
+
+            chestUnlockUIPopup?.SetActive(false);
             chestController?.UnlockingChestWithGems();
         }
     }

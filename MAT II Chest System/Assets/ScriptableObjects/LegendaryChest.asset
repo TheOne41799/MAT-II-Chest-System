@@ -19,4 +19,4 @@ MonoBehaviour:
   minimumGemsInChest: 0
   maximumGemsInChest: 0
   timeRequiredToUnlockChest: 10
-  gemsRequiredToUnlockChest: 0
+  gemsRequiredToUnlockChest: 3

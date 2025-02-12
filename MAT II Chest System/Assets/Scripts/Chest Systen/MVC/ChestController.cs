@@ -8,8 +8,11 @@ namespace ChestSystem.Chests
 {
     public class ChestController
     {
+        public int ChestID { get; private set; }
         public ChestModel chestModel {  get; private set; }
         public ChestView chestView { get; private set; }
+
+        private static int chestCounter = 0;
 
         private UIService uiService;
 
@@ -19,13 +22,15 @@ namespace ChestSystem.Chests
 
         public ChestController(ChestModelSO chestModelSO, ChestView chestViewPrefab, UIService uiService)
         {
+            ChestID = chestCounter++;
+
             this.chestModelSO = chestModelSO;
             this.uiService = uiService;
 
             chestModel = new ChestModel(chestModelSO);
             chestView = GameObject.Instantiate(chestViewPrefab);
 
-            EventService.Instance.OnChestCreated.InvokeEvent(chestView);
+            EventService.Instance.OnChestCreated.InvokeEvent(this);
 
             InitializeVariables();
         }

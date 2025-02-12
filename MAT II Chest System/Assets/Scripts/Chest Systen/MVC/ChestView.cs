@@ -55,14 +55,9 @@ namespace ChestSystem.Chests
                 chestStateText.text = currentChestState.ToString();
                 timeToUnlockChestText.text = remainingTime.ToString() + " secs";
             }
-            /*else
-            {
-                timeToUnlockChestText.gameObject.SetActive(false);
-                chestStateText.text = currentChestState.ToString();
-            }*/
         }
 
-        public void ChestUnlockedUI()
+        public void ChestUnlockedStateUI()
         {
             timeToUnlockChestText.gameObject.SetActive(false);
             chestStateText.text = currentChestState.ToString();

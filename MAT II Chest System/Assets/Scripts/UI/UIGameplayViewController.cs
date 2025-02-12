@@ -17,8 +17,7 @@ namespace ChestSystem.UI
         [SerializeField] private TextMeshProUGUI timerText;
         [SerializeField] private TextMeshProUGUI gemsText;
 
-        //this is a mistake
-        private ChestController chestController;
+        private Dictionary<int, ChestController> chestControllers = new Dictionary<int, ChestController>();
 
         private void Awake()
         {
@@ -33,7 +32,10 @@ namespace ChestSystem.UI
 
         public void ChestUnlockButtonClicked(ChestController chestController)
         {
-            this.chestController = chestController;
+            if (!chestControllers.ContainsKey(chestController.ChestID))
+            {
+                chestControllers[chestController.ChestID] = chestController;
+            }
 
             timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
             gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
@@ -44,7 +46,11 @@ namespace ChestSystem.UI
         private void UnlockChestWithTimerButton()
         {
             chestUnlockUIPopup?.SetActive(false);
-            chestController?.UnlockingChestWithTimer();
+
+            foreach (var chest in chestControllers.Values)
+            {
+                chest.UnlockingChestWithTimer();
+            }
         }
 
         private void UnlockChestWithGemsButton()
@@ -53,17 +59,20 @@ namespace ChestSystem.UI
             // just create an event
 
             chestUnlockUIPopup?.SetActive(false);
-            chestController?.UnlockingChestWithGems();
+
+            foreach (var chest in chestControllers.Values)
+            {
+                chest.UnlockingChestWithGems();
+            }
         }
 
         private void ChestUnlocked(ChestController controller)
         {
-            // this is a mistake
-            if (chestController == controller)
+            if (chestControllers.ContainsKey(controller.ChestID))
             {
-                chestController.UnlockedChest();
+                chestControllers[controller.ChestID].UnlockedChest();
+                chestControllers.Remove(controller.ChestID);
             }
-            //chestController.UnlockedChest(controller);
         }
     }
 }

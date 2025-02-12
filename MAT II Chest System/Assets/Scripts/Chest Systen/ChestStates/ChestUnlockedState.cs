@@ -16,8 +16,7 @@ namespace ChestSystem.Chests
 
         public void EnterState()
         {
-            //Debug.Log("Unlocked");
-            chestController.chestView.ChestUnlockedUI();
+            chestController.chestView.ChestUnlockedStateUI();
         }
 
         public void ExitState()

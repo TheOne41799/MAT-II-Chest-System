@@ -11,6 +11,7 @@ namespace ChestSystem.Chests
         public ChestController chestController { get; set; }
         private GenericStateMachine<T> stateMachine;
         private float unlockTimeRemaining;
+        private bool isChestUnlocked = false;
 
         public ChestUnlockingState(GenericStateMachine<T> stateMachine, float unlockTime)
         {
@@ -30,30 +31,31 @@ namespace ChestSystem.Chests
 
         public void UpdateState()
         {
-            if (unlockTimeRemaining >= 0)
+            if (!isChestUnlocked)
             {
-                unlockTimeRemaining -= Time.deltaTime;                
-            }
-            else
-            {
-                unlockTimeRemaining = 0;
+                if (unlockTimeRemaining > 0)
+                {
+                    unlockTimeRemaining -= Time.deltaTime;
+                }
+                else
+                {
+                    unlockTimeRemaining = 0;
+                    isChestUnlocked = true;
 
-                // Where to call this?
-                //EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
-            }
+                    chestController.UnlockedChest();
 
-            DisplayTime(unlockTimeRemaining);
+                    EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
+                }
+
+                Debug.Log(isChestUnlocked);
+
+                DisplayTime(unlockTimeRemaining);
+            }
         }
 
         private void DisplayTime(float timeValue)
         {
-            /*if (timeValue <= 0)
-            {
-                timeValue = 0;                
-            }*/
-
             timeValue = Mathf.FloorToInt(timeValue);
-            //timeValue = Mathf.Ceil(timeValue * 10) / 10f;
 
             chestController.chestView.UpdateTimer(timeValue);            
         }

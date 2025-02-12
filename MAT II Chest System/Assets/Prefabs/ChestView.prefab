@@ -210,8 +210,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -876,8 +876,8 @@ MonoBehaviour:
   unlockButton: {fileID: 3239589156258964394}
   chestImage: {fileID: 5892087934822849770}
   chestTypeText: {fileID: 1708330956}
+  chestStateText: {fileID: 1609373605014504916}
   timeToUnlockChestText: {fileID: 2117478640}
-  chestUnlockUIPopup: {fileID: 0}
 --- !u!1 &8002114610654326084
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,7 @@ namespace ChestSystem.UI
         [SerializeField] private TextMeshProUGUI timerText;
         [SerializeField] private TextMeshProUGUI gemsText;
 
+        //this is a mistake
         private ChestController chestController;
 
         private void Awake()
@@ -24,6 +25,7 @@ namespace ChestSystem.UI
             chestUnlockUIPopup?.SetActive(false);
 
             EventService.Instance.OnChestUnlockClicked.AddListener(ChestUnlockButtonClicked);
+            EventService.Instance.OnChestUnlocked.AddListener(ChestUnlocked);
 
             unlockWithTimerButton.onClick.AddListener(UnlockChestWithTimerButton);
             unlockWithGemsButton.onClick.AddListener(UnlockChestWithGemsButton);
@@ -52,6 +54,16 @@ namespace ChestSystem.UI
 
             chestUnlockUIPopup?.SetActive(false);
             chestController?.UnlockingChestWithGems();
+        }
+
+        private void ChestUnlocked(ChestController controller)
+        {
+            // this is a mistake
+            if (chestController == controller)
+            {
+                chestController.UnlockedChest();
+            }
+            //chestController.UnlockedChest(controller);
         }
     }
 }

@@ -32,5 +32,10 @@ namespace ChestSystem.Main
             uiService = new UIService(chestSystemViewControllerPrefab, gameplayViewControllerPrefab, canvas);
             chestService = new ChestService(chestModelDatabaseSO, chestViewPrefab, canvas, uiService);
         }
+
+        private void Update()
+        {
+            chestService?.Update();
+        }
     }
 }

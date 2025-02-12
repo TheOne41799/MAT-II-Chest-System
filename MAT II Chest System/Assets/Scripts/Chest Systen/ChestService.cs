@@ -15,7 +15,7 @@ namespace ChestSystem.Chests
         private UIService uiService;
 
         public ChestService(ChestModelDatabaseSO chestModelDatabaseSO, ChestView chestViewPrefab, Canvas canvas, UIService uiService)
-        {            
+        {
             this.chestModelDatabaseSO = chestModelDatabaseSO;
             this.chestView = chestViewPrefab;
             this.canvas = canvas;
@@ -31,7 +31,7 @@ namespace ChestSystem.Chests
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
             ChestController chestController = new ChestController(chestModelSO, chestView, uiService);
-            
+
             chestControllers.Add(chestController);
         }
 
@@ -46,6 +46,14 @@ namespace ChestSystem.Chests
             for (int i = 0; i < chestModelDatabaseSO.ChestModelSOsList.Count; i++)
             {
                 Debug.Log(chestModelDatabaseSO.ChestModelSOsList[i].ChestType);
+            }
+        }
+
+        public void Update()
+        {
+            foreach (ChestController controller in chestControllers)
+            {
+                controller?.Update();
             }
         }
     }

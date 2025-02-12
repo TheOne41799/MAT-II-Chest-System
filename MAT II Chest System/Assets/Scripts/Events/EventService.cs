@@ -24,12 +24,14 @@ namespace ChestSystem.Events
         public GameEventController<int> OnGenerateChestButtonClicked { get; private set; }
         public GameEventController<ChestView> OnChestCreated { get; private set; }
         public GameEventController<ChestController> OnChestUnlockClicked { get; private set; }
+        public GameEventController<ChestController> OnChestUnlocked { get; private set; }
 
         public EventService()
         {
             OnGenerateChestButtonClicked = new GameEventController<int>();
             OnChestCreated = new GameEventController<ChestView>();
             OnChestUnlockClicked = new GameEventController<ChestController>();
+            OnChestUnlocked = new GameEventController<ChestController>();
         }
     }
 }

@@ -19,10 +19,7 @@ namespace ChestSystem.Chests
             chestController.chestView.ChestLockedStateUI();
         }
 
-        public void ExitState()
-        {
-            
-        }
+        public void ExitState() { }
 
         public void UpdateState() { }
     }

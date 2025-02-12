@@ -16,7 +16,8 @@ namespace ChestSystem.Chests
         private void CreateStates()
         {
             States.Add(ChestSystem.Chests.ChestState.LOCKED, new ChestLockedState<ChestController>(this));
-            States.Add(ChestSystem.Chests.ChestState.UNLOCKING, new ChestUnlockingState<ChestController>(this));
+            States.Add(ChestSystem.Chests.ChestState.UNLOCKING, new ChestUnlockingState<ChestController>(this, 
+                                                    this.chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest));
             States.Add(ChestSystem.Chests.ChestState.UNLOCKED, new ChestUnlockedState<ChestController>(this));
             States.Add(ChestSystem.Chests.ChestState.COLLECTED, new ChestCollectedState<ChestController>(this));
         }

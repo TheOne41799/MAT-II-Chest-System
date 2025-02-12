@@ -48,7 +48,7 @@ namespace ChestSystem.UI
         {
             if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
             {
-                Debug.LogWarning("No more available slots!");
+                // Create a popup for no extra slots
                 return;
             }
 
@@ -57,8 +57,6 @@ namespace ChestSystem.UI
 
         public void ChestAdded(ChestView chestView)
         {
-            Debug.Log("Chest has been added at index: " + currentChestSlotNumber);
-
             if (allUIChestSlots[currentChestSlotNumber] != null)
             {
                 Destroy(allUIChestSlots[currentChestSlotNumber]);

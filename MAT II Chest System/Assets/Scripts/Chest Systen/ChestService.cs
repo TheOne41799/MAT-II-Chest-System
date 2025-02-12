@@ -24,10 +24,20 @@ namespace ChestSystem.Chests
             //PrintTest();
             //CreateChest();
 
+            //EventService.Instance.OnGenerateChestButtonClicked.AddListener(CreateChest);
+
             EventService.Instance.OnGenerateChestButtonClicked.AddListener(CreateChest);
         }
 
-        public void CreateChest(int currentEmptySlot)
+        /*public void CreateChest(int currentEmptySlot)
+        {
+            ChestModelSO chestModelSO = ChooseARandomChestModel();
+            ChestController chestController = new ChestController(chestModelSO, chestView, uiService);
+
+            chestControllers.Add(chestController);
+        }*/
+
+        public void CreateChest()
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
             ChestController chestController = new ChestController(chestModelSO, chestView, uiService);

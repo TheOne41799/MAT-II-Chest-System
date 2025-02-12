@@ -50,7 +50,9 @@ namespace ChestSystem.UI
                 return;
             }
 
-            EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent(currentChestSlotNumber);
+            //EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent(currentChestSlotNumber);
+            EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
+            //currentChestSlotNumber++;
         }        
 
         public void ChestAdded(ChestController chestController)

@@ -16,17 +16,18 @@ namespace ChestSystem.Chests
 
         public void EnterState()
         {
-            throw new System.NotImplementedException();
+            //Debug.Log("Unlocked");
+            chestController.chestView.ChestUnlockedUI();
         }
 
         public void ExitState()
         {
-            throw new System.NotImplementedException();
+            
         }
 
         public void UpdateState()
         {
-            throw new System.NotImplementedException();
+            
         }
     }
 }

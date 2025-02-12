@@ -31,11 +31,46 @@ namespace ChestSystem.Chests
         }
 
         private void InitializeVariables()
-        {
+        {        
             chestModel.SetChestController(this);
-            chestView.SetChestController(this);
+            chestView.SetChestController(this);            
 
-            chestView.InitializeUI();
+            CreateStateMachine();
+            chestView.currentChestState = ChestState.LOCKED;
+            chestStateMachine.ChangeState(ChestState.LOCKED);            
+
+            chestView.InitializeVariables();
+        }
+
+        public void Update()
+        {
+            chestStateMachine.Update();
+        }
+
+        private void CreateStateMachine()
+        {
+            chestStateMachine = new ChestStateMachine(this);
+        }
+
+        public void UnlockingChestWithTimer()
+        {            
+            chestStateMachine.ChangeState(ChestState.UNLOCKING);
+            chestView.currentChestState = ChestState.UNLOCKING;
+        }
+
+        public void UnlockingChestWithGems()
+        {
+            // check for conditions
+
+            
+            chestStateMachine.ChangeState(ChestState.UNLOCKED);
+            chestView.currentChestState = ChestState.UNLOCKED;
+        }
+
+        public void UnlockedChest()
+        {
+            chestStateMachine.ChangeState(ChestState.UNLOCKED);
+            chestView.currentChestState = ChestState.UNLOCKED;
         }
     }
 }

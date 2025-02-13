@@ -46,14 +46,11 @@ namespace ChestSystem.UI
         {
             if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
             {
-                Debug.Log("opne");
                 EventService.Instance.OnChestSlotsFull.InvokeEvent();
                 return;
             }
 
-            //EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent(currentChestSlotNumber);
             EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
-            //currentChestSlotNumber++;
         }        
 
         public void ChestAdded(ChestController chestController)

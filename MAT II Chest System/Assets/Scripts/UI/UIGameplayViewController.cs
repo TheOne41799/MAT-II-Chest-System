@@ -44,10 +44,34 @@ namespace ChestSystem.UI
                 chestControllers[chestController.ChestID] = chestController;
             }
 
-            timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
-            gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
+            ///????????????????
+            /*if (chestController.chestView.currentChestState == ChestState.LOCKED)
+            {
+                timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
+                gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
 
-            chestUnlockUIPopup?.SetActive(true);            
+                chestUnlockUIPopup?.SetActive(true);
+            }*/
+
+            ChestStateCheck(chestController);
+        }
+
+        private void ChestStateCheck(ChestController chestController)
+        {
+            switch (chestController.chestView.currentChestState)
+            {
+                case ChestState.LOCKED:
+                    timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
+                    gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
+                    chestUnlockUIPopup?.SetActive(true);
+                    break;
+                case ChestState.UNLOCKING:
+                    Debug.Log("Unlocking");
+                    break;
+                case ChestState.UNLOCKED:
+                    Debug.Log("Unlocked");
+                    break;
+            }
         }
 
         private void UnlockChestWithTimerButton()

@@ -18,7 +18,7 @@ namespace ChestSystem.Chests
 
         private ChestModelSO chestModelSO;
 
-        private ChestStateMachine chestStateMachine;
+        public ChestStateMachine chestStateMachine { get; private set; }
 
         public ChestController(ChestModelSO chestModelSO, ChestView chestViewPrefab, UIService uiService)
         {

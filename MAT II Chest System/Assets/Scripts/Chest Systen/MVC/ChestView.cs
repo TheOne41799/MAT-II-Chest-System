@@ -15,6 +15,9 @@ namespace ChestSystem.Chests
         [SerializeField] private TextMeshProUGUI chestStateText;
         [SerializeField] private TextMeshProUGUI timeToUnlockChestText;
 
+        [SerializeField] private TextMeshProUGUI numberOfCoinsInChestText;
+        [SerializeField] private TextMeshProUGUI numberOfGemsInChestText;
+
         private ChestController chestController;
         public ChestState currentChestState { get; set; }
 
@@ -26,6 +29,9 @@ namespace ChestSystem.Chests
         public void InitializeVariables()
         {
             unlockButton.onClick.AddListener(ChestUnlockButtonClicked);
+
+            numberOfCoinsInChestText.text = chestController.chestModel.numberOfCoinsInChest.ToString();
+            numberOfGemsInChestText.text = chestController.chestModel.numberOfGemsInChest.ToString();
         }
 
         public void ChestLockedStateUI()

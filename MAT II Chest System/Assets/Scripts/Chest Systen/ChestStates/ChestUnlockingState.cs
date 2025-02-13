@@ -47,8 +47,6 @@ namespace ChestSystem.Chests
                     EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
                 }
 
-                Debug.Log(isChestUnlocked);
-
                 DisplayTime(unlockTimeRemaining);
             }
         }

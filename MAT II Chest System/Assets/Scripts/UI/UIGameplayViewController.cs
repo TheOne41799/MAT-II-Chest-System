@@ -19,15 +19,22 @@ namespace ChestSystem.UI
 
         private Dictionary<int, ChestController> chestControllers = new Dictionary<int, ChestController>();
 
+        [Header("UI Popups - Chest Slots full")]
+        [SerializeField] private GameObject chestSlotsFullPopup;
+        [SerializeField] private Button chestSlotsFullPopupCloseButton;
+
         private void Awake()
         {
             chestUnlockUIPopup?.SetActive(false);
+            chestSlotsFullPopup?.SetActive(false);
 
             EventService.Instance.OnChestUnlockClicked.AddListener(ChestUnlockButtonClicked);
             EventService.Instance.OnChestUnlocked.AddListener(ChestUnlocked);
+            EventService.Instance.OnChestSlotsFull.AddListener(OpenChestSlotsFullPopup);
 
             unlockWithTimerButton.onClick.AddListener(UnlockChestWithTimerButton);
             unlockWithGemsButton.onClick.AddListener(UnlockChestWithGemsButton);
+            chestSlotsFullPopupCloseButton.onClick.AddListener(CloseChestSlotsFullPopup);
         }
 
         public void ChestUnlockButtonClicked(ChestController chestController)
@@ -73,6 +80,16 @@ namespace ChestSystem.UI
                 chestControllers[controller.ChestID].UnlockedChest();
                 chestControllers.Remove(controller.ChestID);
             }
+        }
+
+        private void OpenChestSlotsFullPopup()
+        {
+            chestSlotsFullPopup.gameObject?.SetActive(true);
+        }
+
+        private void CloseChestSlotsFullPopup()
+        {
+            chestSlotsFullPopup.gameObject?.SetActive(false);
         }
     }
 }

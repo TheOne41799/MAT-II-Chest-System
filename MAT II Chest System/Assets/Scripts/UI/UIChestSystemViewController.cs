@@ -46,7 +46,8 @@ namespace ChestSystem.UI
         {
             if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
             {
-                // Create a popup for no extra slots
+                Debug.Log("opne");
+                EventService.Instance.OnChestSlotsFull.InvokeEvent();
                 return;
             }
 

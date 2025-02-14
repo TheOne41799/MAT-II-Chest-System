@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chestType: 1
   chestSprite: {fileID: 21300000, guid: 278a0565cf3334f48bf9dc9ba9a3fc08, type: 3}
-  minimumCoinsInChest: 0
-  maximumCoinsInChest: 0
-  minimumGemsInChest: 0
-  maximumGemsInChest: 0
+  minimumCoinsInChest: 50
+  maximumCoinsInChest: 100
+  minimumGemsInChest: 2
+  maximumGemsInChest: 5
   timeRequiredToUnlockChest: 6
   gemsRequiredToUnlockChest: 1

@@ -19,15 +19,39 @@ namespace ChestSystem.UI
 
         private Dictionary<int, ChestController> chestControllers = new Dictionary<int, ChestController>();
 
+        [Header("UI Popups - Chest Slots full")]
+        [SerializeField] private GameObject chestSlotsFullPopup;
+        [SerializeField] private Button chestSlotsFullPopupCloseButton;
+
+        [Header("Player Coins and Gems")]
+        private int playerCoins = 0;
+        private int playerGems = 0;
+        [SerializeField] private TextMeshProUGUI playerCoinsText;
+        [SerializeField] private TextMeshProUGUI playerGemsText;
+
         private void Awake()
         {
             chestUnlockUIPopup?.SetActive(false);
+            chestSlotsFullPopup?.SetActive(false);
 
             EventService.Instance.OnChestUnlockClicked.AddListener(ChestUnlockButtonClicked);
             EventService.Instance.OnChestUnlocked.AddListener(ChestUnlocked);
+            EventService.Instance.OnChestSlotsFull.AddListener(OpenChestSlotsFullPopup);
 
             unlockWithTimerButton.onClick.AddListener(UnlockChestWithTimerButton);
             unlockWithGemsButton.onClick.AddListener(UnlockChestWithGemsButton);
+            chestSlotsFullPopupCloseButton.onClick.AddListener(CloseChestSlotsFullPopup);
+
+            UpdatePlayerDetails(playerCoins, playerGems);
+        }
+
+        private void UpdatePlayerDetails(int coins, int gems)
+        {
+            playerCoins += coins;
+            playerGems += gems;
+
+            playerCoinsText.text = playerCoins.ToString();
+            playerGemsText.text = playerGems.ToString();
         }
 
         public void ChestUnlockButtonClicked(ChestController chestController)
@@ -37,10 +61,31 @@ namespace ChestSystem.UI
                 chestControllers[chestController.ChestID] = chestController;
             }
 
-            timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
-            gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
+            ChestStateCheck(chestController);
+        }
 
-            chestUnlockUIPopup?.SetActive(true);            
+        private void ChestStateCheck(ChestController chestController)
+        {
+            switch (chestController.chestView.currentChestState)
+            {
+                case ChestState.LOCKED:
+                    timerText.text = chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest.ToString() + " sec";
+                    gemsText.text = chestController.chestModel.chestModelSO.GemsRequiredToUnlockChest.ToString() + " gems";
+                    chestUnlockUIPopup?.SetActive(true);
+                    break;
+                case ChestState.UNLOCKING:
+                    // Note that this popup must have two buttons
+                    // 1 - one for close
+                    // 2 - another for purchase with gems
+
+                    Debug.Log("Unlocking");
+                    break;
+                case ChestState.UNLOCKED:
+                    //EventService.Instance.OnUnlockedChestOpened.InvokeEvent(chestController.ChestID);
+
+                    Debug.Log("Unlocked");
+                    break;
+            }
         }
 
         private void UnlockChestWithTimerButton()
@@ -73,6 +118,16 @@ namespace ChestSystem.UI
                 chestControllers[controller.ChestID].UnlockedChest();
                 chestControllers.Remove(controller.ChestID);
             }
+        }
+
+        private void OpenChestSlotsFullPopup()
+        {
+            chestSlotsFullPopup.gameObject?.SetActive(true);
+        }
+
+        private void CloseChestSlotsFullPopup()
+        {
+            chestSlotsFullPopup.gameObject?.SetActive(false);
         }
     }
 }

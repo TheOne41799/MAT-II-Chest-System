@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using ChestSystem.Chests;
 using ChestSystem.UI;
+using ChestSystem.Player;
 
 namespace ChestSystem.Main
 {
@@ -11,6 +12,7 @@ namespace ChestSystem.Main
         #region services variables
         private ChestService chestService;
         private UIService uiService;
+        private PlayerService playerService;
         #endregion
 
         #region database variables
@@ -31,6 +33,7 @@ namespace ChestSystem.Main
         {
             uiService = new UIService(chestSystemViewControllerPrefab, gameplayViewControllerPrefab, canvas);
             chestService = new ChestService(chestModelDatabaseSO, chestViewPrefab, canvas, uiService);
+            playerService = new PlayerService();
         }
 
         private void Update()

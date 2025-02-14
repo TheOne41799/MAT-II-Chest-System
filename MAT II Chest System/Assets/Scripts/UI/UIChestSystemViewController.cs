@@ -46,14 +46,12 @@ namespace ChestSystem.UI
         {
             if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
             {
-                // Create a popup for no extra slots
+                EventService.Instance.OnChestSlotsFull.InvokeEvent();
                 return;
             }
 
-            //EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent(currentChestSlotNumber);
             EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
-            //currentChestSlotNumber++;
-        }        
+        }
 
         public void ChestAdded(ChestController chestController)
         {
@@ -78,8 +76,11 @@ namespace ChestSystem.UI
 
         public void RemoveChest(int chestID)
         {
+            Debug.Log(chestID);
+
             if (chestControllers.ContainsKey(chestID))
             {
+                currentChestSlotNumber--;
                 Destroy(chestControllers[chestID].chestView.gameObject);
                 chestControllers.Remove(chestID);
 

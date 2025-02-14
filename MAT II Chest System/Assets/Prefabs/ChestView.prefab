@@ -878,6 +878,8 @@ MonoBehaviour:
   chestTypeText: {fileID: 1708330956}
   chestStateText: {fileID: 1609373605014504916}
   timeToUnlockChestText: {fileID: 2117478640}
+  numberOfCoinsInChestText: {fileID: 1643229076093622175}
+  numberOfGemsInChestText: {fileID: 3110001144122685072}
 --- !u!1 &8002114610654326084
 GameObject:
   m_ObjectHideFlags: 0

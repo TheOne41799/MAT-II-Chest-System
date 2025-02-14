@@ -51,13 +51,13 @@ namespace ChestSystem.Chests
             return chestModelDatabaseSO.ChestModelSOsList[rand];
         }
 
-        private void PrintTest()
+        /*private void PrintTest()
         {
             for (int i = 0; i < chestModelDatabaseSO.ChestModelSOsList.Count; i++)
             {
                 Debug.Log(chestModelDatabaseSO.ChestModelSOsList[i].ChestType);
             }
-        }
+        }*/
 
         public void Update()
         {

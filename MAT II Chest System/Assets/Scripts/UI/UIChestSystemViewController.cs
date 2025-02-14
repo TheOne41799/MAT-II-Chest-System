@@ -89,5 +89,7 @@ namespace ChestSystem.UI
                 newEmptySlot.transform.SetSiblingIndex(chestID);
             }
         }
+
+
     }
 }

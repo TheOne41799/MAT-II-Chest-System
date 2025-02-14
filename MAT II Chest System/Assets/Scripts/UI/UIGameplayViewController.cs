@@ -77,9 +77,12 @@ namespace ChestSystem.UI
                     // Note that this popup must have two buttons
                     // 1 - one for close
                     // 2 - another for purchase with gems
+
                     Debug.Log("Unlocking");
                     break;
                 case ChestState.UNLOCKED:
+                    //EventService.Instance.OnUnlockedChestOpened.InvokeEvent(chestController.ChestID);
+
                     Debug.Log("Unlocked");
                     break;
             }

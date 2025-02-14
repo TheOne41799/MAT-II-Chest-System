@@ -19,6 +19,7 @@ namespace ChestSystem.UI
             uiGameplayViewController = GameObject.Instantiate(uiGameplayViewControllerPrefab, canvas.transform);
             
             EventService.Instance.OnChestCreated.AddListener(uiChestSystemViewController.ChestAdded);
+            //EventService.Instance.OnUnlockedChestOpened.AddListener(uiChestSystemViewController.RemoveChest);
         }
     }
 }

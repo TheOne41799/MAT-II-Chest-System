@@ -51,7 +51,7 @@ namespace ChestSystem.UI
             }
 
             EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
-        }        
+        }
 
         public void ChestAdded(ChestController chestController)
         {
@@ -76,8 +76,11 @@ namespace ChestSystem.UI
 
         public void RemoveChest(int chestID)
         {
+            Debug.Log(chestID);
+
             if (chestControllers.ContainsKey(chestID))
             {
+                currentChestSlotNumber--;
                 Destroy(chestControllers[chestID].chestView.gameObject);
                 chestControllers.Remove(chestID);
 

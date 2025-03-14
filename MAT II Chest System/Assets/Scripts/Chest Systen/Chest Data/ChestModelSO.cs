@@ -20,7 +20,7 @@ namespace ChestSystem.Chests
         public int MinimumCoinsInChest { get { return minimumCoinsInChest; } }
 
         [SerializeField] private int maximumCoinsInChest;
-        public int MaximumCoinsInChest { get {return maximumCoinsInChest; } }
+        public int MaximumCoinsInChest { get { return maximumCoinsInChest; } }
 
 
         [Header("Gems")]

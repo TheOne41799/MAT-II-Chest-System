@@ -10,7 +10,34 @@ namespace ChestSystem.UI
 {
     public class UIGameplayViewController : MonoBehaviour
     {
-        [Header("UI Popups - Chest Unlock")]
+        [Header("Player Coins and Gems")]
+        private int playerCoins = 0;
+        private int playerGems = 0;
+        [SerializeField] private TextMeshProUGUI playerCoinsText;
+        [SerializeField] private TextMeshProUGUI playerGemsText;
+
+
+        private void Awake()
+        {
+            UpdatePlayerDetails(playerCoins, playerGems);
+        }
+
+        private void UpdatePlayerDetails(int coins, int gems)
+        {
+            playerCoins += coins;
+            playerGems += gems;
+
+            playerCoinsText.text = playerCoins.ToString();
+            playerGemsText.text = playerGems.ToString();
+        }
+
+
+
+
+
+
+
+        /*[Header("UI Popups - Chest Unlock")]
         [SerializeField] private GameObject chestUnlockUIPopup;
         [SerializeField] private Button unlockWithTimerButton;
         [SerializeField] private Button unlockWithGemsButton;
@@ -128,6 +155,6 @@ namespace ChestSystem.UI
         private void CloseChestSlotsFullPopup()
         {
             chestSlotsFullPopup.gameObject?.SetActive(false);
-        }
+        }*/
     }
 }

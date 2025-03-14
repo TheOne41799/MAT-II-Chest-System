@@ -6,13 +6,13 @@ namespace ChestSystem.Player
 {
     public class PlayerModel
     {
-        public int numberOfCoins {  get; set; }
+        /*public int numberOfCoins {  get; set; }
         public int numberOfGems { get; set; }
 
         public PlayerModel() 
         {
             numberOfCoins = 0;
             numberOfGems = 0;
-        }
+        }*/
     }
 }

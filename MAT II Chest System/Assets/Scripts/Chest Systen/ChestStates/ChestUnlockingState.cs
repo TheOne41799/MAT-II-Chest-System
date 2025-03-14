@@ -8,7 +8,25 @@ namespace ChestSystem.Chests
 {
     public class ChestUnlockingState<T> : IChestState where T : ChestController
     {
-        public ChestController chestController { get; set; }
+
+        public ChestController chestController { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void EnterState()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ExitState()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateState()
+        {
+            throw new NotImplementedException();
+        }
+
+        /*public ChestController chestController { get; set; }
         private GenericStateMachine<T> stateMachine;
         private float unlockTimeRemaining;
         private bool isChestUnlocked = false;
@@ -21,12 +39,12 @@ namespace ChestSystem.Chests
 
         public void EnterState()
         {
-            chestController.chestView.ChestUnlockingStateUI();            
+            chestController.chestView.ChestUnlockingStateUI();
         }
 
         public void ExitState()
         {
-            
+
         }
 
         public void UpdateState()
@@ -55,7 +73,8 @@ namespace ChestSystem.Chests
         {
             timeValue = Mathf.FloorToInt(timeValue);
 
-            chestController.chestView.UpdateTimer(timeValue);            
-        }
+            chestController.chestView.UpdateTimer(timeValue);
+        }*/
+
     }
 }

@@ -9,12 +9,12 @@ namespace ChestSystem.Chests
     {
         protected T chestController;
         protected IChestState currentState;
-        protected Dictionary<ChestState, IChestState> States = new Dictionary<ChestState, IChestState> ();
+        protected Dictionary<ChestState, IChestState> States = new Dictionary<ChestState, IChestState>();
 
         public GenericStateMachine(T controller)
         {
             this.chestController = controller;
-        }        
+        }
 
         public void ChangeState(ChestState newState)
         {

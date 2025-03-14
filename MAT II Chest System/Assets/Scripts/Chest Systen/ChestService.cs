@@ -8,7 +8,46 @@ namespace ChestSystem.Chests
 {
     public class ChestService
     {
-        private ChestModelDatabaseSO chestModelDatabaseSO;
+        private ChestPool chestPool;
+
+
+        public ChestService(ChestModelDatabaseSO chestModelDatabaseSO)
+        {
+            chestPool = new ChestPool(chestModelDatabaseSO);
+
+            EventService.Instance.OnGenerateChestButtonClicked.AddListener(GetChestFromPool);
+        }
+
+        private void GetChestFromPool()
+        {
+            //Test
+            ChestController controller = chestPool.GetChest();
+
+            EventService.Instance.OnChestAdded.InvokeEvent(controller);
+        }
+
+        private void ReturnChestToPool()
+        {
+
+        }
+
+        private bool IsAnyChestUnlocking()
+        {
+            return false;
+        }
+
+        // command pattern
+
+
+
+
+
+
+
+
+
+
+        /*private ChestModelDatabaseSO chestModelDatabaseSO;
         private List<ChestController> chestControllers = new List<ChestController>();
         private ChestView chestView;
         private Canvas canvas;
@@ -29,13 +68,13 @@ namespace ChestSystem.Chests
             EventService.Instance.OnGenerateChestButtonClicked.AddListener(CreateChest);
         }
 
-        /*public void CreateChest(int currentEmptySlot)
+        *//*public void CreateChest(int currentEmptySlot)
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
             ChestController chestController = new ChestController(chestModelSO, chestView, uiService);
 
             chestControllers.Add(chestController);
-        }*/
+        }*//*
 
         public void CreateChest()
         {
@@ -51,13 +90,13 @@ namespace ChestSystem.Chests
             return chestModelDatabaseSO.ChestModelSOsList[rand];
         }
 
-        /*private void PrintTest()
+        *//*private void PrintTest()
         {
             for (int i = 0; i < chestModelDatabaseSO.ChestModelSOsList.Count; i++)
             {
                 Debug.Log(chestModelDatabaseSO.ChestModelSOsList[i].ChestType);
             }
-        }*/
+        }*//*
 
         public void Update()
         {
@@ -65,6 +104,6 @@ namespace ChestSystem.Chests
             {
                 controller?.Update();
             }
-        }
+        }*/
     }
 }

@@ -6,11 +6,11 @@ namespace ChestSystem.Player
 {
     public class PlayerController
     {
-        public PlayerModel playerModel {  get; set; }
+        /*public PlayerModel playerModel {  get; set; }
 
         public PlayerController() 
         {
             playerModel = new PlayerModel();
-        }
+        }*/
     }
 }

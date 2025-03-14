@@ -11,6 +11,27 @@ namespace ChestSystem.Main
     {
         #region services variables
         private ChestService chestService;
+        #endregion
+
+        #region database variables
+        [Header("Database variables")]
+        [SerializeField] private ChestModelDatabaseSO chestModelDatabaseSO;
+        #endregion
+
+
+        private void Start()
+        {
+            chestService = new ChestService(chestModelDatabaseSO);
+        }
+
+
+
+
+
+
+
+        /*#region services variables
+        private ChestService chestService;
         private UIService uiService;
         private PlayerService playerService;
         #endregion
@@ -39,6 +60,6 @@ namespace ChestSystem.Main
         private void Update()
         {
             chestService?.Update();
-        }
+        }*/
     }
 }

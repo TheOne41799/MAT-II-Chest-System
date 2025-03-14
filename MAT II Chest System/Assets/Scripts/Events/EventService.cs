@@ -21,7 +21,23 @@ namespace ChestSystem.Events
             }
         }
 
-        //public GameEventController<int> OnGenerateChestButtonClicked { get; private set; }
+        public GameEventController OnGenerateChestButtonClicked { get; private set; }
+        public GameEventController<ChestController> OnChestAdded { get; private set; }
+
+
+        public EventService()
+        {
+            OnGenerateChestButtonClicked = new GameEventController();
+            OnChestAdded = new GameEventController<ChestController>();
+        }
+
+
+
+
+
+
+
+        /*//public GameEventController<int> OnGenerateChestButtonClicked { get; private set; }
         public GameEventController OnGenerateChestButtonClicked { get; private set; }
         public GameEventController<ChestController> OnChestCreated { get; private set; }
         public GameEventController<ChestController> OnChestUnlockClicked { get; private set; }
@@ -38,6 +54,6 @@ namespace ChestSystem.Events
             OnChestUnlocked = new GameEventController<ChestController>();
             OnChestSlotsFull = new GameEventController();
             //OnUnlockedChestOpened = new GameEventController<int>();
-        }
+        }*/
     }
 }

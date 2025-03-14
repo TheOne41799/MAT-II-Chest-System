@@ -9,26 +9,47 @@ namespace ChestSystem.Chests
     public class ChestService
     {
         private ChestPool chestPool;
+        private Dictionary<int, ChestController> activeChests;
 
 
         public ChestService(ChestModelDatabaseSO chestModelDatabaseSO)
         {
             chestPool = new ChestPool(chestModelDatabaseSO);
 
+            activeChests = new Dictionary<int, ChestController>();
+
             EventService.Instance.OnGenerateChestButtonClicked.AddListener(GetChestFromPool);
+            EventService.Instance.OnChestUnlockButtonClicked.AddListener(UnlockChest);
         }
 
         private void GetChestFromPool()
         {
-            //Test
             ChestController controller = chestPool.GetChest();
+
+            if (!activeChests.ContainsKey(controller.ChestID))
+            {
+                activeChests.Add(controller.ChestID, controller);
+            }
 
             EventService.Instance.OnChestAdded.InvokeEvent(controller);
         }
 
-        private void ReturnChestToPool()
+        private void UnlockChest(int chestID)
         {
+            if (activeChests.ContainsKey(chestID))
+            {
+                activeChests[chestID].UnlockChest();
+            }
+        }
 
+        private void ReturnChestToPool(ChestController controller)
+        { 
+            if (activeChests.ContainsKey(controller.ChestID))
+            {
+                activeChests.Remove(controller.ChestID);
+            }
+
+            chestPool.ReturnChest(controller);
         }
 
         private bool IsAnyChestUnlocking()
@@ -38,72 +59,5 @@ namespace ChestSystem.Chests
 
         // command pattern
 
-
-
-
-
-
-
-
-
-
-        /*private ChestModelDatabaseSO chestModelDatabaseSO;
-        private List<ChestController> chestControllers = new List<ChestController>();
-        private ChestView chestView;
-        private Canvas canvas;
-        private UIService uiService;
-
-        public ChestService(ChestModelDatabaseSO chestModelDatabaseSO, ChestView chestViewPrefab, Canvas canvas, UIService uiService)
-        {
-            this.chestModelDatabaseSO = chestModelDatabaseSO;
-            this.chestView = chestViewPrefab;
-            this.canvas = canvas;
-            this.uiService = uiService;
-
-            //PrintTest();
-            //CreateChest();
-
-            //EventService.Instance.OnGenerateChestButtonClicked.AddListener(CreateChest);
-
-            EventService.Instance.OnGenerateChestButtonClicked.AddListener(CreateChest);
-        }
-
-        *//*public void CreateChest(int currentEmptySlot)
-        {
-            ChestModelSO chestModelSO = ChooseARandomChestModel();
-            ChestController chestController = new ChestController(chestModelSO, chestView, uiService);
-
-            chestControllers.Add(chestController);
-        }*//*
-
-        public void CreateChest()
-        {
-            ChestModelSO chestModelSO = ChooseARandomChestModel();
-            ChestController chestController = new ChestController(chestModelSO, chestView, uiService);
-
-            chestControllers.Add(chestController);
-        }
-
-        private ChestModelSO ChooseARandomChestModel()
-        {
-            int rand = Random.Range(0, chestModelDatabaseSO.ChestModelSOsList.Count);
-            return chestModelDatabaseSO.ChestModelSOsList[rand];
-        }
-
-        *//*private void PrintTest()
-        {
-            for (int i = 0; i < chestModelDatabaseSO.ChestModelSOsList.Count; i++)
-            {
-                Debug.Log(chestModelDatabaseSO.ChestModelSOsList[i].ChestType);
-            }
-        }*//*
-
-        public void Update()
-        {
-            foreach (ChestController controller in chestControllers)
-            {
-                controller?.Update();
-            }
-        }*/
     }
 }

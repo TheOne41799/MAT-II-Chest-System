@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2004629079}
   - component: {fileID: 2004629080}
   m_Layer: 5
-  m_Name: UIChestSlots
+  m_Name: UIChestSlotViewHolder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,9 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06db60a525d7d174eba640dffaf13aef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalChestSlots: 5
+  totalChestSlots: 12
   generateChestButton: {fileID: 2365340834020216791}
-  chestSlotViewController: {fileID: 849717600939610748, guid: 4a27b39abdb27fa4fb3b255d23e7d0da, type: 3}
+  chestSlotViewControllerPrefab: {fileID: 849717600939610748, guid: 4a27b39abdb27fa4fb3b255d23e7d0da, type: 3}
   uiChestSlotViewHolder: {fileID: 2004629078}
 --- !u!222 &857059743543500417
 CanvasRenderer:

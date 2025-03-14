@@ -10,10 +10,24 @@ namespace ChestSystem.Chests
     {
         public ChestModel ChestModel { get; private set; }
 
+        private ChestStateMachine chestStateMachine;
+
+        public int ChestID { get; private set; }
+        private static int nextChestID = 0;
+
 
         public ChestController(ChestModelSO chestModelSO)
         {
+            ChestID = GenerateUniqueID();
+
             ChestModel = new ChestModel(chestModelSO, GenerateRandomCoinsInChest(chestModelSO), GenerateRandomGemsInChest(chestModelSO));
+
+            InitializeVariables();
+        }
+
+        private int GenerateUniqueID()
+        {
+            return nextChestID++;
         }
 
         private int GenerateRandomCoinsInChest(ChestModelSO chestModelSO)
@@ -28,76 +42,44 @@ namespace ChestSystem.Chests
             return randGems;
         }
 
+        private void InitializeVariables()
+        {
+            CreateStateMachine();
+
+            ChestLockedState();
+        }
+
+        private void CreateStateMachine()
+        {
+            chestStateMachine = new ChestStateMachine();
+        }
 
 
-        /* public int ChestID { get; private set; }
-         public ChestModel chestModel {  get; private set; }
-         public ChestView chestView { get; private set; }
+        private void ChestLockedState()
+        {
+            chestStateMachine.Initialize(new ChestLockedState(this));
+        }
 
-         private static int chestCounter = 0;
+        public void UnlockChest()
+        {
+            Debug.Log($"Matching chest found with key value of {ChestID}");
 
-         private UIService uiService;
+            ChestUnlockingState();
+        }
 
-         private ChestModelSO chestModelSO;
+        private void ChestUnlockingState()
+        {
+            chestStateMachine.ChangeState(new ChestUnlockingState(this));
+        }
 
-         public ChestStateMachine chestStateMachine { get; private set; }
+        private void ChestUnlockedState()
+        {
+            chestStateMachine.ChangeState(new ChestUnlockedState(this));
+        }
 
-         public ChestController(ChestModelSO chestModelSO, ChestView chestViewPrefab, UIService uiService)
-         {
-             ChestID = chestCounter++;
-
-             this.chestModelSO = chestModelSO;
-             this.uiService = uiService;
-
-             chestModel = new ChestModel(chestModelSO);
-             chestView = GameObject.Instantiate(chestViewPrefab);
-
-             EventService.Instance.OnChestCreated.InvokeEvent(this);
-
-             InitializeVariables();
-         }
-
-         private void InitializeVariables()
-         {        
-             chestModel.SetChestController(this);
-             chestView.SetChestController(this);            
-
-             CreateStateMachine();
-             chestView.currentChestState = ChestState.LOCKED;
-             chestStateMachine.ChangeState(ChestState.LOCKED);            
-
-             chestView.InitializeVariables();
-         }
-
-         public void Update()
-         {
-             chestStateMachine.Update();
-         }
-
-         private void CreateStateMachine()
-         {
-             chestStateMachine = new ChestStateMachine(this);
-         }
-
-         public void UnlockingChestWithTimer()
-         {            
-             chestStateMachine.ChangeState(ChestState.UNLOCKING);
-             chestView.currentChestState = ChestState.UNLOCKING;
-         }
-
-         public void UnlockingChestWithGems()
-         {
-             // check for conditions
-
-
-             chestStateMachine.ChangeState(ChestState.UNLOCKED);
-             chestView.currentChestState = ChestState.UNLOCKED;
-         }
-
-         public void UnlockedChest()
-         {
-             chestStateMachine.ChangeState(ChestState.UNLOCKED);
-             chestView.currentChestState = ChestState.UNLOCKED;
-         }*/
+        private void ChestCollectedState()
+        {
+            chestStateMachine.ChangeState(new ChestCollectedState(this));
+        }
     }
 }

@@ -25,13 +25,15 @@ public class UIChestSlotViewController : MonoBehaviour
     public ChestController ChestController { get { return chestController; } }
 
 
-    //chests must be added in chestsystemviewcontroller
-
-
     private void Awake()
     {
         ClearSlot();
         ActivateDeactivateChestSlotViewChildrenGameObjects();    
+    }
+
+    private void OnEnable()
+    {
+        chestButton.onClick.AddListener(CheckUnlockButtonClicked);
     }
 
     private void ClearSlot()
@@ -57,24 +59,25 @@ public class UIChestSlotViewController : MonoBehaviour
     {
         chestController = controller;
 
-        UpdateChestSlotViewWhenFilled();
-    }
-
-    private void UpdateChestSlotViewWhenFilled()
-    {
-        if (chestController == null) return;
+        UIChestSlotViewLockedState(chestController);
 
         ActivateDeactivateChestSlotViewChildrenGameObjects();
+    }
 
+    private void CheckUnlockButtonClicked()
+    {     
+        EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
+    }
+
+    public void UIChestSlotViewLockedState(ChestController controller)
+    {
         chestImage.sprite = chestController.ChestModel.ChestSprite;
         chestType.text = chestController.ChestModel.ChestType.ToString();
 
         coinsInChest.text = chestController.ChestModel.CoinsInTheChest.ToString();
         gemsInChest.text = chestController.ChestModel.GemsInChest.ToString();
 
-        //chest state
-
-        //timer
+        timer.gameObject.SetActive(false);
     }
 }
 

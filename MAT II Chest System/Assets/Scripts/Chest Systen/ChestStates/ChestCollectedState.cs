@@ -4,47 +4,20 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class ChestCollectedState<T> : IChestState where T : ChestController
+    public class ChestCollectedState : IChestState
     {
-        public ChestController chestController { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        private ChestController chestController;
 
-        public void EnterState()
-        {
-            throw new System.NotImplementedException();
-        }
 
-        public void ExitState()
-        {
-            throw new System.NotImplementedException();
-        }
+        public ChestCollectedState(ChestController chest) { this.chestController = chest; }
 
-        public void UpdateState()
-        {
-            throw new System.NotImplementedException();
-        }
 
-        /*public ChestController chestController { get; set; }
-        private GenericStateMachine<T> stateMachine;
+        public void EnterState() { Debug.Log("Chest has been Collected!"); }
 
-        public ChestCollectedState(GenericStateMachine<T> stateMachine)
-        {
-            this.stateMachine = stateMachine;
-        }
 
-        public void EnterState()
-        {
+        public void UpdateState() { }
 
-        }
 
-        public void ExitState()
-        {
-
-        }
-
-        public void UpdateState()
-        {
-
-        }*/
-
+        public void ExitState() { Debug.Log("Exiting Collected State."); }
     }
 }

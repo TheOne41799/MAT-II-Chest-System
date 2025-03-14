@@ -4,48 +4,20 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class ChestUnlockedState<T> : IChestState where T : ChestController
+    public class ChestUnlockedState : IChestState
     {
-        public ChestController chestController { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-
-        public void EnterState()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void ExitState()
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void UpdateState()
-        {
-            throw new System.NotImplementedException();
-        }
+        private ChestController chestController;
 
 
-        /*public ChestController chestController { get; set; }
-        private GenericStateMachine<T> stateMachine;
+        public ChestUnlockedState(ChestController chest) { this.chestController = chest; }
 
-        public ChestUnlockedState(GenericStateMachine<T> stateMachine)
-        {
-            this.stateMachine = stateMachine;
-        }
 
-        public void EnterState()
-        {
-            chestController.chestView.ChestUnlockedStateUI();
-        }
+        public void EnterState() { Debug.Log("Chest is Unlocked!"); }
 
-        public void ExitState()
-        {
 
-        }
+        public void UpdateState() { }
 
-        public void UpdateState()
-        {
 
-        }*/
-
+        public void ExitState() { Debug.Log("Exiting Unlocked State."); }
     }
 }

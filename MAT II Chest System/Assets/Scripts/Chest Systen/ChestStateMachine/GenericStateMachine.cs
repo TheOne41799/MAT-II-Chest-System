@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class GenericStateMachine<T> where T: ChestController
+    /*public class GenericStateMachine<T> where T: ChestController
     {
         protected T chestController;
         protected IChestState currentState;
@@ -40,5 +40,5 @@ namespace ChestSystem.Chests
                 state.chestController = chestController;
             }
         }
-    }
+    }*/
 }

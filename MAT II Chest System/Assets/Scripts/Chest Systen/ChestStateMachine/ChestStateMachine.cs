@@ -4,22 +4,22 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class ChestStateMachine : GenericStateMachine<ChestController>
+    public class ChestStateMachine
     {
-        public ChestStateMachine(ChestController controller) : base(controller)
+        private IChestState currentState;
+
+
+        public void Initialize(IChestState initialState)
         {
-            this.chestController = controller;
-            CreateStates();
-            SetOwner();
+            currentState = initialState;
+            currentState.EnterState();            
         }
 
-        private void CreateStates()
+        public void ChangeState(IChestState newState)
         {
-            /*States.Add(ChestSystem.Chests.ChestState.LOCKED, new ChestLockedState<ChestController>(this));
-            States.Add(ChestSystem.Chests.ChestState.UNLOCKING, new ChestUnlockingState<ChestController>(this,
-                                                    this.chestController.chestModel.chestModelSO.TimeRequiredToUnlockChest));
-            States.Add(ChestSystem.Chests.ChestState.UNLOCKED, new ChestUnlockedState<ChestController>(this));
-            States.Add(ChestSystem.Chests.ChestState.COLLECTED, new ChestCollectedState<ChestController>(this));*/
+            currentState?.ExitState();
+            currentState = newState;
+            currentState.EnterState();
         }
     }
 }

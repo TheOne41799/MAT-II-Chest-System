@@ -12,7 +12,9 @@ namespace ChestSystem.Chests
         private ChestController chestController;
 
         private int unlockTimeRemaining;
+
         private bool isChestUnlocked = false;
+        public bool IsChestUnlocked { get { return isChestUnlocked; } }
 
         public ChestState ChestState => ChestState.UNLOCKING;
 
@@ -25,44 +27,18 @@ namespace ChestSystem.Chests
             this.unlockTimeRemaining = chest.ChestModel.TimeRequiredToUnlockChest;
 
             this.coroutineRunner = coroutineRunner;
-
-            //Debug.Log(this.unlockTimeRemaining);
         }
 
 
         public void EnterState() 
         {
-            //Debug.Log("Chest is Unlocking."); 
-
-            //EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
+            EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
 
             coroutineRunner.StartCoroutine(UnlockChestRoutine());
         }
 
 
-        //test
-        public void UpdateState()
-        {
-
-
-            /*if (!isChestUnlocked)
-            {
-                if (unlockTimeRemaining > 0)
-                {
-                    unlockTimeRemaining -= (int)Time.deltaTime;
-
-                    Debug.Log("Unlock time: " + unlockTimeRemaining);
-                }
-                else
-                {
-                    unlockTimeRemaining = 0;
-                    isChestUnlocked = true;
-                }
-
-                EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
-            }*/
-        }
-        //
+        
 
         private IEnumerator UnlockChestRoutine()
         {
@@ -76,7 +52,7 @@ namespace ChestSystem.Chests
 
             isChestUnlocked = true;
 
-
+            chestController.ChestUnlockedState();
         }
 
         public void ExitState() { Debug.Log("Exiting Unlocking State."); }

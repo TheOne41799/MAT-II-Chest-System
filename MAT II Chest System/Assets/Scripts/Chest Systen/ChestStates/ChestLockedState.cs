@@ -17,12 +17,8 @@ namespace ChestSystem.Chests
 
         public void EnterState() 
         {
-            
+            EventService.Instance.OnChestAdded.InvokeEvent(chestController);
         }
-
-
-        public void UpdateState() { }
-
 
         public void ExitState() { Debug.Log("Exiting Locked State."); }
 

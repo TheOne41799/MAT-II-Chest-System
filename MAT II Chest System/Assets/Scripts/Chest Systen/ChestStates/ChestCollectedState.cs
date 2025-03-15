@@ -16,9 +16,6 @@ namespace ChestSystem.Chests
         public void EnterState() { Debug.Log("Chest has been Collected!"); }
 
 
-        public void UpdateState() { }
-
-
         public void ExitState() { Debug.Log("Exiting Collected State."); }
     }
 }

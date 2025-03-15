@@ -43,6 +43,8 @@ namespace ChestSystem.UI
         private void OnEnable()
         {
             EventService.Instance.OnChestAdded.AddListener(OnChestAdded);
+
+
         }
 
         private void GenerateChestButtonClicked()

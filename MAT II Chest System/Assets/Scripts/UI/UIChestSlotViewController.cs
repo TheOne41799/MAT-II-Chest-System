@@ -35,9 +35,11 @@ namespace ChestSystem.UI
 
         private void OnEnable()
         {
-            chestButton.onClick.AddListener(CheckUnlockButtonClicked);
+            chestButton.onClick.AddListener(ChestButtonClicked);
 
+            EventService.Instance.OnChestAdded.AddListener(UIChestSlotViewLockedState);
             EventService.Instance.OnUnlockingChest.AddListener(UIChestSlotViewUnlockingState);
+            EventService.Instance.OnChestUnlocked.AddListener(UIChestSlotViewUnlockedState);
         }
 
         private void ClearSlot()
@@ -56,22 +58,43 @@ namespace ChestSystem.UI
             if (chestController != null) return;
 
             chestController = controller;
-            UIChestSlotViewLockedState();
+
             ActivateDeactivateChestSlotViewChildrenGameObjects();
         }
 
-        private void CheckUnlockButtonClicked()
+        private void ChestButtonClicked()
         {
             if (chestController != null)
             {
-                EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
+                if (chestController.ChestStateMachine.CurrentState.ChestState == ChestState.LOCKED)
+                {
+                    EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
+                }
+                else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKING)
+                {
+                    Debug.Log("Chest unlocking");
+                }
+                else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKED)
+                {
+                    Debug.Log("Chest unlocked");
+
+                    EventService.Instance.OnChestCollected.InvokeEvent(chestController.ChestModel.CoinsInTheChest,
+                                                                       chestController.ChestModel.GemsInChest);
+
+
+                    ClearSlot();
+                    ActivateDeactivateChestSlotViewChildrenGameObjects();
+                }
             }
         }
 
-        public void UIChestSlotViewLockedState()
+        public void UIChestSlotViewLockedState(ChestController controller)
         {
+            if (chestController == null || chestController.ChestID != controller.ChestID) return;
+
             chestImage.sprite = chestController.ChestModel.ChestSprite;
             chestType.text = chestController.ChestModel.ChestType.ToString();
+            chestState.text = chestController.ChestStateMachine.CurrentState.ChestState.ToString();
             coinsInChest.text = chestController.ChestModel.CoinsInTheChest.ToString();
             gemsInChest.text = chestController.ChestModel.GemsInChest.ToString();
             timer.gameObject.SetActive(false);
@@ -85,7 +108,17 @@ namespace ChestSystem.UI
             timer.gameObject.SetActive(true);
             timer.text = timeRemainingToUnlockChest.ToString();
 
-            chestState.text = "Unlocking";
+            chestState.text = chestController.ChestStateMachine.CurrentState.ChestState.ToString();
+        }
+
+
+        public void UIChestSlotViewUnlockedState(ChestController controller)
+        {
+            if (chestController == null || chestController.ChestID != controller.ChestID) return;
+
+            timer.gameObject.SetActive(false);
+
+            chestState.text = chestController.ChestStateMachine.CurrentState.ChestState.ToString();
         }
     }
 }

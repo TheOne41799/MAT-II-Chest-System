@@ -11,6 +11,7 @@ namespace ChestSystem.Chests
         public ChestModel ChestModel { get; private set; }
 
         private ChestStateMachine chestStateMachine;
+        public ChestStateMachine ChestStateMachine {  get { return chestStateMachine; } }
 
         public int ChestID { get; private set; }
         private static int nextChestID = 0;
@@ -56,11 +57,6 @@ namespace ChestSystem.Chests
             chestStateMachine = new ChestStateMachine();
         }
 
-        public void Update()
-        {
-            chestStateMachine.Update();
-        }
-
         private void ChestLockedState()
         {
             chestStateMachine.Initialize(new ChestLockedState(this));
@@ -80,7 +76,7 @@ namespace ChestSystem.Chests
         {
             //Debug.Log("Unlock with Gems");
 
-            ChestUnlockedState();
+            //ChestUnlockedState();
         }
 
         private void ChestUnlockingState()
@@ -90,8 +86,9 @@ namespace ChestSystem.Chests
             chestStateMachine.ChangeState(new ChestUnlockingState(this, CoroutineRunner));
         }
 
-        private void ChestUnlockedState()
+        public void ChestUnlockedState()
         {
+            
             chestStateMachine.ChangeState(new ChestUnlockedState(this));
         }
 

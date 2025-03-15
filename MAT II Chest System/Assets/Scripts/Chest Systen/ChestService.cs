@@ -69,17 +69,17 @@ namespace ChestSystem.Chests
             if (activeChests.ContainsKey(controller.ChestID))
             {
                 activeChests.Remove(controller.ChestID);
+
+
+                
+
             }
+
 
             chestPool.ReturnChest(controller);
-        }
 
-        public void Update()
-        {
-            foreach (ChestController controller in activeChests.Values)
-            {
-                controller?.Update();
-            }
+            
+
         }
 
         /*private bool IsAnyChestUnlocking()

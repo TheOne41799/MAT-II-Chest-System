@@ -7,6 +7,7 @@ namespace ChestSystem.Chests
     public class ChestStateMachine
     {
         private IChestState currentState;
+        public IChestState CurrentState { get { return currentState; } }
 
 
         public void Initialize(IChestState initialState)
@@ -20,11 +21,6 @@ namespace ChestSystem.Chests
             currentState?.ExitState();
             currentState = newState;
             currentState.EnterState();
-        }
-
-        public void Update()
-        {
-            currentState?.UpdateState();
         }
     }
 }

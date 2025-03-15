@@ -1,3 +1,4 @@
+using ChestSystem.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,11 +7,19 @@ namespace ChestSystem.Player
 {
     public class PlayerService
     {
-        /*public PlayerController playerController {  get; set; }
+        private PlayerController playerController;
 
-        public PlayerService() 
-        { 
-            playerController = new PlayerController();
-        }*/
+
+        public PlayerService()
+        {
+            this.playerController = new PlayerController();
+
+            EventService.Instance.OnChestCollected.AddListener(ChestCollected);
+        }
+
+        private void ChestCollected(int coins, int gems)
+        {
+            playerController.ChestCollected(coins, gems);
+        }
     }
 }

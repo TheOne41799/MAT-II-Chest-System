@@ -11,6 +11,7 @@ namespace ChestSystem.Main
     {
         #region services variables
         private ChestService chestService;
+        private PlayerService playerService;
         #endregion
 
         #region database variables
@@ -21,12 +22,8 @@ namespace ChestSystem.Main
 
         private void Start()
         {
+            playerService = new PlayerService();
             chestService = new ChestService(chestModelDatabaseSO, this);
-        }
-
-        private void Update()
-        {
-            chestService?.Update();
         }
     }
 }

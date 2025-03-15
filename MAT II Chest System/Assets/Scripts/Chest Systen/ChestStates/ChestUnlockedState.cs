@@ -1,3 +1,4 @@
+using ChestSystem.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,10 +13,13 @@ namespace ChestSystem.Chests
         public ChestUnlockedState(ChestController chest) { this.chestController = chest; }
 
 
-        public void EnterState() { Debug.Log("Chest is Unlocked!"); }
+        public void EnterState() 
+        { 
+            Debug.Log("Chest is Unlocked!"); 
 
 
-        public void UpdateState() { }
+            EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
+        }
 
 
         public void ExitState() { Debug.Log("Exiting Unlocked State."); }

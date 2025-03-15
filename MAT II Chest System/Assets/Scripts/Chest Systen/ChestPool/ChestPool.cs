@@ -29,6 +29,8 @@ namespace ChestSystem.Chests
                     pooledChestController.IsUsed = true;
                     return pooledChestController.ChestController;
                 }
+
+                
             }
 
             return CreateNewRandomChest();

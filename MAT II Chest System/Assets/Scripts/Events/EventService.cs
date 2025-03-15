@@ -28,6 +28,8 @@ namespace ChestSystem.Events
         public GameEventController<UIPopups> OnUIPopupActivate { get; private set; }
         public GameEventController<ChestController, UIPopups> OnUIPopupChestUnlockActivate { get; private set; }
         public GameEventController OnAllUIPopupsDeactivate { get; private set; }
+        public GameEventController<ChestController, ChestUnlockMethod> OnUnlockChest {  get; private set; }
+        public GameEventController<ChestController, int> OnUnlockingChest { get; private set; }
 
 
         public EventService()
@@ -38,6 +40,8 @@ namespace ChestSystem.Events
             OnUIPopupActivate = new GameEventController<UIPopups>();
             OnUIPopupChestUnlockActivate = new GameEventController<ChestController, UIPopups>();
             OnAllUIPopupsDeactivate = new GameEventController();
+            OnUnlockChest = new GameEventController<ChestController, ChestUnlockMethod>();
+            OnUnlockingChest = new GameEventController<ChestController, int>();
         }
     }
 }

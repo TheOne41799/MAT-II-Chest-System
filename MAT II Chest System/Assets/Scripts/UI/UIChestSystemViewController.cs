@@ -18,18 +18,23 @@ namespace ChestSystem.UI
 
         private List<UIChestSlotViewController> uIChestSlotViewControllers;
         private UIChestSlotViewController currentEmptyUIChestSlotViewControllerToBeFilled;
+        private Dictionary<int, UIChestSlotViewController> chestSlotDictionary;
 
 
         private void Awake()
         {
             uIChestSlotViewControllers = new List<UIChestSlotViewController>();
 
+            chestSlotDictionary = new Dictionary<int, UIChestSlotViewController>();
+
             for (int i = 0; i < totalChestSlots; i++)
             {
                 GameObject gameObject = Instantiate(chestSlotViewControllerPrefab.gameObject);
                 gameObject.transform.SetParent(uiChestSlotViewHolder.transform, false);
 
-                uIChestSlotViewControllers.Add(gameObject.GetComponent<UIChestSlotViewController>());
+                UIChestSlotViewController slotController = gameObject.GetComponent<UIChestSlotViewController>();
+
+                uIChestSlotViewControllers.Add(slotController);
             }
 
             generateChestButton.onClick.AddListener(GenerateChestButtonClicked);           
@@ -56,14 +61,18 @@ namespace ChestSystem.UI
 
             currentEmptyUIChestSlotViewControllerToBeFilled = null;
 
-            Debug.Log("Chest Slots are full");
-
             EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_SLOTS_FULL_POPUP);
         }
 
         private void OnChestAdded(ChestController controller)
         {
-            currentEmptyUIChestSlotViewControllerToBeFilled.OnChestAdded(controller);
+            if (currentEmptyUIChestSlotViewControllerToBeFilled == null) return;
+
+            if (!chestSlotDictionary.ContainsKey(controller.ChestID))
+            {
+                chestSlotDictionary[controller.ChestID] = currentEmptyUIChestSlotViewControllerToBeFilled;
+                currentEmptyUIChestSlotViewControllerToBeFilled.OnChestAdded(controller);
+            }
         }
     }
 }

@@ -21,7 +21,12 @@ namespace ChestSystem.Main
 
         private void Start()
         {
-            chestService = new ChestService(chestModelDatabaseSO);
-        }        
+            chestService = new ChestService(chestModelDatabaseSO, this);
+        }
+
+        private void Update()
+        {
+            chestService?.Update();
+        }
     }
 }

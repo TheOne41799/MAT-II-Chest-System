@@ -9,6 +9,8 @@ namespace ChestSystem.Chests
     {
         private ChestController chestController;
 
+        public ChestState ChestState => ChestState.LOCKED;
+
 
         public ChestLockedState(ChestController chest) { this.chestController = chest; }
 

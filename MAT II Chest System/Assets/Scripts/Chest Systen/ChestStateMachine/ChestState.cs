@@ -4,12 +4,12 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    /*public enum ChestState
+    public enum ChestState
     {
         NONE,
         LOCKED,
         UNLOCKING,
         UNLOCKED,
         COLLECTED
-    }*/
+    }
 }

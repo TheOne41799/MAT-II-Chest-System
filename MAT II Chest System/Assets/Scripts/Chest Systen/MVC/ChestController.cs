@@ -15,6 +15,8 @@ namespace ChestSystem.Chests
         public int ChestID { get; private set; }
         private static int nextChestID = 0;
 
+        public MonoBehaviour CoroutineRunner { get; set; }
+
 
         public ChestController(ChestModelSO chestModelSO)
         {
@@ -54,22 +56,38 @@ namespace ChestSystem.Chests
             chestStateMachine = new ChestStateMachine();
         }
 
+        public void Update()
+        {
+            chestStateMachine.Update();
+        }
 
         private void ChestLockedState()
         {
             chestStateMachine.Initialize(new ChestLockedState(this));
         }
 
-        public void UnlockChest()
+
+        public void UnlockChestWithTimer()
         {
+            //Debug.Log("Unlock with Timer");
+
             //Debug.Log($"Matching chest found with key value of {ChestID}");
 
-            //ChestUnlockingState();
+            ChestUnlockingState();
+        }
+
+        public void UnlockChestWithGems()
+        {
+            //Debug.Log("Unlock with Gems");
+
+            ChestUnlockedState();
         }
 
         private void ChestUnlockingState()
         {
-            chestStateMachine.ChangeState(new ChestUnlockingState(this));
+            //chestStateMachine.ChangeState(new ChestUnlockingState(this));
+
+            chestStateMachine.ChangeState(new ChestUnlockingState(this, CoroutineRunner));
         }
 
         private void ChestUnlockedState()

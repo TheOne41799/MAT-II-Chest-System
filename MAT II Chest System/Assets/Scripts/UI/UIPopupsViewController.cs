@@ -26,6 +26,8 @@ namespace ChestSystem.UI
         [SerializeField] private TextMeshProUGUI uiPopupUnlockChestWithGemsText;
         #endregion
 
+        private ChestController chestController;
+
 
         private void Awake()
         {
@@ -72,6 +74,8 @@ namespace ChestSystem.UI
 
         private void UIPopupUnlockChestManager(ChestController controller, UIPopups popup)
         {
+            chestController = controller;
+
             uiPopupUnlockChestWithTimerText.text = controller.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
             uiPopupUnlockChestWithGemsText.text = controller.ChestModel.GemsRequiredToUnlockChest.ToString() + " gems";
 
@@ -82,11 +86,21 @@ namespace ChestSystem.UI
         private void UnlockChestWithTimer()
         {
             DeactivateUIPopups();
+
+            EventService.Instance.OnUnlockChest.InvokeEvent(chestController, ChestUnlockMethod.WITH_TIMER);
+            
+            /*Debug.Log("Unlock with Timer");
+            Debug.Log(chestController.ChestID);*/
         }
 
         private void UnlockChestWithGems()
         {
             DeactivateUIPopups();
+
+            EventService.Instance.OnUnlockChest.InvokeEvent(chestController, ChestUnlockMethod.WITH_GEMS);
+
+            /*Debug.Log("Unlock with Gems");
+            Debug.Log(chestController.ChestID);*/
         }
     }    
 }

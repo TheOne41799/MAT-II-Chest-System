@@ -21,5 +21,10 @@ namespace ChestSystem.Chests
             currentState = newState;
             currentState.EnterState();
         }
+
+        public void Update()
+        {
+            currentState?.UpdateState();
+        }
     }
 }

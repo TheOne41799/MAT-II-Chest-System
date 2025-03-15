@@ -36,6 +36,8 @@ namespace ChestSystem.UI
         private void OnEnable()
         {
             chestButton.onClick.AddListener(CheckUnlockButtonClicked);
+
+            EventService.Instance.OnUnlockingChest.AddListener(UIChestSlotViewUnlockingState);
         }
 
         private void ClearSlot()
@@ -45,41 +47,45 @@ namespace ChestSystem.UI
 
         private void ActivateDeactivateChestSlotViewChildrenGameObjects()
         {
-            if (chestController == null)
-            {
-                uiChestSlotEmpty.SetActive(true);
-                uiChestSlotFilled.SetActive(false);
-            }
-            else
-            {
-                uiChestSlotEmpty.SetActive(false);
-                uiChestSlotFilled.SetActive(true);
-            }
+            uiChestSlotEmpty.SetActive(chestController == null);
+            uiChestSlotFilled.SetActive(chestController != null);
         }
 
         public void OnChestAdded(ChestController controller)
         {
+            if (chestController != null) return;
+
             chestController = controller;
-
-            UIChestSlotViewLockedState(chestController);
-
+            UIChestSlotViewLockedState();
             ActivateDeactivateChestSlotViewChildrenGameObjects();
         }
 
         private void CheckUnlockButtonClicked()
         {
-            EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
+            if (chestController != null)
+            {
+                EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
+            }
         }
 
-        public void UIChestSlotViewLockedState(ChestController controller)
+        public void UIChestSlotViewLockedState()
         {
             chestImage.sprite = chestController.ChestModel.ChestSprite;
             chestType.text = chestController.ChestModel.ChestType.ToString();
-
             coinsInChest.text = chestController.ChestModel.CoinsInTheChest.ToString();
             gemsInChest.text = chestController.ChestModel.GemsInChest.ToString();
-
             timer.gameObject.SetActive(false);
+        }
+
+
+        public void UIChestSlotViewUnlockingState(ChestController controller, int timeRemainingToUnlockChest)
+        {
+            if (chestController == null || chestController.ChestID != controller.ChestID) return;
+
+            timer.gameObject.SetActive(true);
+            timer.text = timeRemainingToUnlockChest.ToString();
+
+            chestState.text = "Unlocking";
         }
     }
 }

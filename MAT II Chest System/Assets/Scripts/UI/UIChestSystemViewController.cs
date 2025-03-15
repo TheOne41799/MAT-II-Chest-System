@@ -57,6 +57,8 @@ namespace ChestSystem.UI
             currentEmptyUIChestSlotViewControllerToBeFilled = null;
 
             Debug.Log("Chest Slots are full");
+
+            EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_SLOTS_FULL_POPUP);
         }
 
         private void OnChestAdded(ChestController controller)

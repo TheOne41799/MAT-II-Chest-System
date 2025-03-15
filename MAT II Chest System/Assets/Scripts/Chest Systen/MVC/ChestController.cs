@@ -62,9 +62,9 @@ namespace ChestSystem.Chests
 
         public void UnlockChest()
         {
-            Debug.Log($"Matching chest found with key value of {ChestID}");
+            //Debug.Log($"Matching chest found with key value of {ChestID}");
 
-            ChestUnlockingState();
+            //ChestUnlockingState();
         }
 
         private void ChestUnlockingState()

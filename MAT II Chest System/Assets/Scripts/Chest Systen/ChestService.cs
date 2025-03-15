@@ -38,7 +38,13 @@ namespace ChestSystem.Chests
         {
             if (activeChests.ContainsKey(chestID))
             {
-                activeChests[chestID].UnlockChest();
+                ChestController controller = activeChests[chestID];
+                EventService.Instance.OnUIPopupChestUnlockActivate.InvokeEvent(controller, UIPopups.UI_CHEST_UNLOCK_POPUP);
+                
+
+
+                //Test - Important value
+                //activeChests[chestID].UnlockChest();
             }
         }
 

@@ -35,6 +35,7 @@ namespace ChestSystem.Events
 
         public GameEventController<int, int> OnChestCollected { get; private set; } 
         public GameEventController<int, int> OnPlayerStatsUpdated { get; private set; }
+        public GameEventController<ChestController> OnChestRemoved { get; private set; }
 
 
 
@@ -56,7 +57,7 @@ namespace ChestSystem.Events
             OnChestCollected = new GameEventController<int, int>();
             OnPlayerStatsUpdated = new GameEventController<int, int>();
             
-
+            OnChestRemoved = new GameEventController<ChestController>();
 
             
         }

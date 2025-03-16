@@ -44,7 +44,7 @@ namespace ChestSystem.UI
         {
             EventService.Instance.OnChestAdded.AddListener(OnChestAdded);
 
-
+            EventService.Instance.OnChestRemoved.AddListener(OnChestRemoved);
         }
 
         private void GenerateChestButtonClicked()
@@ -74,7 +74,32 @@ namespace ChestSystem.UI
             {
                 chestSlotDictionary[controller.ChestID] = currentEmptyUIChestSlotViewControllerToBeFilled;
                 currentEmptyUIChestSlotViewControllerToBeFilled.OnChestAdded(controller);
+
+                Debug.Log(chestSlotDictionary.Count);
             }
+
+            
+        }
+
+        private void OnChestRemoved(ChestController controller)
+        {
+            //Debug.Log("Chest Removed");
+            //Debug.Log(controller.ChestID);
+
+            //if (currentEmptyUIChestSlotViewControllerToBeFilled != null) return;
+
+            if(chestSlotDictionary.ContainsKey(controller.ChestID))
+            {
+                UIChestSlotViewController controllerToBeRemoved = chestSlotDictionary[controller.ChestID];
+
+                controllerToBeRemoved.OnChestRemoved();
+
+                chestSlotDictionary.Remove(controller.ChestID);
+
+                
+            }
+
+            Debug.Log("Removal " + chestSlotDictionary.Count);
         }
     }
 }

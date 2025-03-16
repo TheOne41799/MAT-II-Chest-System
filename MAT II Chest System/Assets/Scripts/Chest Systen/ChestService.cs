@@ -27,6 +27,7 @@ namespace ChestSystem.Chests
             EventService.Instance.OnGenerateChestButtonClicked.AddListener(GetChestFromPool);
             EventService.Instance.OnChestUnlockButtonClicked.AddListener(UnlockChest);
             EventService.Instance.OnUnlockChest.AddListener(UnlockChest);
+            EventService.Instance.OnChestRemoved.AddListener(ReturnChestToPool);
         }
 
         private void GetChestFromPool()
@@ -38,6 +39,8 @@ namespace ChestSystem.Chests
             if (!activeChests.ContainsKey(controller.ChestID))
             {
                 activeChests.Add(controller.ChestID, controller);
+
+                //Debug.Log("Active chest after addition: " + activeChests.Count);
             }
 
             EventService.Instance.OnChestAdded.InvokeEvent(controller);
@@ -70,6 +73,10 @@ namespace ChestSystem.Chests
             {
                 activeChests.Remove(controller.ChestID);
 
+                controller.ChestCollectedState();
+
+
+                //Debug.Log("Active chest after removal: " + activeChests.Count);
 
                 
 
@@ -80,7 +87,7 @@ namespace ChestSystem.Chests
 
             
 
-        }
+        }        
 
         /*private bool IsAnyChestUnlocking()
         {

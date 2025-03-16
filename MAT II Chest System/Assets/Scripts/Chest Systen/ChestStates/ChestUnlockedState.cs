@@ -15,13 +15,16 @@ namespace ChestSystem.Chests
 
         public void EnterState() 
         { 
-            Debug.Log("Chest is Unlocked!"); 
+            //Debug.Log("Chest is Unlocked!"); 
 
 
             EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
         }
 
 
-        public void ExitState() { Debug.Log("Exiting Unlocked State."); }
+        public void ExitState() 
+        { 
+            //Debug.Log("Exiting Unlocked State."); 
+        }
     }
 }

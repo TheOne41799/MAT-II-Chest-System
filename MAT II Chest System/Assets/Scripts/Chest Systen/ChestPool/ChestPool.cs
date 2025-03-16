@@ -27,6 +27,13 @@ namespace ChestSystem.Chests
                 if (pooledChestController != null)
                 {
                     pooledChestController.IsUsed = true;
+
+
+
+                    pooledChestController.ChestController.InitializeVariables();
+
+
+
                     return pooledChestController.ChestController;
                 }
 
@@ -51,6 +58,8 @@ namespace ChestSystem.Chests
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
             ChestController chestController = new ChestController(chestModelSO);
+
+            chestController.InitializeVariables();
 
             return chestController;
         }

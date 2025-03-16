@@ -18,14 +18,18 @@ namespace ChestSystem.Chests
 
         public MonoBehaviour CoroutineRunner { get; set; }
 
+        private ChestModelSO chestModelSO;
+
 
         public ChestController(ChestModelSO chestModelSO)
         {
             ChestID = GenerateUniqueID();
 
-            ChestModel = new ChestModel(chestModelSO, GenerateRandomCoinsInChest(chestModelSO), GenerateRandomGemsInChest(chestModelSO));
+            this.chestModelSO = chestModelSO;
 
-            InitializeVariables();
+            //ChestModel = new ChestModel(chestModelSO, GenerateRandomCoinsInChest(chestModelSO), GenerateRandomGemsInChest(chestModelSO));
+
+            //InitializeVariables();
         }
 
         private int GenerateUniqueID()
@@ -45,8 +49,10 @@ namespace ChestSystem.Chests
             return randGems;
         }
 
-        private void InitializeVariables()
+        public void InitializeVariables()
         {
+            ChestModel = new ChestModel(chestModelSO, GenerateRandomCoinsInChest(chestModelSO), GenerateRandomGemsInChest(chestModelSO));
+
             CreateStateMachine();
 
             ChestLockedState();
@@ -92,7 +98,7 @@ namespace ChestSystem.Chests
             chestStateMachine.ChangeState(new ChestUnlockedState(this));
         }
 
-        private void ChestCollectedState()
+        public void ChestCollectedState()
         {
             chestStateMachine.ChangeState(new ChestCollectedState(this));
         }

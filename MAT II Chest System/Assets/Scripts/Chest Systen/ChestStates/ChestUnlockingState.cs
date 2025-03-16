@@ -55,7 +55,10 @@ namespace ChestSystem.Chests
             chestController.ChestUnlockedState();
         }
 
-        public void ExitState() { Debug.Log("Exiting Unlocking State."); }
+        public void ExitState() 
+        { 
+            //Debug.Log("Exiting Unlocking State."); 
+        }
 
 
     }

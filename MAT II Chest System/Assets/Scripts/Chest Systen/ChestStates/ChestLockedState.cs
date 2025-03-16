@@ -20,7 +20,10 @@ namespace ChestSystem.Chests
             EventService.Instance.OnChestAdded.InvokeEvent(chestController);
         }
 
-        public void ExitState() { Debug.Log("Exiting Locked State."); }
+        public void ExitState() 
+        {
+            //Debug.Log("Exiting Locked State."); 
+        }
 
         
     }

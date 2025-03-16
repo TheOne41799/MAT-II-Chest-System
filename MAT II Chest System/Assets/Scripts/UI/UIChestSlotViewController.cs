@@ -79,6 +79,11 @@ namespace ChestSystem.UI
                 else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKING)
                 {
                     //Debug.Log("Chest unlocking");
+
+
+
+                    //Test
+                    EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
                 }
                 else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKED)
                 {

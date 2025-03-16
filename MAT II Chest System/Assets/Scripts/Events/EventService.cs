@@ -27,7 +27,7 @@ namespace ChestSystem.Events
         public GameEventController<int> OnChestUnlockButtonClicked { get; private set; }
         public GameEventController<UIPopups> OnUIPopupActivate { get; private set; }
         public GameEventController<ChestController, UIPopups> OnUIPopupChestUnlockActivate { get; private set; }
-        public GameEventController OnAllUIPopupsDeactivate { get; private set; }
+        //public GameEventController OnAllUIPopupsDeactivate { get; private set; }
         public GameEventController<ChestController, ChestUnlockMethod> OnUnlockChest {  get; private set; }
         public GameEventController<ChestController, int> OnUnlockingChest { get; private set; }
         public GameEventController<ChestController> OnChestUnlocked { get; private set; }
@@ -47,7 +47,7 @@ namespace ChestSystem.Events
             OnChestUnlockButtonClicked = new GameEventController<int>();
             OnUIPopupActivate = new GameEventController<UIPopups>();
             OnUIPopupChestUnlockActivate = new GameEventController<ChestController, UIPopups>();
-            OnAllUIPopupsDeactivate = new GameEventController();
+            //OnAllUIPopupsDeactivate = new GameEventController();
             OnUnlockChest = new GameEventController<ChestController, ChestUnlockMethod>();
             OnUnlockingChest = new GameEventController<ChestController, int>();
             OnChestUnlocked = new GameEventController<ChestController>();

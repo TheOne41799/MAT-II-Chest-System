@@ -20,6 +20,8 @@ namespace ChestSystem.Chests
 
         private ChestModelSO chestModelSO;
 
+        public bool IsChestUnlocking;
+
 
         public ChestController(ChestModelSO chestModelSO)
         {
@@ -56,6 +58,8 @@ namespace ChestSystem.Chests
             CreateStateMachine();
 
             ChestLockedState();
+
+            IsChestUnlocking = false;
         }
 
         private void CreateStateMachine()
@@ -76,11 +80,31 @@ namespace ChestSystem.Chests
             //Debug.Log($"Matching chest found with key value of {ChestID}");
 
             ChestUnlockingState();
+
+            IsChestUnlocking = true;
         }
 
         public void UnlockChestWithGems()
         {
             //Debug.Log("Unlock with Gems");
+            //Debug.Log("Chest state is locked or unlocking");
+
+            //plan
+            //- send a message from here to the player
+
+            /*if (chestStateMachine.CurrentState is ChestUnlockingState unlockingState)
+            {
+                int remainingTime = unlockingState.UnlockTimeRemaining;
+
+                Debug.Log($"Remaining unlock time: {remainingTime} seconds");
+
+                // Now you can use `remainingTime` to calculate gem cost or implement unlocking logic
+            }*/
+
+            // first if check if timer is active, if yes then calculate the required number of gems
+            //- check if he has enough gems
+            //- if yes, unlock the chest - also check the timer value
+            //- if no, create a method for UIPop indicating not enough gems
 
             //ChestUnlockedState();
         }

@@ -12,6 +12,7 @@ namespace ChestSystem.Chests
         private ChestController chestController;
 
         private int unlockTimeRemaining;
+        public int UnlockTimeRemaining { get { return unlockTimeRemaining; } }
 
         private bool isChestUnlocked = false;
         public bool IsChestUnlocked { get { return isChestUnlocked; } }

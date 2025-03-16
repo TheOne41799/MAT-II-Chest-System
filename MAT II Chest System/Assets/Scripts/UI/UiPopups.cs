@@ -8,6 +8,8 @@ namespace ChestSystem.UI
     {
         NONE,
         UI_CHEST_UNLOCK_POPUP,
-        UI_CHEST_SLOTS_FULL_POPUP
+        UI_CHEST_SLOTS_FULL_POPUP,
+        UI_CHEST_ALREADY_UNLOCKING,
+        UI_CHEST_ALREADY_UNLOCKED
     }
 }

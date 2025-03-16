@@ -1,8 +1,6 @@
-using ChestSystem.UI;
-using ChestSystem.Utilities;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections.Generic;
+
 
 namespace ChestSystem.Chests
 {
@@ -12,32 +10,43 @@ namespace ChestSystem.Chests
 
         private ChestModelDatabaseSO chestModelDatabaseSO;
 
+        private int initialChestsPerType = 3;
+
 
         public ChestPool(ChestModelDatabaseSO chestModelDatabaseSO)
         {
             this.chestModelDatabaseSO = chestModelDatabaseSO;
+
+            InitializeChestPool();
+        }
+
+        private void InitializeChestPool()
+        {
+            for (int i = 0; i < initialChestsPerType; i++)
+            {
+                pooledChestControllers.Add(new PooledChestController { ChestController = CreateChestOfType(ChestType.COMMON), IsUsed = false });
+                pooledChestControllers.Add(new PooledChestController { ChestController = CreateChestOfType(ChestType.RARE), IsUsed = false });
+                pooledChestControllers.Add(new PooledChestController { ChestController = CreateChestOfType(ChestType.EPIC), IsUsed = false });
+                pooledChestControllers.Add(new PooledChestController { ChestController = CreateChestOfType(ChestType.LEGENDARY), IsUsed = false });
+            }
         }
 
         public ChestController GetChest()
         {
             if (pooledChestControllers.Count > 0)
             {
-                PooledChestController pooledChestController = pooledChestControllers.Find(controller => !controller.IsUsed); ;
-
-                if (pooledChestController != null)
+                List<PooledChestController> availableChests = pooledChestControllers.FindAll(controller => !controller.IsUsed);
+                
+                if (availableChests.Count > 0)
                 {
+                    int randIndex = Random.Range(0, availableChests.Count);
+                    PooledChestController pooledChestController = availableChests[randIndex];
+
                     pooledChestController.IsUsed = true;
-
-
-
                     pooledChestController.ChestController.InitializeVariables();
-
-
 
                     return pooledChestController.ChestController;
                 }
-
-                
             }
 
             return CreateNewRandomChest();
@@ -54,12 +63,26 @@ namespace ChestSystem.Chests
             return newPooledChestController.ChestController;
         }
 
+        private ChestController CreateChestOfType(ChestType chestType)
+        {
+            ChestModelSO chestModelSO = chestModelDatabaseSO.ChestModelSOsList.Find(model => model.ChestType == chestType);
+            ChestController chestController = new ChestController(chestModelSO);
+            
+            chestController.InitializeVariables();
+
+            //Debug.Log(chestController.ChestModel.ChestType);
+
+            return chestController;
+        }
+
         private ChestController CreateChest()
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
             ChestController chestController = new ChestController(chestModelSO);
 
             chestController.InitializeVariables();
+
+            //Debug.Log(chestController.ChestModel.ChestType);
 
             return chestController;
         }

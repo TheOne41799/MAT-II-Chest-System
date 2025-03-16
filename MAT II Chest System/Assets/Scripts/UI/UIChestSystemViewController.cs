@@ -75,7 +75,7 @@ namespace ChestSystem.UI
                 chestSlotDictionary[controller.ChestID] = currentEmptyUIChestSlotViewControllerToBeFilled;
                 currentEmptyUIChestSlotViewControllerToBeFilled.OnChestAdded(controller);
 
-                Debug.Log(chestSlotDictionary.Count);
+                //Debug.Log("Add " + controller.ChestID);
             }
 
             
@@ -99,7 +99,7 @@ namespace ChestSystem.UI
                 
             }
 
-            Debug.Log("Removal " + chestSlotDictionary.Count);
+            //Debug.Log("Removal " + controller.ChestID);
         }
     }
 }

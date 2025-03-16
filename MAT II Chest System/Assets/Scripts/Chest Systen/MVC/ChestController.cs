@@ -20,6 +20,12 @@ namespace ChestSystem.Chests
 
         private ChestModelSO chestModelSO;
 
+        private int updatedGemsRequiredToUnlockChest;
+        public int UpdatedGemsRequiredToUnlockChest { get { return updatedGemsRequiredToUnlockChest; } }
+
+        private int updatedTimeRemainingToUnlockChest;
+        public int UpdatedTimeRemainingToUnlockChest { get { return updatedTimeRemainingToUnlockChest; }}
+
         //public bool IsChestUnlocking;
 
 
@@ -87,12 +93,23 @@ namespace ChestSystem.Chests
 
         public void UnlockChestWithGems()
         {
-            int gemsRequired = CalculateGemsRequiredToUnlockTheChest();
+            //int gemsRequired = CalculateGemsRequiredToUnlockTheChest();
 
-            Debug.Log($"Gems Required to Unlock: {gemsRequired}");
+            
+            
+            
+            //updatedGemsRequiredToUnlockChest = CalculateGemsRequiredToUnlockTheChest();
+
+            // you need a new place to send this message from
+            // EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.InvokeEvent(this);
+
+
+
+
+            Debug.Log($"Gems Required to Unlock: {updatedGemsRequiredToUnlockChest}");
         }
 
-        private int CalculateGemsRequiredToUnlockTheChest()
+        /*private int CalculateGemsRequiredToUnlockTheChest()
         {
             int remainingTime = 0;
 
@@ -106,6 +123,43 @@ namespace ChestSystem.Chests
             }
 
             return Mathf.CeilToInt(remainingTime / 10f) + ChestModel.MinimumGemsRequiredToUnlockChest;
+        }*/
+
+        /*private int CalculateGemsRequiredToUnlockTheChest()
+        {
+            if (chestStateMachine.CurrentState is ChestLockedState lockedState)
+            {
+                updatedTimeRemainingToUnlockChest = ChestModel.TimeRequiredToUnlockChest;
+            }
+            else if (chestStateMachine.CurrentState is ChestUnlockingState unlockingState)
+            {
+                updatedTimeRemainingToUnlockChest = unlockingState.UnlockTimeRemaining;
+            }
+
+            return Mathf.CeilToInt(updatedTimeRemainingToUnlockChest / 10f) + ChestModel.MinimumGemsRequiredToUnlockChest;
+        }*/
+
+        private void CalculateGemsRequiredToUnlockTheChest()
+        {
+            if (chestStateMachine.CurrentState is ChestLockedState lockedState)
+            {
+                updatedTimeRemainingToUnlockChest = ChestModel.TimeRequiredToUnlockChest;
+            }
+            else if (chestStateMachine.CurrentState is ChestUnlockingState unlockingState)
+            {
+                updatedTimeRemainingToUnlockChest = unlockingState.UnlockTimeRemaining;
+            }
+
+            updatedGemsRequiredToUnlockChest = Mathf.CeilToInt(updatedTimeRemainingToUnlockChest / 10f) + ChestModel.MinimumGemsRequiredToUnlockChest;
+        }
+
+        public void UpdateTimeAndGemsRequiredText()
+        {
+            //Debug.Log("asasdasd");
+
+            CalculateGemsRequiredToUnlockTheChest();
+
+            EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.InvokeEvent(this);
         }
 
         /*private void CalculateGemsRequiredToUnlockTheChest()

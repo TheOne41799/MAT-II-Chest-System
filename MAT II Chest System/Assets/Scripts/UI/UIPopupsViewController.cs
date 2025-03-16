@@ -30,7 +30,7 @@ namespace ChestSystem.UI
         [SerializeField] private TextMeshProUGUI uiPopupUnlockChestWithGemsText;
         #endregion
 
-        private ChestController chestController;
+        private ChestController activeChestController;
 
 
         private void Awake()
@@ -66,6 +66,11 @@ namespace ChestSystem.UI
             EventService.Instance.OnUIPopupActivate.AddListener(UIPopupManager);
             EventService.Instance.OnUIPopupChestUnlockActivate.AddListener(UIPopupUnlockChestManager);
             //EventService.Instance.OnAllUIPopupsDeactivate.AddListener(DeactivateUIPopups);
+
+
+
+            //test
+            EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.AddListener(UpdateTimeAndGemsRequiredText);
         }
 
         private void UIPopupManager(UIPopups uiPopup)
@@ -89,14 +94,56 @@ namespace ChestSystem.UI
 
         private void UIPopupUnlockChestManager(ChestController controller, UIPopups popup)
         {
-            chestController = controller;
+            activeChestController = controller;
 
-            uiPopupUnlockChestWithTimerText.text = controller.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
-            uiPopupUnlockChestWithGemsText.text = controller.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";
+            /*uiPopupUnlockChestWithTimerText.text = controller.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = controller.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";*/
+
+            UpdateTimeAndGemsRequiredTextOnChestLocked(controller);
+
+            //UpdateTimeAndGemsRequiredText();
 
             DeactivateUIPopups();
             uiChestUnlockPopup.SetActive(true);
         }
+
+        /*private void UpdateTimeAndGemsRequiredText()
+        {
+            uiPopupUnlockChestWithTimerText.text = chestController.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = chestController.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";
+        }*/
+
+        /*private void UpdateTimeAndGemsRequiredText(ChestController chestController)
+        {
+            uiPopupUnlockChestWithTimerText.text = chestController.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = chestController.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";
+        }*/
+
+        private void UpdateTimeAndGemsRequiredTextOnChestLocked(ChestController chestController)
+        {
+            Debug.Log("Locked");
+
+            uiPopupUnlockChestWithTimerText.text = chestController.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = chestController.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";
+        }
+
+        private void UpdateTimeAndGemsRequiredText(ChestController controller)
+        {
+            Debug.Log("Unlocking");
+
+            if (activeChestController != controller) return;
+
+            uiPopupUnlockChestWithTimerText.text = activeChestController.UpdatedTimeRemainingToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = activeChestController.UpdatedGemsRequiredToUnlockChest.ToString() + " gems";
+        }
+
+
+
+
+
+
+
+
 
         private void UnlockChestWithTimer()
         {
@@ -105,9 +152,9 @@ namespace ChestSystem.UI
             //EventService.Instance.OnUnlockChest.InvokeEvent(chestController, ChestUnlockMethod.WITH_TIMER);
 
 
-            if(chestController.ChestStateMachine.CurrentState is not ChestUnlockingState)
+            if(activeChestController.ChestStateMachine.CurrentState is not ChestUnlockingState)
             {
-                EventService.Instance.OnUnlockChest.InvokeEvent(chestController, ChestUnlockMethod.WITH_TIMER);
+                EventService.Instance.OnUnlockChest.InvokeEvent(activeChestController, ChestUnlockMethod.WITH_TIMER);
             }
             else
             {
@@ -133,12 +180,12 @@ namespace ChestSystem.UI
             //3 scaenarios
 
             
-            if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.LOCKED
-               || chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKING)
+            if(activeChestController.ChestStateMachine.CurrentState.ChestState == ChestState.LOCKED
+               || activeChestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKING)
             {
-                EventService.Instance.OnUnlockChest.InvokeEvent(chestController, ChestUnlockMethod.WITH_GEMS);
+                EventService.Instance.OnUnlockChest.InvokeEvent(activeChestController, ChestUnlockMethod.WITH_GEMS);
             }
-            else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKED)
+            else if(activeChestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKED)
             {
                 UIPopupManager(UIPopups.UI_CHEST_ALREADY_UNLOCKED);
             }

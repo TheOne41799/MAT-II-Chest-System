@@ -49,6 +49,8 @@ namespace ChestSystem.Chests
                 unlockTimeRemaining--;
 
                 EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
+
+                chestController.UpdateTimeAndGemsRequiredText();
             }
 
             isChestUnlocked = true;

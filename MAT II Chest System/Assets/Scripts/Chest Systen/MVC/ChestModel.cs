@@ -11,19 +11,19 @@ namespace ChestSystem.Chests
         public int CoinsInTheChest { get; }
         public int GemsInChest { get; }
         public int TimeRequiredToUnlockChest { get; }
-        public int GemsRequiredToUnlockChest { get; }
+        public int MinimumGemsRequiredToUnlockChest { get; }
 
 
         public ChestModel(ChestModelSO chestModelSO, int coins, int gems)
         {
-            ChestType = chestModelSO.ChestType;
-            ChestSprite = chestModelSO.ChestSprite;
+            this.ChestType = chestModelSO.ChestType;
+            this.ChestSprite = chestModelSO.ChestSprite;
 
-            CoinsInTheChest = coins;
-            GemsInChest = gems;            
+            this.CoinsInTheChest = coins;
+            this.GemsInChest = gems;            
 
-            TimeRequiredToUnlockChest = chestModelSO.TimeRequiredToUnlockChest;
-            GemsRequiredToUnlockChest = chestModelSO.GemsRequiredToUnlockChest;
+            this.TimeRequiredToUnlockChest = chestModelSO.TimeRequiredToUnlockChest;
+            this.MinimumGemsRequiredToUnlockChest = chestModelSO.MinimumGemsRequiredToUnlockChest;
         }
     }
 }

@@ -25,7 +25,7 @@ namespace ChestSystem.Chests
             this.coroutineRunner = coroutineRunner;
 
             EventService.Instance.OnGenerateChestButtonClicked.AddListener(GetChestFromPool);
-            EventService.Instance.OnChestUnlockButtonClicked.AddListener(UnlockChest);
+            EventService.Instance.OnChestUnlockButtonClicked.AddListener(UnlockChestButtonClicked);
             EventService.Instance.OnUnlockChest.AddListener(UnlockChest);
             EventService.Instance.OnChestRemoved.AddListener(ReturnChestToPool);
         }
@@ -46,7 +46,7 @@ namespace ChestSystem.Chests
             EventService.Instance.OnChestAdded.InvokeEvent(controller);
         }
 
-        private void UnlockChest(int chestID)
+        private void UnlockChestButtonClicked(int chestID)
         {
             if (activeChests.ContainsKey(chestID))
             {

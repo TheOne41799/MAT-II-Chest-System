@@ -35,7 +35,7 @@ namespace ChestSystem.Chests
         [SerializeField] private int timeRequiredToUnlockChest;
         public int TimeRequiredToUnlockChest { get { return timeRequiredToUnlockChest; } }
 
-        [SerializeField] private int gemsRequiredToUnlockChest;
-        public int GemsRequiredToUnlockChest { get { return gemsRequiredToUnlockChest; } }
+        [SerializeField] private int minimumGemsRequiredToUnlockChest;
+        public int MinimumGemsRequiredToUnlockChest { get { return minimumGemsRequiredToUnlockChest; } }
     }
 }

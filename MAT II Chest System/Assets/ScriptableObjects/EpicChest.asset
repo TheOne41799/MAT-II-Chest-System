@@ -18,5 +18,5 @@ MonoBehaviour:
   maximumCoinsInChest: 300
   minimumGemsInChest: 4
   maximumGemsInChest: 7
-  timeRequiredToUnlockChest: 100
+  timeRequiredToUnlockChest: 10
   minimumGemsRequiredToUnlockChest: 15

@@ -7,6 +7,7 @@ namespace ChestSystem.Player
     public class PlayerController
     {
         private PlayerModel playerModel;
+        public PlayerModel PlayerModel { get { return playerModel; } }
 
         public PlayerController()
         {

@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using ChestSystem.Events;
 using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 namespace ChestSystem.Chests
 {
@@ -22,6 +23,11 @@ namespace ChestSystem.Chests
         private MonoBehaviour coroutineRunner;
 
 
+        //test
+        private Coroutine chestUnlockingCoroutine;
+        public Coroutine ChestUnlockingCoroutine { get { return chestUnlockingCoroutine; } }
+
+
         public ChestUnlockingState(ChestController chest, MonoBehaviour coroutineRunner) 
         { 
             this.chestController = chest;
@@ -35,7 +41,7 @@ namespace ChestSystem.Chests
         {
             EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
 
-            coroutineRunner.StartCoroutine(UnlockChestRoutine());
+            chestUnlockingCoroutine = coroutineRunner.StartCoroutine(UnlockChestRoutine());
         }
 
 
@@ -45,12 +51,14 @@ namespace ChestSystem.Chests
         {
             while (unlockTimeRemaining > 0)
             {
+                //Debug.Log("Unlocking");
+
                 yield return new WaitForSeconds(1);
                 unlockTimeRemaining--;
 
                 EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
 
-                chestController.UpdateTimeAndGemsRequiredText();
+                chestController.UpdateTimeAndGemsRequiredTextOnUIPopup();
             }
 
             isChestUnlocked = true;
@@ -61,6 +69,16 @@ namespace ChestSystem.Chests
         public void ExitState() 
         { 
             //Debug.Log("Exiting Unlocking State."); 
+            
+            StopChestUnlockingCoroutine();
+
+        }
+
+        private void StopChestUnlockingCoroutine()
+        {
+            //Debug.Log("Stopped coroutine on chest with ID " + chestController.ChestID);
+
+            coroutineRunner.StopCoroutine(chestUnlockingCoroutine);
         }
 
 

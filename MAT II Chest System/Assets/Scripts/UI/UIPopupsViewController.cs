@@ -14,6 +14,7 @@ namespace ChestSystem.UI
         [SerializeField] private GameObject uiChestSlotsFullPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockingPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockedPopup;
+        [SerializeField] private GameObject uiPlayerHasInsufficientGemsPopup;
 
         private List<GameObject> allUIPopupsList = new List<GameObject>();
 
@@ -21,8 +22,9 @@ namespace ChestSystem.UI
         [SerializeField] private Button uiPopupUnlockChestWithTimerButton;
         [SerializeField] private Button uiPopupUnlockChestWithGemsButton;
         [SerializeField] private Button uiPopupChestSlotsFullCloseButton;
-        [SerializeField] private Button uiChestAlreadyUnlockingCloseButton;
-        [SerializeField] private Button uichestAlreadyUnlockedCloseButton;
+        [SerializeField] private Button uiPopupChestAlreadyUnlockingCloseButton;
+        [SerializeField] private Button uiPopupChestAlreadyUnlockedCloseButton;
+        [SerializeField] private Button uiPopupPlayerHasInsufficientGemsCloseButton;
         #endregion
 
         #region UI Popups Close Buttons
@@ -43,8 +45,9 @@ namespace ChestSystem.UI
         {
             allUIPopupsList.Add(uiChestUnlockPopup);
             allUIPopupsList.Add(uiChestSlotsFullPopup);
-            allUIPopupsList.Add (uiChestAlreadyUnlockingPopup);
+            allUIPopupsList.Add(uiChestAlreadyUnlockingPopup);
             allUIPopupsList.Add(uiChestAlreadyUnlockedPopup);
+            allUIPopupsList.Add(uiPlayerHasInsufficientGemsPopup);
         }
 
         private void DeactivateUIPopups()
@@ -59,9 +62,11 @@ namespace ChestSystem.UI
         {
             uiPopupUnlockChestWithTimerButton.onClick.AddListener(UnlockChestWithTimer);
             uiPopupUnlockChestWithGemsButton.onClick.AddListener(UnlockChestWithGems);
+
             uiPopupChestSlotsFullCloseButton.onClick.AddListener(DeactivateUIPopups);
-            uiChestAlreadyUnlockingCloseButton.onClick.AddListener(DeactivateUIPopups);
-            uichestAlreadyUnlockedCloseButton.onClick.AddListener (DeactivateUIPopups);
+            uiPopupChestAlreadyUnlockingCloseButton.onClick.AddListener(DeactivateUIPopups);
+            uiPopupChestAlreadyUnlockedCloseButton.onClick.AddListener (DeactivateUIPopups);
+            uiPopupPlayerHasInsufficientGemsCloseButton.onClick.AddListener(DeactivateUIPopups);
 
             EventService.Instance.OnUIPopupActivate.AddListener(UIPopupManager);
             EventService.Instance.OnUIPopupChestUnlockActivate.AddListener(UIPopupUnlockChestManager);
@@ -70,7 +75,7 @@ namespace ChestSystem.UI
 
 
             //test
-            EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.AddListener(UpdateTimeAndGemsRequiredText);
+            EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.AddListener(UpdateTimeAndGemsRequiredTextOnChestLocking);
         }
 
         private void UIPopupManager(UIPopups uiPopup)
@@ -88,6 +93,10 @@ namespace ChestSystem.UI
                 case UIPopups.UI_CHEST_ALREADY_UNLOCKED:
                     DeactivateUIPopups();
                     uiChestAlreadyUnlockedPopup.SetActive(true);
+                    break;
+                case UIPopups.UI_PLAYER_HAS_INSUFFICIENT_GEMS:
+                    DeactivateUIPopups();
+                    uiPlayerHasInsufficientGemsPopup.SetActive(true);
                     break;
             }
         }
@@ -121,15 +130,18 @@ namespace ChestSystem.UI
 
         private void UpdateTimeAndGemsRequiredTextOnChestLocked(ChestController chestController)
         {
-            Debug.Log("Locked");
+            //Debug.Log("Locked");
 
-            uiPopupUnlockChestWithTimerText.text = chestController.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
-            uiPopupUnlockChestWithGemsText.text = chestController.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";
+            /*uiPopupUnlockChestWithTimerText.text = chestController.ChestModel.TimeRequiredToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = chestController.ChestModel.MinimumGemsRequiredToUnlockChest.ToString() + " gems";*/
+
+            uiPopupUnlockChestWithTimerText.text = activeChestController.UpdatedTimeRemainingToUnlockChest.ToString() + " secs";
+            uiPopupUnlockChestWithGemsText.text = activeChestController.UpdatedGemsRequiredToUnlockChest.ToString() + " gems";
         }
 
-        private void UpdateTimeAndGemsRequiredText(ChestController controller)
+        private void UpdateTimeAndGemsRequiredTextOnChestLocking(ChestController controller)
         {
-            Debug.Log("Unlocking");
+            //Debug.Log("Unlocking");
 
             if (activeChestController != controller) return;
 
@@ -152,18 +164,32 @@ namespace ChestSystem.UI
             //EventService.Instance.OnUnlockChest.InvokeEvent(chestController, ChestUnlockMethod.WITH_TIMER);
 
 
-            if(activeChestController.ChestStateMachine.CurrentState is not ChestUnlockingState)
+            /*if(activeChestController.ChestStateMachine.CurrentState is not ChestUnlockingState)
             {
                 EventService.Instance.OnUnlockChest.InvokeEvent(activeChestController, ChestUnlockMethod.WITH_TIMER);
             }
             else
             {
                 UIPopupManager(UIPopups.UI_CHEST_ALREADY_UNLOCKING);
+            }*/
+
+
+            if (activeChestController.ChestStateMachine.CurrentState is ChestLockedState)
+            {
+                EventService.Instance.OnUnlockChest.InvokeEvent(activeChestController, ChestUnlockMethod.WITH_TIMER);
+            }
+            else if(activeChestController.ChestStateMachine.CurrentState is ChestUnlockingState)
+            {
+                //queue related code maybe used here
+
+                UIPopupManager(UIPopups.UI_CHEST_ALREADY_UNLOCKING);
+            }
+            else if(activeChestController.ChestStateMachine.CurrentState is ChestUnlockedState)
+            {
+                UIPopupManager(UIPopups.UI_CHEST_ALREADY_UNLOCKED);
             }
 
 
-
-            
             /*Debug.Log("Unlock with Timer");
             Debug.Log(chestController.ChestID);*/
         }

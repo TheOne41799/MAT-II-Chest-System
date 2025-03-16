@@ -8,6 +8,7 @@ namespace ChestSystem.Player
     public class PlayerService
     {
         private PlayerController playerController;
+        public PlayerController PlayerController { get { return playerController; } }
 
 
         public PlayerService()

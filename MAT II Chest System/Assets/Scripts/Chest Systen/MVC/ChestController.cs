@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using ChestSystem.Events;
+using ChestSystem.Player;
 
 namespace ChestSystem.Chests
 {
@@ -27,11 +28,16 @@ namespace ChestSystem.Chests
         public int UpdatedTimeRemainingToUnlockChest { get { return updatedTimeRemainingToUnlockChest; }}
 
         //public bool IsChestUnlocking;
+        private PlayerService playerService;
 
 
-        public ChestController(ChestModelSO chestModelSO)
+        public ChestController(ChestModelSO chestModelSO, PlayerService playerService)
         {
             ChestID = GenerateUniqueID();
+
+
+            this.playerService = playerService;
+
 
             this.chestModelSO = chestModelSO;
 
@@ -76,6 +82,8 @@ namespace ChestSystem.Chests
         private void ChestLockedState()
         {
             chestStateMachine.Initialize(new ChestLockedState(this));
+
+            CalculateTimeAndGemsRequiredToUnlockTheChest();
         }
 
 
@@ -93,20 +101,37 @@ namespace ChestSystem.Chests
 
         public void UnlockChestWithGems()
         {
+            //Debug.Log(playerService.PlayerController.PlayerModel.PlayerGems);
+
+            //Debug.Log("Gems " + updatedGemsRequiredToUnlockChest);
+            //Debug.Log("Time " + updatedTimeRemainingToUnlockChest);
+
+
+            if(playerService.PlayerController.PlayerModel.PlayerGems >= updatedGemsRequiredToUnlockChest)
+            {
+                playerService.PlayerController.PlayerModel.DeductPlayerGemsOnChestPurchase(updatedGemsRequiredToUnlockChest);
+
+                ChestUnlockedState();
+            }
+            else
+            {
+                //Debug.Log("false");
+
+
+                EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_PLAYER_HAS_INSUFFICIENT_GEMS);
+            }
+
+
+
+
             //int gemsRequired = CalculateGemsRequiredToUnlockTheChest();
 
-            
-            
-            
             //updatedGemsRequiredToUnlockChest = CalculateGemsRequiredToUnlockTheChest();
 
             // you need a new place to send this message from
             // EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.InvokeEvent(this);
 
-
-
-
-            Debug.Log($"Gems Required to Unlock: {updatedGemsRequiredToUnlockChest}");
+            //Debug.Log($"Gems Required to Unlock: {updatedGemsRequiredToUnlockChest}");
         }
 
         /*private int CalculateGemsRequiredToUnlockTheChest()
@@ -139,7 +164,7 @@ namespace ChestSystem.Chests
             return Mathf.CeilToInt(updatedTimeRemainingToUnlockChest / 10f) + ChestModel.MinimumGemsRequiredToUnlockChest;
         }*/
 
-        private void CalculateGemsRequiredToUnlockTheChest()
+        private void CalculateTimeAndGemsRequiredToUnlockTheChest()
         {
             if (chestStateMachine.CurrentState is ChestLockedState lockedState)
             {
@@ -153,11 +178,11 @@ namespace ChestSystem.Chests
             updatedGemsRequiredToUnlockChest = Mathf.CeilToInt(updatedTimeRemainingToUnlockChest / 10f) + ChestModel.MinimumGemsRequiredToUnlockChest;
         }
 
-        public void UpdateTimeAndGemsRequiredText()
+        public void UpdateTimeAndGemsRequiredTextOnUIPopup()
         {
             //Debug.Log("asasdasd");
 
-            CalculateGemsRequiredToUnlockTheChest();
+            CalculateTimeAndGemsRequiredToUnlockTheChest();
 
             EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.InvokeEvent(this);
         }

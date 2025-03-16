@@ -1,4 +1,5 @@
 using ChestSystem.Events;
+using ChestSystem.Player;
 using ChestSystem.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace ChestSystem.Chests
         private MonoBehaviour coroutineRunner;
 
 
-        public ChestService(ChestModelDatabaseSO chestModelDatabaseSO, MonoBehaviour coroutineRunner)
+        public ChestService(ChestModelDatabaseSO chestModelDatabaseSO, PlayerService playerService, MonoBehaviour coroutineRunner)
         {
-            chestPool = new ChestPool(chestModelDatabaseSO);
+            chestPool = new ChestPool(chestModelDatabaseSO, playerService);
 
             activeChests = new Dictionary<int, ChestController>();
 

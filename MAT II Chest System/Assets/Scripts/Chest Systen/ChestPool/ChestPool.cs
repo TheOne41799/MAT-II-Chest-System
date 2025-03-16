@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using ChestSystem.Player;
 
 
 namespace ChestSystem.Chests
@@ -10,12 +11,15 @@ namespace ChestSystem.Chests
 
         private ChestModelDatabaseSO chestModelDatabaseSO;
 
+        private PlayerService playerService;
+
         private int initialChestsPerType = 3;
 
 
-        public ChestPool(ChestModelDatabaseSO chestModelDatabaseSO)
+        public ChestPool(ChestModelDatabaseSO chestModelDatabaseSO, PlayerService playerService)
         {
             this.chestModelDatabaseSO = chestModelDatabaseSO;
+            this.playerService = playerService;
 
             InitializeChestPool();
         }
@@ -66,7 +70,7 @@ namespace ChestSystem.Chests
         private ChestController CreateChestOfType(ChestType chestType)
         {
             ChestModelSO chestModelSO = chestModelDatabaseSO.ChestModelSOsList.Find(model => model.ChestType == chestType);
-            ChestController chestController = new ChestController(chestModelSO);
+            ChestController chestController = new ChestController(chestModelSO, playerService);
             
             chestController.InitializeVariables();
 
@@ -78,7 +82,7 @@ namespace ChestSystem.Chests
         private ChestController CreateChest()
         {
             ChestModelSO chestModelSO = ChooseARandomChestModel();
-            ChestController chestController = new ChestController(chestModelSO);
+            ChestController chestController = new ChestController(chestModelSO, playerService);
 
             chestController.InitializeVariables();
 

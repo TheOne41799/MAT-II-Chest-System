@@ -23,7 +23,7 @@ namespace ChestSystem.Main
         private void Start()
         {
             playerService = new PlayerService();
-            chestService = new ChestService(chestModelDatabaseSO, this);
+            chestService = new ChestService(chestModelDatabaseSO, playerService, this);
         }
     }
 }

@@ -1,31 +1,26 @@
+using ChestSystem.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class ChestUnlockedState<T> : IChestState where T : ChestController
+    public class ChestUnlockedState : IChestState
     {
-        public ChestController chestController { get; set; }
-        private GenericStateMachine<T> stateMachine;
+        private ChestController chestController;
+        public ChestState ChestState => ChestState.UNLOCKED;
 
-        public ChestUnlockedState(GenericStateMachine<T> stateMachine)
-        {
-            this.stateMachine = stateMachine;
+        public ChestUnlockedState(ChestController chest) { this.chestController = chest; }
+
+
+        public void EnterState() 
+        { 
+            EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
         }
 
-        public void EnterState()
-        {
-            chestController.chestView.ChestUnlockedStateUI();
-        }
 
-        public void ExitState()
-        {
-            
-        }
-
-        public void UpdateState()
-        {
+        public void ExitState() 
+        { 
             
         }
     }

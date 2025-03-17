@@ -6,11 +6,17 @@ namespace ChestSystem.Player
 {
     public class PlayerController
     {
-        public PlayerModel playerModel {  get; set; }
+        private PlayerModel playerModel;
+        public PlayerModel PlayerModel { get { return playerModel; } }
 
-        public PlayerController() 
+        public PlayerController()
         {
             playerModel = new PlayerModel();
+        }
+
+        public void ChestCollected(int coins, int gems)
+        {
+            playerModel.UpdatePlayerStats(coins, gems);
         }
     }
 }

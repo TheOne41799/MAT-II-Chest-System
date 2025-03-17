@@ -4,28 +4,22 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class ChestCollectedState<T> : IChestState where T : ChestController
+    public class ChestCollectedState : IChestState
     {
-        public ChestController chestController { get; set; }
-        private GenericStateMachine<T> stateMachine;
+        private ChestController chestController;
+        public ChestState ChestState => ChestState.COLLECTED;
 
-        public ChestCollectedState(GenericStateMachine<T> stateMachine)
-        {
-            this.stateMachine = stateMachine;
-        }
+        public ChestCollectedState(ChestController chest) { this.chestController = chest; }
 
-        public void EnterState()
+
+        public void EnterState() 
         {
             
         }
 
-        public void ExitState()
-        {
-            
-        }
 
-        public void UpdateState()
-        {
+        public void ExitState() 
+        { 
             
         }
     }

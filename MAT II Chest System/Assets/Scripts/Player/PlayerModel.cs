@@ -1,3 +1,4 @@
+using ChestSystem.Events;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,13 +7,33 @@ namespace ChestSystem.Player
 {
     public class PlayerModel
     {
-        public int numberOfCoins {  get; set; }
-        public int numberOfGems { get; set; }
+        private int playerCoins = 0;
+        private int playerGems = 10;
+        public int PlayerGems { get { return playerGems; } }
 
-        public PlayerModel() 
+        public PlayerModel()
         {
-            numberOfCoins = 0;
-            numberOfGems = 0;
+            InitializePlayerStats();
+        }
+
+        private void InitializePlayerStats()
+        {
+            EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
+        }
+
+        public void UpdatePlayerStats(int coins, int gems)
+        {
+            playerCoins += coins;
+            playerGems += gems;
+
+            EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
+        }
+
+        public void DeductPlayerGemsOnChestPurchase(int gems)
+        {
+            playerGems -= gems;
+
+            EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
         }
     }
 }

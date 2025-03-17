@@ -8,85 +8,86 @@ using ChestSystem.Events;
 namespace ChestSystem.UI
 {
     public class UIChestSystemViewController : MonoBehaviour
-    {        
-        [SerializeField] private GameObject emptyUIChestSlot;
+    {
+        [SerializeField] private int totalChestSlots;
 
         [SerializeField] private Button generateChestButton;
 
-        [SerializeField] private Transform uiChestSlotsContainer;
+        [SerializeField] private UIChestSlotViewController chestSlotViewControllerPrefab;
+        [SerializeField] private GameObject uiChestSlotViewHolder;
 
-        private Dictionary<int, ChestController> chestControllers = new Dictionary<int, ChestController>();
-        private Dictionary<int, GameObject> uiChestSlots = new Dictionary<int, GameObject>();
+        private List<UIChestSlotViewController> uIChestSlotViewControllers;
+        private UIChestSlotViewController currentEmptyUIChestSlotViewControllerToBeFilled;
+        private Dictionary<int, UIChestSlotViewController> chestSlotDictionary;
 
-        [SerializeField] private int totalNumberOfUIChestSlots;
-        private int currentChestSlotNumber = 0;
 
-        private void Start()
+        private void Awake()
         {
-            InitializeVaribales();
-            CreateEmptyUIChestSlots();
-        }
+            uIChestSlotViewControllers = new List<UIChestSlotViewController>();
 
-        private void InitializeVaribales()
-        {
-            generateChestButton.onClick.AddListener(GenerateChest);
-            currentChestSlotNumber = 0;
-        }
+            chestSlotDictionary = new Dictionary<int, UIChestSlotViewController>();
 
-        private void CreateEmptyUIChestSlots()
-        {
-            for (int i = 0; i < totalNumberOfUIChestSlots; i++)
+            for (int i = 0; i < totalChestSlots; i++)
             {
-                GameObject emptyChestSlot = Instantiate(emptyUIChestSlot, uiChestSlotsContainer);
-                uiChestSlots[i] = emptyChestSlot;
-            }
-        }
+                GameObject gameObject = Instantiate(chestSlotViewControllerPrefab.gameObject);
+                gameObject.transform.SetParent(uiChestSlotViewHolder.transform, false);
 
-        public void GenerateChest()
-        {
-            if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
-            {
-                EventService.Instance.OnChestSlotsFull.InvokeEvent();
-                return;
+                UIChestSlotViewController slotController = gameObject.GetComponent<UIChestSlotViewController>();
+
+                uIChestSlotViewControllers.Add(slotController);
             }
 
-            EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
+            generateChestButton.onClick.AddListener(GenerateChestButtonClicked);           
         }
 
-        public void ChestAdded(ChestController chestController)
+        private void OnEnable()
         {
-            if (currentChestSlotNumber >= totalNumberOfUIChestSlots)
+            EventService.Instance.OnChestAdded.AddListener(OnChestAdded);
+
+            EventService.Instance.OnChestRemoved.AddListener(OnChestRemoved);
+        }
+
+        private void GenerateChestButtonClicked()
+        {
+            foreach (UIChestSlotViewController controller in uIChestSlotViewControllers)
             {
-                Debug.Log("No empty slot available!");
-                return;
+                if(controller.ChestController == null)
+                {
+                    currentEmptyUIChestSlotViewControllerToBeFilled = controller;
+
+                    EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
+                                        
+                    return;
+                }
             }
 
-            GameObject emptySlot = uiChestSlots[currentChestSlotNumber];
+            currentEmptyUIChestSlotViewControllerToBeFilled = null;
 
-            Destroy(emptySlot);
-            uiChestSlots[currentChestSlotNumber] = chestController.chestView.gameObject;
-
-            chestControllers[currentChestSlotNumber] = chestController;
-
-            chestController.chestView.transform.SetParent(uiChestSlotsContainer);
-            chestController.chestView.transform.SetSiblingIndex(currentChestSlotNumber);
-
-            currentChestSlotNumber++;
+            EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_SLOTS_FULL_POPUP);
         }
 
-        public void RemoveChest(int chestID)
+        private void OnChestAdded(ChestController controller)
         {
-            Debug.Log(chestID);
+            if (currentEmptyUIChestSlotViewControllerToBeFilled == null) return;
 
-            if (chestControllers.ContainsKey(chestID))
+            if (!chestSlotDictionary.ContainsKey(controller.ChestID))
             {
-                currentChestSlotNumber--;
-                Destroy(chestControllers[chestID].chestView.gameObject);
-                chestControllers.Remove(chestID);
+                chestSlotDictionary[controller.ChestID] = currentEmptyUIChestSlotViewControllerToBeFilled;
+                currentEmptyUIChestSlotViewControllerToBeFilled.OnChestAdded(controller);
+            }
 
-                GameObject newEmptySlot = Instantiate(emptyUIChestSlot, uiChestSlotsContainer);
-                uiChestSlots[chestID] = newEmptySlot;
-                newEmptySlot.transform.SetSiblingIndex(chestID);
+            
+        }
+
+        private void OnChestRemoved(ChestController controller)
+        {
+            if(chestSlotDictionary.ContainsKey(controller.ChestID))
+            {
+                UIChestSlotViewController controllerToBeRemoved = chestSlotDictionary[controller.ChestID];
+
+                controllerToBeRemoved.OnChestRemoved();
+
+                chestSlotDictionary.Remove(controller.ChestID);
             }
         }
     }

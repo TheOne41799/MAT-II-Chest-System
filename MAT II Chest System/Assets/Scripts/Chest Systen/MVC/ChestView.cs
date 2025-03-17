@@ -9,7 +9,7 @@ namespace ChestSystem.Chests
 {
     public class ChestView : MonoBehaviour
     {
-        [SerializeField] private Button unlockButton;
+        /*[SerializeField] private Button unlockButton;
         [SerializeField] private Image chestImage;
         [SerializeField] private TextMeshProUGUI chestTypeText;
         [SerializeField] private TextMeshProUGUI chestStateText;
@@ -67,6 +67,6 @@ namespace ChestSystem.Chests
         {
             timeToUnlockChestText.gameObject.SetActive(false);
             chestStateText.text = currentChestState.ToString();
-        }
+        }*/
     }
 }

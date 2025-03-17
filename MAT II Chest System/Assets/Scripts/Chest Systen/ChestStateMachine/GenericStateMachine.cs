@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace ChestSystem.Chests
 {
-    public class GenericStateMachine<T> where T: ChestController
+    /*public class GenericStateMachine<T> where T: ChestController
     {
         protected T chestController;
         protected IChestState currentState;
-        protected Dictionary<ChestState, IChestState> States = new Dictionary<ChestState, IChestState> ();
+        protected Dictionary<ChestState, IChestState> States = new Dictionary<ChestState, IChestState>();
 
         public GenericStateMachine(T controller)
         {
             this.chestController = controller;
-        }        
+        }
 
         public void ChangeState(ChestState newState)
         {
@@ -40,5 +40,5 @@ namespace ChestSystem.Chests
                 state.chestController = chestController;
             }
         }
-    }
+    }*/
 }

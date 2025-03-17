@@ -3,59 +3,77 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using ChestSystem.Events;
+using UnityEngine.UIElements;
+using Unity.VisualScripting;
 
 namespace ChestSystem.Chests
 {
-    public class ChestUnlockingState<T> : IChestState where T : ChestController
+    public class ChestUnlockingState : IChestState
     {
-        public ChestController chestController { get; set; }
-        private GenericStateMachine<T> stateMachine;
-        private float unlockTimeRemaining;
+        private ChestController chestController;
+
+        private int unlockTimeRemaining;
+        public int UnlockTimeRemaining { get { return unlockTimeRemaining; } }
+
         private bool isChestUnlocked = false;
+        public bool IsChestUnlocked { get { return isChestUnlocked; } }
 
-        public ChestUnlockingState(GenericStateMachine<T> stateMachine, float unlockTime)
-        {
-            this.stateMachine = stateMachine;
-            this.unlockTimeRemaining = unlockTime;
+        public ChestState ChestState => ChestState.UNLOCKING;
+
+        private MonoBehaviour coroutineRunner;
+
+        private Coroutine chestUnlockingCoroutine;
+        public Coroutine ChestUnlockingCoroutine { get { return chestUnlockingCoroutine; } }
+
+
+        public ChestUnlockingState(ChestController chest, MonoBehaviour coroutineRunner) 
+        { 
+            this.chestController = chest;
+            this.unlockTimeRemaining = chest.ChestModel.TimeRequiredToUnlockChest;
+
+            this.coroutineRunner = coroutineRunner;
         }
 
-        public void EnterState()
+
+        public void EnterState() 
         {
-            chestController.chestView.ChestUnlockingStateUI();            
+            EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
+
+            chestUnlockingCoroutine = coroutineRunner.StartCoroutine(UnlockChestRoutine());
         }
 
-        public void ExitState()
-        {
-            
-        }
 
-        public void UpdateState()
+        private IEnumerator UnlockChestRoutine()
         {
-            if (!isChestUnlocked)
+            while (unlockTimeRemaining > 0)
             {
-                if (unlockTimeRemaining > 0)
-                {
-                    unlockTimeRemaining -= Time.deltaTime;
-                }
-                else
-                {
-                    unlockTimeRemaining = 0;
-                    isChestUnlocked = true;
+                yield return new WaitForSeconds(1);
+                unlockTimeRemaining--;
 
-                    chestController.UnlockedChest();
+                EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
 
-                    EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
-                }
-
-                DisplayTime(unlockTimeRemaining);
+                chestController.UpdateTimeAndGemsRequiredTextOnUIPopup();
             }
+
+            isChestUnlocked = true;
+
+            chestController.ChestUnlockedState();
         }
 
-        private void DisplayTime(float timeValue)
+        public void ExitState() 
+        { 
+            StopChestUnlockingCoroutine();
+
+        }
+
+        private void StopChestUnlockingCoroutine()
         {
-            timeValue = Mathf.FloorToInt(timeValue);
-
-            chestController.chestView.UpdateTimer(timeValue);            
+            coroutineRunner.StopCoroutine(chestUnlockingCoroutine);
         }
+
+
     }
+
+
+
 }

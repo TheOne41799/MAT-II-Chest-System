@@ -6,9 +6,8 @@ namespace ChestSystem.Chests
 {
     public interface IChestState
     {
-        public ChestController chestController { get; set; }
+        ChestState ChestState { get; }
         void EnterState();
-        void UpdateState();
         void ExitState();
     }
 }

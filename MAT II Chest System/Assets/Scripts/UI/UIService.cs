@@ -7,7 +7,9 @@ namespace ChestSystem.UI
 {
     public class UIService
     {
-        public UIChestSystemViewController uiChestSystemViewController { get; }
+
+
+        /*public UIChestSystemViewController uiChestSystemViewController { get; }
         private UIGameplayViewController uiGameplayViewController;
         private Canvas canvas;
 
@@ -20,6 +22,6 @@ namespace ChestSystem.UI
             
             EventService.Instance.OnChestCreated.AddListener(uiChestSystemViewController.ChestAdded);
             //EventService.Instance.OnUnlockedChestOpened.AddListener(uiChestSystemViewController.RemoveChest);
-        }
+        }*/
     }
 }

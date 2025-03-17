@@ -6,35 +6,24 @@ namespace ChestSystem.Chests
 {
     public class ChestModel
     {
-        public ChestModelSO chestModelSO {  get; private set; }
-        private ChestController chestController;
+        public ChestType ChestType { get; }
+        public Sprite ChestSprite { get; }
+        public int CoinsInTheChest { get; }
+        public int GemsInChest { get; }
+        public int TimeRequiredToUnlockChest { get; }
+        public int MinimumGemsRequiredToUnlockChest { get; }
 
-        public int numberOfCoinsInChest { get; private set; }
-        public int numberOfGemsInChest { get; private set; }
 
-        public ChestModel(ChestModelSO chestModelSO)
+        public ChestModel(ChestModelSO chestModelSO, int coins, int gems)
         {
-            this.chestModelSO = chestModelSO;
+            this.ChestType = chestModelSO.ChestType;
+            this.ChestSprite = chestModelSO.ChestSprite;
 
-            numberOfCoinsInChest = GenerateRandomCoinsInChest();
-            numberOfGemsInChest = GenerateRandomGemsInChest();
-        }
+            this.CoinsInTheChest = coins;
+            this.GemsInChest = gems;            
 
-        public void SetChestController(ChestController controller)
-        {
-            chestController = controller;
-        }
-
-        private int GenerateRandomCoinsInChest()
-        {
-            int randCoins = Random.Range(chestModelSO.MinimumCoinsInChest, chestModelSO.MaximumCoinsInChest);
-            return randCoins;
-        }
-
-        private int GenerateRandomGemsInChest()
-        {
-            int randGems = Random.Range(chestModelSO.MinimuGemsInChest, chestModelSO.MaximumGemsInChest);
-            return randGems;
+            this.TimeRequiredToUnlockChest = chestModelSO.TimeRequiredToUnlockChest;
+            this.MinimumGemsRequiredToUnlockChest = chestModelSO.MinimumGemsRequiredToUnlockChest;
         }
     }
 }

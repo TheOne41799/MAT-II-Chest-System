@@ -37,7 +37,7 @@ namespace ChestSystem.Events
         public GameEventController<int, int> OnPlayerStatsUpdated { get; private set; }
         public GameEventController<ChestController> OnChestRemoved { get; private set; }
         public GameEventController<ChestController, UIPopups> OnUIPopupCollectRewardsOrUndoChestUnlock { get; private set; }
-
+        public GameEventController OnCloseUIPopups { get; private set; }
 
         public EventService()
         {
@@ -51,21 +51,16 @@ namespace ChestSystem.Events
             OnUpdateGemsAndTimeRequiredToUnlockChest = new GameEventController<ChestController>();
             OnChestUnlocked = new GameEventController<ChestController>();
 
-
-            //
             OnQueuedChestUnlocked = new GameEventController<ChestController>();
             OnQueuedChestUnlockedWithGems = new GameEventController<ChestController>();
-            //
-
 
             OnChestCollected = new GameEventController<int, int>();
             OnPlayerStatsUpdated = new GameEventController<int, int>();
             OnChestRemoved = new GameEventController<ChestController>();
 
-
-
-            //
             OnUIPopupCollectRewardsOrUndoChestUnlock = new GameEventController<ChestController, UIPopups>();
+
+            OnCloseUIPopups = new GameEventController();
         }
     }
 }

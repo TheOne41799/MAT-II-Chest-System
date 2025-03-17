@@ -16,6 +16,7 @@ namespace ChestSystem.UI
         [SerializeField] private GameObject uiChestAlreadyQueuedPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockedPopup;
         [SerializeField] private GameObject uiPlayerHasInsufficientGemsPopup;
+        [SerializeField] private GameObject uiCollectRewardsOrUndoChestUnlockPopup;
 
         private List<GameObject> allUIPopupsList = new List<GameObject>();
 
@@ -32,6 +33,13 @@ namespace ChestSystem.UI
         #region UI Popups Close Buttons
         [SerializeField] private TextMeshProUGUI uiPopupUnlockChestWithTimerText;
         [SerializeField] private TextMeshProUGUI uiPopupUnlockChestWithGemsText;
+        #endregion
+
+        #region UI Popups Collect Rewards
+        [SerializeField] private Button uiPopupUndoChestUnlockButton;
+        [SerializeField] private Button uiPopupCollectRewardsButton;        
+        [SerializeField] private TextMeshProUGUI uiPopupCollectRewardsCoinsText;
+        [SerializeField] private TextMeshProUGUI uiPopupCollectRewardsGemsText;
         #endregion
 
         private ChestController activeChestController;
@@ -51,6 +59,7 @@ namespace ChestSystem.UI
             allUIPopupsList.Add(uiChestAlreadyQueuedPopup);
             allUIPopupsList.Add(uiChestAlreadyUnlockedPopup);
             allUIPopupsList.Add(uiPlayerHasInsufficientGemsPopup);
+            allUIPopupsList.Add(uiCollectRewardsOrUndoChestUnlockPopup);
         }
 
         private void DeactivateUIPopups()
@@ -72,16 +81,25 @@ namespace ChestSystem.UI
             uiPopupChestAlreadyUnlockedCloseButton.onClick.AddListener (DeactivateUIPopups);
             uiPopupPlayerHasInsufficientGemsCloseButton.onClick.AddListener(DeactivateUIPopups);
 
+            uiPopupUndoChestUnlockButton.onClick.AddListener(UndoChestUnlock);
+            uiPopupCollectRewardsButton.onClick.AddListener(CollectRewards);
+
             EventService.Instance.OnUIPopupActivate.AddListener(UIPopupManager);
             EventService.Instance.OnUIPopupChestUnlockActivate.AddListener(UIPopupUnlockChestManager);
             
             EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.AddListener(UpdateTimeAndGemsRequiredTextOnChestLocking);
+
+            EventService.Instance.OnUIPopupCollectRewardsOrUndoChestUnlock.AddListener(UIPopupCollectRewardsOrUndoChestUnlock);
         }
 
         private void UIPopupManager(UIPopups uiPopup)
         {
             switch(uiPopup)
             {
+                case UIPopups.UI_CHEST_UNLOCK_POPUP:
+                    DeactivateUIPopups();
+                    uiChestUnlockPopup.SetActive(true);
+                    break;
                 case UIPopups.UI_CHEST_SLOTS_FULL_POPUP:
                     DeactivateUIPopups();
                     uiChestSlotsFullPopup.SetActive(true);
@@ -102,6 +120,10 @@ namespace ChestSystem.UI
                     DeactivateUIPopups();
                     uiPlayerHasInsufficientGemsPopup.SetActive(true);
                     break;
+                case UIPopups.UI_COLLECT_REWARDS_OR_UNDO_CHEST_UNLOCK:
+                    DeactivateUIPopups();
+                    uiCollectRewardsOrUndoChestUnlockPopup.SetActive(true);
+                    break;
             }
         }
 
@@ -111,8 +133,7 @@ namespace ChestSystem.UI
 
             UpdateTimeAndGemsRequiredTextOnChestLocked(controller);
 
-            DeactivateUIPopups();
-            uiChestUnlockPopup.SetActive(true);
+            UIPopupManager(popup);
         }
 
         private void UpdateTimeAndGemsRequiredTextOnChestLocked(ChestController chestController)
@@ -162,5 +183,35 @@ namespace ChestSystem.UI
                 UIPopupManager(UIPopups.UI_CHEST_ALREADY_UNLOCKED);
             }
         }
+
+        private void UIPopupCollectRewardsOrUndoChestUnlock(ChestController controller, UIPopups popup)
+        {
+            activeChestController = controller;
+
+            UpdateRewardsCoinsAndGemsInChest(activeChestController);
+
+            UIPopupManager(popup);
+        }
+
+        private void UpdateRewardsCoinsAndGemsInChest(ChestController controller)
+        {
+            uiPopupCollectRewardsCoinsText.text = controller.ChestModel.CoinsInTheChest.ToString();
+            uiPopupCollectRewardsGemsText.text = controller.ChestModel.GemsInChest.ToString();
+        }
+
+        private void UndoChestUnlock()
+        {
+            Debug.Log("Undo Chest Unlock");
+        }
+
+        private void CollectRewards()
+        {
+            DeactivateUIPopups();
+
+            EventService.Instance.OnChestCollected.InvokeEvent(activeChestController.ChestModel.CoinsInTheChest,
+                                                               activeChestController.ChestModel.GemsInChest);
+
+            EventService.Instance.OnChestRemoved.InvokeEvent(activeChestController);
+        }        
     }    
 }

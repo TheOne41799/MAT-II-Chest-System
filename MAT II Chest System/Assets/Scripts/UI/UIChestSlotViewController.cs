@@ -82,10 +82,11 @@ namespace ChestSystem.UI
                 }
                 else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKED)
                 {
-                    EventService.Instance.OnChestCollected.InvokeEvent(chestController.ChestModel.CoinsInTheChest,
-                                                                       chestController.ChestModel.GemsInChest);
-
-                    EventService.Instance.OnChestRemoved.InvokeEvent(chestController);
+                    EventService.Instance.OnUIPopupCollectRewardsOrUndoChestUnlock.InvokeEvent
+                        (
+                                chestController,
+                                UIPopups.UI_COLLECT_REWARDS_OR_UNDO_CHEST_UNLOCK
+                        );
                 }
             }
         }

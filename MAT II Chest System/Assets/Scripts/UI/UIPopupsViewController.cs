@@ -90,6 +90,8 @@ namespace ChestSystem.UI
             EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.AddListener(UpdateTimeAndGemsRequiredTextOnChestLocking);
 
             EventService.Instance.OnUIPopupCollectRewardsOrUndoChestUnlock.AddListener(UIPopupCollectRewardsOrUndoChestUnlock);
+
+            EventService.Instance.OnCloseUIPopups.AddListener(DeactivateUIPopups);
         }
 
         private void UIPopupManager(UIPopups uiPopup)

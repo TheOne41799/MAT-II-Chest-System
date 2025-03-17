@@ -8,9 +8,7 @@ namespace ChestSystem.Chests
     public class ChestLockedState : IChestState
     {
         private ChestController chestController;
-
         public ChestState ChestState => ChestState.LOCKED;
-
 
         public ChestLockedState(ChestController chest) { this.chestController = chest; }
 
@@ -22,9 +20,7 @@ namespace ChestSystem.Chests
 
         public void ExitState() 
         {
-            //Debug.Log("Exiting Locked State."); 
+            
         }
-
-        
     }
 }

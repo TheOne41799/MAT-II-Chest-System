@@ -27,25 +27,13 @@ namespace ChestSystem.Events
         public GameEventController<int> OnChestUnlockButtonClicked { get; private set; }
         public GameEventController<UIPopups> OnUIPopupActivate { get; private set; }
         public GameEventController<ChestController, UIPopups> OnUIPopupChestUnlockActivate { get; private set; }
-        //public GameEventController OnAllUIPopupsDeactivate { get; private set; }
         public GameEventController<ChestController, ChestUnlockMethod> OnUnlockChest {  get; private set; }
         public GameEventController<ChestController, int> OnUnlockingChest { get; private set; }
-
-
-
-
-        //test
         public GameEventController<ChestController> OnUpdateGemsAndTimeRequiredToUnlockChest { get; private set; }
-
-
         public GameEventController<ChestController> OnChestUnlocked { get; private set; }
-
-
         public GameEventController<int, int> OnChestCollected { get; private set; } 
         public GameEventController<int, int> OnPlayerStatsUpdated { get; private set; }
         public GameEventController<ChestController> OnChestRemoved { get; private set; }
-
-
 
 
         public EventService()
@@ -55,28 +43,13 @@ namespace ChestSystem.Events
             OnChestUnlockButtonClicked = new GameEventController<int>();
             OnUIPopupActivate = new GameEventController<UIPopups>();
             OnUIPopupChestUnlockActivate = new GameEventController<ChestController, UIPopups>();
-            //OnAllUIPopupsDeactivate = new GameEventController();
             OnUnlockChest = new GameEventController<ChestController, ChestUnlockMethod>();
             OnUnlockingChest = new GameEventController<ChestController, int>();
-
-
-
-
-            //test
             OnUpdateGemsAndTimeRequiredToUnlockChest = new GameEventController<ChestController>();
-
-
-
             OnChestUnlocked = new GameEventController<ChestController>();
-
-
-
             OnChestCollected = new GameEventController<int, int>();
             OnPlayerStatsUpdated = new GameEventController<int, int>();
-            
             OnChestRemoved = new GameEventController<ChestController>();
-
-            
         }
     }
 }

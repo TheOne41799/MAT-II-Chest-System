@@ -74,8 +74,6 @@ namespace ChestSystem.UI
             {
                 chestSlotDictionary[controller.ChestID] = currentEmptyUIChestSlotViewControllerToBeFilled;
                 currentEmptyUIChestSlotViewControllerToBeFilled.OnChestAdded(controller);
-
-                //Debug.Log("Add " + controller.ChestID);
             }
 
             
@@ -83,11 +81,6 @@ namespace ChestSystem.UI
 
         private void OnChestRemoved(ChestController controller)
         {
-            //Debug.Log("Chest Removed");
-            //Debug.Log(controller.ChestID);
-
-            //if (currentEmptyUIChestSlotViewControllerToBeFilled != null) return;
-
             if(chestSlotDictionary.ContainsKey(controller.ChestID))
             {
                 UIChestSlotViewController controllerToBeRemoved = chestSlotDictionary[controller.ChestID];
@@ -95,11 +88,7 @@ namespace ChestSystem.UI
                 controllerToBeRemoved.OnChestRemoved();
 
                 chestSlotDictionary.Remove(controller.ChestID);
-
-                
             }
-
-            //Debug.Log("Removal " + controller.ChestID);
         }
     }
 }

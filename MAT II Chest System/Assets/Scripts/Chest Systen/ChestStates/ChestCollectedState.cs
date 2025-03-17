@@ -9,22 +9,18 @@ namespace ChestSystem.Chests
         private ChestController chestController;
         public ChestState ChestState => ChestState.COLLECTED;
 
-
         public ChestCollectedState(ChestController chest) { this.chestController = chest; }
 
 
         public void EnterState() 
         {
-            //Debug.Log("Chest has been Collected!"); 
-
-            //Debug.Log("Chest collected");
-            //Debug.Log("Chest ID " + chestController.ChestID);
+            
         }
 
 
         public void ExitState() 
         { 
-            //Debug.Log("Exiting Collected State."); 
+            
         }
     }
 }

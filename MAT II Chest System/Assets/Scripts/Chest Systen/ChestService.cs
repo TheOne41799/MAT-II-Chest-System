@@ -14,6 +14,12 @@ namespace ChestSystem.Chests
         private Dictionary<int, ChestController> activeChests;
 
 
+        //test
+        /*private Queue<ChestController> chestUnlockQueue;
+        private ChestController currentlyUnlockingChest;*/
+        //
+
+
         private MonoBehaviour coroutineRunner;
 
 
@@ -22,6 +28,14 @@ namespace ChestSystem.Chests
             chestPool = new ChestPool(chestModelDatabaseSO, playerService);
 
             activeChests = new Dictionary<int, ChestController>();
+
+
+
+            //test
+            //chestUnlockQueue = new Queue<ChestController>();
+            //
+
+
 
             this.coroutineRunner = coroutineRunner;
 
@@ -40,8 +54,6 @@ namespace ChestSystem.Chests
             if (!activeChests.ContainsKey(controller.ChestID))
             {
                 activeChests.Add(controller.ChestID, controller);
-
-                //Debug.Log("Active chest after addition: " + activeChests.Count);
             }
 
             EventService.Instance.OnChestAdded.InvokeEvent(controller);
@@ -56,51 +68,112 @@ namespace ChestSystem.Chests
             }
         }
 
+        //working
         private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
         {
             if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
             {
                 controller.UnlockChestWithTimer();
             }
-            else if(chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
+            else if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
             {
                 controller.UnlockChestWithGems();
             }
         }
+        //
 
+
+
+        //test
+
+        // Chest Queue
+
+        /*private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
+        {
+            if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
+            {
+                EnqueueChestForUnlock(controller);
+            }
+            else if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
+            {
+                controller.UnlockChestWithGems();
+            }
+        }*/
+
+        /*private void EnqueueChestForUnlock(ChestController controller)
+        {
+            if (!chestUnlockQueue.Contains(controller) && controller.ChestStateMachine.CurrentState is ChestLockedState)
+            {
+                chestUnlockQueue.Enqueue(controller);
+            }
+
+            if (currentlyUnlockingChest == null)
+            {
+                StartNextChestUnlock();
+            }
+        }*/
+
+        /*private void StartNextChestUnlock()
+        {
+            if (chestUnlockQueue.Count > 0)
+            {
+                currentlyUnlockingChest = chestUnlockQueue.Dequeue();
+                currentlyUnlockingChest.UnlockChestWithTimer();
+
+                // Listen for when the chest is fully unlocked
+                currentlyUnlockingChest.OnChestUnlocked += HandleChestUnlocked;
+            }
+        }*/
+
+
+        /*private void HandleChestUnlocked(ChestController chest)
+        {
+            if (currentlyUnlockingChest == chest)
+            {
+                currentlyUnlockingChest.OnChestUnlocked -= HandleChestUnlocked;
+                currentlyUnlockingChest = null;
+
+                // Start unlocking the next chest in queue
+                StartNextChestUnlock();
+            }
+        }*/
+
+
+        /*private void ReturnChestToPool(ChestController controller)
+        {
+            if (activeChests.ContainsKey(controller.ChestID))
+            {
+                activeChests.Remove(controller.ChestID);
+                controller.ChestCollectedState();
+            }
+
+            // If the chest being unlocked is removed, clear it
+            if (currentlyUnlockingChest == controller)
+            {
+                currentlyUnlockingChest = null;
+                StartNextChestUnlock();
+            }
+
+            chestPool.ReturnChest(controller);
+        }*/
+
+
+        // command pattern
+
+        ///////////////////
+
+
+        // working
         private void ReturnChestToPool(ChestController controller)
-        { 
+        {
             if (activeChests.ContainsKey(controller.ChestID))
             {
                 activeChests.Remove(controller.ChestID);
 
                 controller.ChestCollectedState();
-
-
-                //Debug.Log("Active chest after removal: " + activeChests.Count);
-
-                
-
             }
 
-
             chestPool.ReturnChest(controller);
-
-            
-
-        }        
-
-        /*private bool IsAnyChestUnlocking()
-        {
-            return false;
-        }*/
-
-        /*private bool IsAnyChestUnlocking()
-        {
-            return activeChests.Values.Any(chest => chest.CurrentState == ChestState.UNLOCKING);
-        }*/
-
-        // command pattern
-
+        }
     }
 }

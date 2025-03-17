@@ -74,8 +74,6 @@ namespace ChestSystem.Chests
             
             chestController.InitializeVariables();
 
-            //Debug.Log(chestController.ChestModel.ChestType);
-
             return chestController;
         }
 
@@ -85,8 +83,6 @@ namespace ChestSystem.Chests
             ChestController chestController = new ChestController(chestModelSO, playerService);
 
             chestController.InitializeVariables();
-
-            //Debug.Log(chestController.ChestModel.ChestType);
 
             return chestController;
         }

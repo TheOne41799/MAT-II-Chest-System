@@ -22,8 +22,6 @@ namespace ChestSystem.Chests
 
         private MonoBehaviour coroutineRunner;
 
-
-        //test
         private Coroutine chestUnlockingCoroutine;
         public Coroutine ChestUnlockingCoroutine { get { return chestUnlockingCoroutine; } }
 
@@ -45,14 +43,10 @@ namespace ChestSystem.Chests
         }
 
 
-        
-
         private IEnumerator UnlockChestRoutine()
         {
             while (unlockTimeRemaining > 0)
             {
-                //Debug.Log("Unlocking");
-
                 yield return new WaitForSeconds(1);
                 unlockTimeRemaining--;
 
@@ -68,16 +62,12 @@ namespace ChestSystem.Chests
 
         public void ExitState() 
         { 
-            //Debug.Log("Exiting Unlocking State."); 
-            
             StopChestUnlockingCoroutine();
 
         }
 
         private void StopChestUnlockingCoroutine()
         {
-            //Debug.Log("Stopped coroutine on chest with ID " + chestController.ChestID);
-
             coroutineRunner.StopCoroutine(chestUnlockingCoroutine);
         }
 

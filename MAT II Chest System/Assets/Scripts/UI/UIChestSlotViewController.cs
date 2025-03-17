@@ -78,21 +78,14 @@ namespace ChestSystem.UI
                 }
                 else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKING)
                 {
-                    //Debug.Log("Chest unlocking");
                     EventService.Instance.OnChestUnlockButtonClicked.InvokeEvent(chestController.ChestID);
                 }
                 else if(chestController.ChestStateMachine.CurrentState.ChestState == ChestState.UNLOCKED)
                 {
-                    //Debug.Log("Chest unlocked");
-
                     EventService.Instance.OnChestCollected.InvokeEvent(chestController.ChestModel.CoinsInTheChest,
                                                                        chestController.ChestModel.GemsInChest);
 
                     EventService.Instance.OnChestRemoved.InvokeEvent(chestController);
-
-
-                    //ClearSlot();
-                    //ActivateDeactivateChestSlotViewChildrenGameObjects();
                 }
             }
         }

@@ -13,6 +13,7 @@ namespace ChestSystem.UI
         [SerializeField] private GameObject uiChestUnlockPopup;
         [SerializeField] private GameObject uiChestSlotsFullPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockingPopup;
+        [SerializeField] private GameObject uiChestAlreadyQueuedPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockedPopup;
         [SerializeField] private GameObject uiPlayerHasInsufficientGemsPopup;
 
@@ -23,6 +24,7 @@ namespace ChestSystem.UI
         [SerializeField] private Button uiPopupUnlockChestWithGemsButton;
         [SerializeField] private Button uiPopupChestSlotsFullCloseButton;
         [SerializeField] private Button uiPopupChestAlreadyUnlockingCloseButton;
+        [SerializeField] private Button uiPopupChestAlreadyQueuedCloseButton;
         [SerializeField] private Button uiPopupChestAlreadyUnlockedCloseButton;
         [SerializeField] private Button uiPopupPlayerHasInsufficientGemsCloseButton;
         #endregion
@@ -46,6 +48,7 @@ namespace ChestSystem.UI
             allUIPopupsList.Add(uiChestUnlockPopup);
             allUIPopupsList.Add(uiChestSlotsFullPopup);
             allUIPopupsList.Add(uiChestAlreadyUnlockingPopup);
+            allUIPopupsList.Add(uiChestAlreadyQueuedPopup);
             allUIPopupsList.Add(uiChestAlreadyUnlockedPopup);
             allUIPopupsList.Add(uiPlayerHasInsufficientGemsPopup);
         }
@@ -65,6 +68,7 @@ namespace ChestSystem.UI
 
             uiPopupChestSlotsFullCloseButton.onClick.AddListener(DeactivateUIPopups);
             uiPopupChestAlreadyUnlockingCloseButton.onClick.AddListener(DeactivateUIPopups);
+            uiPopupChestAlreadyQueuedCloseButton.onClick.AddListener(DeactivateUIPopups);
             uiPopupChestAlreadyUnlockedCloseButton.onClick.AddListener (DeactivateUIPopups);
             uiPopupPlayerHasInsufficientGemsCloseButton.onClick.AddListener(DeactivateUIPopups);
 
@@ -85,6 +89,10 @@ namespace ChestSystem.UI
                 case UIPopups.UI_CHEST_ALREADY_UNLOCKING:
                     DeactivateUIPopups();
                     uiChestAlreadyUnlockingPopup.SetActive(true);
+                    break;
+                case UIPopups.UI_CHEST_ALREADY_QUEUED:
+                    DeactivateUIPopups();
+                    uiChestAlreadyQueuedPopup.SetActive(true);
                     break;
                 case UIPopups.UI_CHEST_ALREADY_UNLOCKED:
                     DeactivateUIPopups();
@@ -132,8 +140,6 @@ namespace ChestSystem.UI
             }
             else if(activeChestController.ChestStateMachine.CurrentState is ChestUnlockingState)
             {
-                //queue related code maybe used here
-
                 UIPopupManager(UIPopups.UI_CHEST_ALREADY_UNLOCKING);
             }
             else if(activeChestController.ChestStateMachine.CurrentState is ChestUnlockedState)

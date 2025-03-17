@@ -31,13 +31,8 @@ namespace ChestSystem.Events
         public GameEventController<ChestController, int> OnUnlockingChest { get; private set; }
         public GameEventController<ChestController> OnUpdateGemsAndTimeRequiredToUnlockChest { get; private set; }
         public GameEventController<ChestController> OnChestUnlocked { get; private set; }
-
-        //
         public GameEventController<ChestController> OnQueuedChestUnlocked { get; private set; }
         public GameEventController<ChestController> OnQueuedChestUnlockedWithGems { get; private set; }
-        //
-
-
         public GameEventController<int, int> OnChestCollected { get; private set; } 
         public GameEventController<int, int> OnPlayerStatsUpdated { get; private set; }
         public GameEventController<ChestController> OnChestRemoved { get; private set; }

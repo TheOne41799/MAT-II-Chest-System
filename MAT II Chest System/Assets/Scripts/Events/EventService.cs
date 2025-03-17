@@ -31,6 +31,13 @@ namespace ChestSystem.Events
         public GameEventController<ChestController, int> OnUnlockingChest { get; private set; }
         public GameEventController<ChestController> OnUpdateGemsAndTimeRequiredToUnlockChest { get; private set; }
         public GameEventController<ChestController> OnChestUnlocked { get; private set; }
+
+        //
+        public GameEventController<ChestController> OnQueuedChestUnlocked { get; private set; }
+        public GameEventController<ChestController> OnQueuedChestUnlockedWithGems { get; private set; }
+        //
+
+
         public GameEventController<int, int> OnChestCollected { get; private set; } 
         public GameEventController<int, int> OnPlayerStatsUpdated { get; private set; }
         public GameEventController<ChestController> OnChestRemoved { get; private set; }
@@ -47,6 +54,14 @@ namespace ChestSystem.Events
             OnUnlockingChest = new GameEventController<ChestController, int>();
             OnUpdateGemsAndTimeRequiredToUnlockChest = new GameEventController<ChestController>();
             OnChestUnlocked = new GameEventController<ChestController>();
+
+
+            //
+            OnQueuedChestUnlocked = new GameEventController<ChestController>();
+            OnQueuedChestUnlockedWithGems = new GameEventController<ChestController>();
+            //
+
+
             OnChestCollected = new GameEventController<int, int>();
             OnPlayerStatsUpdated = new GameEventController<int, int>();
             OnChestRemoved = new GameEventController<ChestController>();

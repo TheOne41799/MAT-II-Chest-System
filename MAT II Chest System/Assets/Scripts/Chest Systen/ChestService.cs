@@ -15,8 +15,8 @@ namespace ChestSystem.Chests
 
 
         //test
-        /*private Queue<ChestController> chestUnlockQueue;
-        private ChestController currentlyUnlockingChest;*/
+        private Queue<ChestController> chestUnlockQueue;
+        private ChestController currentlyUnlockingChest;
         //
 
 
@@ -32,7 +32,7 @@ namespace ChestSystem.Chests
 
 
             //test
-            //chestUnlockQueue = new Queue<ChestController>();
+            chestUnlockQueue = new Queue<ChestController>();
             //
 
 
@@ -69,7 +69,7 @@ namespace ChestSystem.Chests
         }
 
         //working
-        private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
+        /*private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
         {
             if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
             {
@@ -79,7 +79,7 @@ namespace ChestSystem.Chests
             {
                 controller.UnlockChestWithGems();
             }
-        }
+        }*/
         //
 
 
@@ -88,7 +88,7 @@ namespace ChestSystem.Chests
 
         // Chest Queue
 
-        /*private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
+        private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
         {
             if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
             {
@@ -98,9 +98,9 @@ namespace ChestSystem.Chests
             {
                 controller.UnlockChestWithGems();
             }
-        }*/
+        }
 
-        /*private void EnqueueChestForUnlock(ChestController controller)
+        private void EnqueueChestForUnlock(ChestController controller)
         {
             if (!chestUnlockQueue.Contains(controller) && controller.ChestStateMachine.CurrentState is ChestLockedState)
             {
@@ -111,9 +111,9 @@ namespace ChestSystem.Chests
             {
                 StartNextChestUnlock();
             }
-        }*/
+        }
 
-        /*private void StartNextChestUnlock()
+        private void StartNextChestUnlock()
         {
             if (chestUnlockQueue.Count > 0)
             {
@@ -121,25 +121,25 @@ namespace ChestSystem.Chests
                 currentlyUnlockingChest.UnlockChestWithTimer();
 
                 // Listen for when the chest is fully unlocked
-                currentlyUnlockingChest.OnChestUnlocked += HandleChestUnlocked;
+                //currentlyUnlockingChest.OnChestUnlocked += HandleChestUnlocked;
             }
-        }*/
+        }
 
 
-        /*private void HandleChestUnlocked(ChestController chest)
+        private void HandleChestUnlocked(ChestController chest)
         {
             if (currentlyUnlockingChest == chest)
             {
-                currentlyUnlockingChest.OnChestUnlocked -= HandleChestUnlocked;
+                //currentlyUnlockingChest.OnChestUnlocked -= HandleChestUnlocked;
                 currentlyUnlockingChest = null;
 
                 // Start unlocking the next chest in queue
                 StartNextChestUnlock();
             }
-        }*/
+        }
 
 
-        /*private void ReturnChestToPool(ChestController controller)
+        private void ReturnChestToPool(ChestController controller)
         {
             if (activeChests.ContainsKey(controller.ChestID))
             {
@@ -155,7 +155,7 @@ namespace ChestSystem.Chests
             }
 
             chestPool.ReturnChest(controller);
-        }*/
+        }
 
 
         // command pattern
@@ -164,7 +164,7 @@ namespace ChestSystem.Chests
 
 
         // working
-        private void ReturnChestToPool(ChestController controller)
+        /*private void ReturnChestToPool(ChestController controller)
         {
             if (activeChests.ContainsKey(controller.ChestID))
             {
@@ -174,6 +174,6 @@ namespace ChestSystem.Chests
             }
 
             chestPool.ReturnChest(controller);
-        }
+        }*/
     }
 }

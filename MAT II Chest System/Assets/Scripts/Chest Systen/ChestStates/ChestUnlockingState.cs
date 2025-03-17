@@ -63,17 +63,13 @@ namespace ChestSystem.Chests
         public void ExitState() 
         { 
             StopChestUnlockingCoroutine();
-
         }
 
         private void StopChestUnlockingCoroutine()
         {
             coroutineRunner.StopCoroutine(chestUnlockingCoroutine);
+
+            EventService.Instance.OnQueuedChestUnlocked.InvokeEvent(chestController);
         }
-
-
     }
-
-
-
 }

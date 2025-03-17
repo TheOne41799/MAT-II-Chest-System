@@ -29,6 +29,8 @@ namespace ChestSystem.Chests
 
         private PlayerService playerService;
 
+        public bool IsChestQueuedToUnlockWithTimer;
+
 
         public ChestController(ChestModelSO chestModelSO, PlayerService playerService)
         {
@@ -59,7 +61,9 @@ namespace ChestSystem.Chests
         public void InitializeVariables()
         {
             ChestModel = new ChestModel(chestModelSO, GenerateRandomCoinsInChest(chestModelSO), GenerateRandomGemsInChest(chestModelSO));
-
+            
+            IsChestQueuedToUnlockWithTimer = false;
+            
             CreateStateMachine();
 
             ChestLockedState();

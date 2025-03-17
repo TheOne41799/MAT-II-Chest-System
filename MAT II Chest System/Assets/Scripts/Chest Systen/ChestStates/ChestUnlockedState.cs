@@ -16,6 +16,13 @@ namespace ChestSystem.Chests
         public void EnterState() 
         { 
             EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
+
+            if(chestController.IsChestQueuedToUnlockWithTimer == true)
+            {
+                EventService.Instance.OnQueuedChestUnlockedWithGems.InvokeEvent(chestController);
+            }
+
+            chestController.IsChestQueuedToUnlockWithTimer = false;
         }
 
 

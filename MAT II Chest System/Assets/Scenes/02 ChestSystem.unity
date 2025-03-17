@@ -446,6 +446,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2004629079, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.000061035156
+      objectReference: {fileID: 0}
+    - target: {fileID: 257176850884843763, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -203
+      objectReference: {fileID: 0}
     - target: {fileID: 7318643580280046491, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
       propertyPath: m_Name
       value: UIManager (Canvas)

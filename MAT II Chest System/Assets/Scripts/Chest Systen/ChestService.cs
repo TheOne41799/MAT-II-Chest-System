@@ -57,8 +57,6 @@ namespace ChestSystem.Chests
             {
                 ChestController controller = activeChests[chestID];
                 EventService.Instance.OnUIPopupChestUnlockActivate.InvokeEvent(controller, UIPopups.UI_CHEST_UNLOCK_POPUP);
-
-                Debug.Log("Add: " + controller.ChestID);
             }
         }
 
@@ -67,6 +65,13 @@ namespace ChestSystem.Chests
         {
             if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
             {
+                if (controller.IsChestQueuedToUnlockWithTimer)
+                {
+                    EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_ALREADY_QUEUED);
+                    return;
+                }
+
+
                 EnqueueChestForUnlock(controller);
             }
             else if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
@@ -110,6 +115,7 @@ namespace ChestSystem.Chests
             }
         }
 
+
         private void RemoveChestUnlockedWithGemsFromTimerQueue(ChestController controller)
         {
             if (chestUnlockQueue.Count == 0) return;
@@ -149,8 +155,6 @@ namespace ChestSystem.Chests
             }
 
             chestPool.ReturnChest(controller);
-
-            Debug.Log("Return: " + controller.ChestID);
         }
 
 

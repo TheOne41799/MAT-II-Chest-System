@@ -446,30 +446,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 172974920775006426, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
-      propertyPath: m_text
-      value: Order the bust
-      objectReference: {fileID: 0}
-    - target: {fileID: 1013697181928144911, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
-      propertyPath: m_text
-      value: PERSEPOLIS!
-      objectReference: {fileID: 0}
-    - target: {fileID: 1013697181928144911, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
-      propertyPath: m_fontSize
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 1013697181928144911, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 140
-      objectReference: {fileID: 0}
-    - target: {fileID: 1254810479847064700, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 607.836
-      objectReference: {fileID: 0}
-    - target: {fileID: 1254810479847064700, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7318643580280046491, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
       propertyPath: m_Name
       value: UIManager (Canvas)

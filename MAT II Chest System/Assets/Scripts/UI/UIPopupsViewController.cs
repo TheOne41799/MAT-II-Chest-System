@@ -20,6 +20,7 @@ namespace ChestSystem.UI
         [SerializeField] private GameObject uiPlayerHasInsufficientGemsPopup;
         [SerializeField] private GameObject uiChestUnlockedWithGemsPopup;
         [SerializeField] private GameObject uiUndoChestUnlockedWithGemsPopup;
+        [SerializeField] private GameObject uiCantUndoChestUnlockedWithTimerPopup;
 
         [SerializeField] private GameObject uiCollectRewardsOrUndoChestUnlockPopup;
 
@@ -48,6 +49,12 @@ namespace ChestSystem.UI
         [SerializeField] private TextMeshProUGUI uiPopupCollectRewardsGemsText;
         #endregion
 
+        #region UI Popups Chest Unlock/ Undo Unlock with gems or timer
+        [SerializeField] private TextMeshProUGUI uiPopupChestUnlockedWithGemsText;
+        [SerializeField] private TextMeshProUGUI uiPopupUndoChestUnlockedWithGemsText;
+        [SerializeField] private Button uiPopupCantUndoChestUnlockedWithTimerCloseButton;
+        #endregion
+
         private ChestController activeChestController;
 
 
@@ -69,6 +76,7 @@ namespace ChestSystem.UI
             allUIPopupsList.Add(uiCollectRewardsOrUndoChestUnlockPopup);
             allUIPopupsList.Add(uiChestUnlockedWithGemsPopup);
             allUIPopupsList.Add(uiUndoChestUnlockedWithGemsPopup);
+            allUIPopupsList.Add(uiCantUndoChestUnlockedWithTimerPopup);
         }
 
         private void DeactivateUIPopups()
@@ -92,6 +100,7 @@ namespace ChestSystem.UI
             uiPopupPlayerHasInsufficientGemsCloseButton.onClick.AddListener(DeactivateUIPopups);
 
             uiPopupUndoChestUnlockButton.onClick.AddListener(UndoChestUnlock);
+            uiPopupCantUndoChestUnlockedWithTimerCloseButton.onClick.AddListener(CloseUIPopupCantUndoChestUnlockedWithTimer);
             uiPopupCollectRewardsButton.onClick.AddListener(CollectRewards);
 
             EventService.Instance.OnUIPopupActivate.AddListener(UIPopupManager);
@@ -128,6 +137,11 @@ namespace ChestSystem.UI
                     DeactivateUIPopups();
                     uiChestAlreadyQueuedPopup.SetActive(true);
                     break;
+                case UIPopups.UI_CHEST_UNLOCKED_WITH_GEMS:                    
+                    DeactivateUIPopups();
+                    ChestUnlockWithGemsTextUpdate();
+                    uiChestUnlockedWithGemsPopup.SetActive(true);
+                    break;
                 case UIPopups.UI_CHEST_ALREADY_UNLOCKED:
                     DeactivateUIPopups();
                     uiChestAlreadyUnlockedPopup.SetActive(true);
@@ -139,6 +153,14 @@ namespace ChestSystem.UI
                 case UIPopups.UI_COLLECT_REWARDS_OR_UNDO_CHEST_UNLOCK:
                     DeactivateUIPopups();
                     uiCollectRewardsOrUndoChestUnlockPopup.SetActive(true);
+                    break;
+                case UIPopups.UI_UNDO_CHEST_UNLOCK_WITH_GEMS:
+                    DeactivateUIPopups();
+                    UndoChestUnlockWithGemsTextUpdate();
+                    uiUndoChestUnlockedWithGemsPopup.SetActive(true);
+                    break;
+                case UIPopups.UI_CANT_UNDO_CHEST_UNLOCKED_WITH_TIMER:
+                    uiCantUndoChestUnlockedWithTimerPopup.SetActive(true);
                     break;
             }
         }
@@ -220,6 +242,16 @@ namespace ChestSystem.UI
             EventService.Instance.OnUndoChestUnlockWithGems.InvokeEvent(activeChestController);
         }
 
+        private void ChestUnlockWithGemsTextUpdate()
+        {
+            uiPopupChestUnlockedWithGemsText.text = activeChestController.UpdatedGemsRequiredToUnlockChest.ToString();
+        }
+
+        private void UndoChestUnlockWithGemsTextUpdate()
+        {
+            uiPopupUndoChestUnlockedWithGemsText.text = activeChestController.UpdatedGemsRequiredToUnlockChest.ToString();
+        }
+
         private void CollectRewards()
         {
             DeactivateUIPopups();
@@ -229,5 +261,10 @@ namespace ChestSystem.UI
 
             EventService.Instance.OnChestRemoved.InvokeEvent(activeChestController);
         }        
+
+        private void CloseUIPopupCantUndoChestUnlockedWithTimer()
+        {
+            uiCantUndoChestUnlockedWithTimerPopup.SetActive(false);
+        }
     }    
 }

@@ -97,6 +97,8 @@ namespace ChestSystem.Chests
 
                 playerService.PlayerController.PlayerModel.DeductPlayerGemsOnChestPurchase(updatedGemsRequiredToUnlockChest);
 
+                EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_UNLOCKED_WITH_GEMS);
+
                 ChestUnlockedState();
             }
             else

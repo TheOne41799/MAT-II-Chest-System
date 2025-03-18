@@ -92,19 +92,12 @@ namespace ChestSystem.Chests
             else if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
             {
                 // i think this is the client
-
-                //controller.UnlockChestWithGems();
-
-
-
                 // command pattern
 
                 if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
                 {
                     UnlockChestCommand unlockCommand = new UnlockChestCommand(controller);
                     commandInvoker.ExecuteCommand(unlockCommand);
-
-
 
                     unlockedChestsWithGemsHistory.Add(controller);
                 }
@@ -205,11 +198,12 @@ namespace ChestSystem.Chests
                 unlockedChestsWithGemsHistory.Remove(controller);
                 commandInvoker.UndoCommandForChest(controller);
 
+                EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_UNDO_CHEST_UNLOCK_WITH_GEMS);
                 EventService.Instance.OnUndoChestUnlockWithGemsAddBackPlayerGems.InvokeEvent(controller);
             }
             else
             {
-                Debug.Log("This chest is not unlocked with gems");
+                EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CANT_UNDO_CHEST_UNLOCKED_WITH_TIMER);
             }
         }        
     }

@@ -13,6 +13,7 @@ namespace ChestSystem.UI
         [SerializeField] private GameObject uiChestUnlockPopup;
         [SerializeField] private GameObject uiChestSlotsFullPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockingPopup;
+        [SerializeField] private GameObject uiChestAddedToQueuePopup;
         [SerializeField] private GameObject uiChestAlreadyQueuedPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockedPopup;
         [SerializeField] private GameObject uiPlayerHasInsufficientGemsPopup;
@@ -25,6 +26,7 @@ namespace ChestSystem.UI
         [SerializeField] private Button uiPopupUnlockChestWithGemsButton;
         [SerializeField] private Button uiPopupChestSlotsFullCloseButton;
         [SerializeField] private Button uiPopupChestAlreadyUnlockingCloseButton;
+        [SerializeField] private Button uiPopupChestAddedToQueueCloseButton;
         [SerializeField] private Button uiPopupChestAlreadyQueuedCloseButton;
         [SerializeField] private Button uiPopupChestAlreadyUnlockedCloseButton;
         [SerializeField] private Button uiPopupPlayerHasInsufficientGemsCloseButton;
@@ -56,6 +58,7 @@ namespace ChestSystem.UI
             allUIPopupsList.Add(uiChestUnlockPopup);
             allUIPopupsList.Add(uiChestSlotsFullPopup);
             allUIPopupsList.Add(uiChestAlreadyUnlockingPopup);
+            allUIPopupsList.Add(uiChestAddedToQueuePopup);
             allUIPopupsList.Add(uiChestAlreadyQueuedPopup);
             allUIPopupsList.Add(uiChestAlreadyUnlockedPopup);
             allUIPopupsList.Add(uiPlayerHasInsufficientGemsPopup);
@@ -77,6 +80,7 @@ namespace ChestSystem.UI
 
             uiPopupChestSlotsFullCloseButton.onClick.AddListener(DeactivateUIPopups);
             uiPopupChestAlreadyUnlockingCloseButton.onClick.AddListener(DeactivateUIPopups);
+            uiPopupChestAddedToQueueCloseButton.onClick.AddListener(DeactivateUIPopups);
             uiPopupChestAlreadyQueuedCloseButton.onClick.AddListener(DeactivateUIPopups);
             uiPopupChestAlreadyUnlockedCloseButton.onClick.AddListener (DeactivateUIPopups);
             uiPopupPlayerHasInsufficientGemsCloseButton.onClick.AddListener(DeactivateUIPopups);
@@ -109,6 +113,10 @@ namespace ChestSystem.UI
                 case UIPopups.UI_CHEST_ALREADY_UNLOCKING:
                     DeactivateUIPopups();
                     uiChestAlreadyUnlockingPopup.SetActive(true);
+                    break;
+                case UIPopups.UI_CHEST_ADDED_TO_QUEUE:
+                    DeactivateUIPopups();
+                    uiChestAddedToQueuePopup.SetActive(true);
                     break;
                 case UIPopups.UI_CHEST_ALREADY_QUEUED:
                     DeactivateUIPopups();

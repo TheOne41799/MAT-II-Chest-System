@@ -117,6 +117,8 @@ namespace ChestSystem.UI
             if (chestController == null || chestController.ChestID != controller.ChestID) return;
 
             chestState.text = "Queued";
+
+            EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_ADDED_TO_QUEUE);
         }
 
 

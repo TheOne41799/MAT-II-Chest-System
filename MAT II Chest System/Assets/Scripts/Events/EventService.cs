@@ -48,6 +48,7 @@ namespace ChestSystem.Events
 
         // command pattern
         public GameEventController<ChestController> OnUndoChestUnlockWithGems { get; private set; }
+        public GameEventController<ChestController> OnUndoChestUnlockWithGemsAddBackPlayerGems { get; private set; }
 
 
         public EventService()
@@ -83,6 +84,7 @@ namespace ChestSystem.Events
 
             // command pattern
             OnUndoChestUnlockWithGems = new GameEventController<ChestController>();
+            OnUndoChestUnlockWithGemsAddBackPlayerGems = new GameEventController<ChestController>();
         }
     }
 }

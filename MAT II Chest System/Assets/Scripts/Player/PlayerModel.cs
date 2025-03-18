@@ -35,5 +35,12 @@ namespace ChestSystem.Player
 
             EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
         }
+
+        public void AddBackPlayerGemsOnUndoChestUnlock(int gems)
+        {
+            playerGems += gems;
+
+            EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
+        }
     }
 }

@@ -204,11 +204,13 @@ namespace ChestSystem.Chests
             {
                 unlockedChestsWithGemsHistory.Remove(controller);
                 commandInvoker.UndoCommandForChest(controller);
+
+                EventService.Instance.OnUndoChestUnlockWithGemsAddBackPlayerGems.InvokeEvent(controller);
             }
             else
             {
                 Debug.Log("This chest is not unlocked with gems");
             }
-        }
+        }        
     }
 }

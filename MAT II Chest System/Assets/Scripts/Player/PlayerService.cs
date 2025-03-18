@@ -1,3 +1,4 @@
+using ChestSystem.Chests;
 using ChestSystem.Events;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,11 +17,17 @@ namespace ChestSystem.Player
             this.playerController = new PlayerController();
 
             EventService.Instance.OnChestCollected.AddListener(ChestCollected);
+            EventService.Instance.OnUndoChestUnlockWithGemsAddBackPlayerGems.AddListener(AddBackPlayerGemsOnUndoChestUnlock);
         }
 
         private void ChestCollected(int coins, int gems)
         {
             playerController.ChestCollected(coins, gems);
+        }
+
+        private void AddBackPlayerGemsOnUndoChestUnlock(ChestController controller)
+        {
+            playerController.PlayerModel.AddBackPlayerGemsOnUndoChestUnlock(controller.UpdatedGemsRequiredToUnlockChest);
         }
     }
 }

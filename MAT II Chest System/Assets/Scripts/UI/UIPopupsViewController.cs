@@ -16,7 +16,11 @@ namespace ChestSystem.UI
         [SerializeField] private GameObject uiChestAddedToQueuePopup;
         [SerializeField] private GameObject uiChestAlreadyQueuedPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockedPopup;
+
         [SerializeField] private GameObject uiPlayerHasInsufficientGemsPopup;
+        [SerializeField] private GameObject uiChestUnlockedWithGemsPopup;
+        [SerializeField] private GameObject uiUndoChestUnlockedWithGemsPopup;
+
         [SerializeField] private GameObject uiCollectRewardsOrUndoChestUnlockPopup;
 
         private List<GameObject> allUIPopupsList = new List<GameObject>();
@@ -63,6 +67,8 @@ namespace ChestSystem.UI
             allUIPopupsList.Add(uiChestAlreadyUnlockedPopup);
             allUIPopupsList.Add(uiPlayerHasInsufficientGemsPopup);
             allUIPopupsList.Add(uiCollectRewardsOrUndoChestUnlockPopup);
+            allUIPopupsList.Add(uiChestUnlockedWithGemsPopup);
+            allUIPopupsList.Add(uiUndoChestUnlockedWithGemsPopup);
         }
 
         private void DeactivateUIPopups()

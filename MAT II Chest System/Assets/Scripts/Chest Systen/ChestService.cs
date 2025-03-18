@@ -87,6 +87,14 @@ namespace ChestSystem.Chests
                 chestUnlockQueue.Enqueue(controller);
 
                 controller.IsChestQueuedToUnlockWithTimer = true;
+
+
+
+                //temp method for chest queue text                
+                if (chestUnlockQueue.Count > 0 && currentlyUnlockingChest != null)
+                {
+                    EventService.Instance.OnChestQueuedToUnlock.InvokeEvent(controller);
+                }
             }
 
             if (currentlyUnlockingChest == null)

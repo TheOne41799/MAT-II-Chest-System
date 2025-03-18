@@ -40,6 +40,11 @@ namespace ChestSystem.UI
             EventService.Instance.OnChestAdded.AddListener(UIChestSlotViewLockedState);
             EventService.Instance.OnUnlockingChest.AddListener(UIChestSlotViewUnlockingState);
             EventService.Instance.OnChestUnlocked.AddListener(UIChestSlotViewUnlockedState);
+
+
+
+            //temp method for chest queue text
+            EventService.Instance.OnChestQueuedToUnlock.AddListener(OnChestAddedToQueue);
         }
 
         private void ClearSlot()
@@ -97,10 +102,23 @@ namespace ChestSystem.UI
 
             chestImage.sprite = chestController.ChestModel.ChestSprite;
             chestType.text = chestController.ChestModel.ChestType.ToString();
+
             chestState.text = chestController.ChestStateMachine.CurrentState.ChestState.ToString();
+
             coinsInChest.text = chestController.ChestModel.CoinsInTheChest.ToString();
             gemsInChest.text = chestController.ChestModel.GemsInChest.ToString();
             timer.gameObject.SetActive(false);
+        }
+
+
+        //temp method for chest queue text
+        public void OnChestAddedToQueue(ChestController controller)
+        {
+            if (chestController == null || chestController.ChestID != controller.ChestID) return;
+
+            chestState.text = "Queued";
+
+            EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_ADDED_TO_QUEUE);
         }
 
 

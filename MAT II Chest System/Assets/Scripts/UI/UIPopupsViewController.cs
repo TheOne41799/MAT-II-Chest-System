@@ -211,7 +211,7 @@ namespace ChestSystem.UI
 
         private void UndoChestUnlock()
         {
-            Debug.Log("Undo Chest Unlock");
+            EventService.Instance.OnUndoChestUnlockWithGems.InvokeEvent(activeChestController);
         }
 
         private void CollectRewards()

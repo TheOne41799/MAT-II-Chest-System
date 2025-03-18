@@ -8,7 +8,7 @@ namespace ChestSystem.Player
     public class PlayerModel
     {
         private int playerCoins = 0;
-        private int playerGems = 10;
+        private int playerGems = 100;
         public int PlayerGems { get { return playerGems; } }
 
         public PlayerModel()

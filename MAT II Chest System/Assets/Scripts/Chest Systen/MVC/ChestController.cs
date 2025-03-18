@@ -92,6 +92,9 @@ namespace ChestSystem.Chests
         {
             if(playerService.PlayerController.PlayerModel.PlayerGems >= updatedGemsRequiredToUnlockChest)
             {
+
+                // i think this is the receiver
+
                 playerService.PlayerController.PlayerModel.DeductPlayerGemsOnChestPurchase(updatedGemsRequiredToUnlockChest);
 
                 ChestUnlockedState();

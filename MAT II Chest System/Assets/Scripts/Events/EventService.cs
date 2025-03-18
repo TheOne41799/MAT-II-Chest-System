@@ -44,6 +44,13 @@ namespace ChestSystem.Events
         //temp method for chest queue text
         public GameEventController<ChestController> OnChestQueuedToUnlock {  get; private set; }
 
+
+
+        // command pattern
+        public GameEventController<ChestController> OnUndoChestUnlockWithGems { get; private set; }
+        public GameEventController<ChestController> OnUndoChestUnlockWithGemsAddBackPlayerGems { get; private set; }
+
+
         public EventService()
         {
             OnGenerateChestButtonClicked = new GameEventController();
@@ -72,6 +79,12 @@ namespace ChestSystem.Events
 
             //temp method for chest queue text
             OnChestQueuedToUnlock = new GameEventController<ChestController>();
+
+
+
+            // command pattern
+            OnUndoChestUnlockWithGems = new GameEventController<ChestController>();
+            OnUndoChestUnlockWithGemsAddBackPlayerGems = new GameEventController<ChestController>();
         }
     }
 }

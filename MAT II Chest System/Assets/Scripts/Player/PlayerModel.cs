@@ -8,7 +8,7 @@ namespace ChestSystem.Player
     public class PlayerModel
     {
         private int playerCoins = 0;
-        private int playerGems = 10;
+        private int playerGems = 100;
         public int PlayerGems { get { return playerGems; } }
 
         public PlayerModel()
@@ -32,6 +32,13 @@ namespace ChestSystem.Player
         public void DeductPlayerGemsOnChestPurchase(int gems)
         {
             playerGems -= gems;
+
+            EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
+        }
+
+        public void AddBackPlayerGemsOnUndoChestUnlock(int gems)
+        {
+            playerGems += gems;
 
             EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
         }

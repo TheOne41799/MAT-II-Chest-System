@@ -450,9 +450,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -0.000061035156
       objectReference: {fileID: 0}
+    - target: {fileID: 172974920775006426, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_text
+      value: Generate Bust
+      objectReference: {fileID: 0}
     - target: {fileID: 257176850884843763, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -203
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013697181928144911, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_text
+      value: THE ANTIQUE DEALER
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013697181928144911, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_fontSize
+      value: 110
+      objectReference: {fileID: 0}
+    - target: {fileID: 1013697181928144911, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 7318643580280046491, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
       propertyPath: m_Name

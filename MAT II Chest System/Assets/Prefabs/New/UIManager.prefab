@@ -409,6 +409,7 @@ GameObject:
   - component: {fileID: 8340176637531070830}
   - component: {fileID: 4519814392662594998}
   - component: {fileID: 4356755010691599656}
+  - component: {fileID: 3067121937766248228}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -519,6 +520,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3067121937766248228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 69748474567960950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &170180848505246511
 GameObject:
   m_ObjectHideFlags: 0
@@ -1070,6 +1083,7 @@ GameObject:
   - component: {fileID: 639928227255993764}
   - component: {fileID: 639928227255993765}
   - component: {fileID: 639928227255993766}
+  - component: {fileID: 6214584831426875574}
   m_Layer: 5
   m_Name: UnlockWithTimerButton
   m_TagString: Untagged
@@ -1181,6 +1195,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6214584831426875574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 639928227255993760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &639928227469997911
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +1836,7 @@ GameObject:
   - component: {fileID: 3582165521207447126}
   - component: {fileID: 536509278994192015}
   - component: {fileID: 4852254990009405558}
+  - component: {fileID: 47277417374911984}
   m_Layer: 5
   m_Name: CollectRewardsButton
   m_TagString: Untagged
@@ -1920,6 +1947,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &47277417374911984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738027924311880970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &819754387606142337
 GameObject:
   m_ObjectHideFlags: 0
@@ -2856,6 +2895,7 @@ GameObject:
   - component: {fileID: 8429205835004027144}
   - component: {fileID: 8458493730703687671}
   - component: {fileID: 674500061703419641}
+  - component: {fileID: 1654366517075171602}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -2966,6 +3006,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1654366517075171602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639221013694243114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1745880972022706073
 GameObject:
   m_ObjectHideFlags: 0
@@ -4044,6 +4096,7 @@ GameObject:
   - component: {fileID: 5040489649546609818}
   - component: {fileID: 6162105318010846524}
   - component: {fileID: 3092907989010993214}
+  - component: {fileID: 2822575972526156694}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -4154,6 +4207,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2822575972526156694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2566995492281154872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2869208706741132014
 GameObject:
   m_ObjectHideFlags: 0
@@ -5538,6 +5603,7 @@ GameObject:
   - component: {fileID: 5057647583433253675}
   - component: {fileID: 8919714914496435849}
   - component: {fileID: 5891212076235548735}
+  - component: {fileID: 6507695065739144881}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -5648,6 +5714,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6507695065739144881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4257637838215821503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4340050177167462945
 GameObject:
   m_ObjectHideFlags: 0
@@ -5736,6 +5814,7 @@ GameObject:
   - component: {fileID: 7325325903844657716}
   - component: {fileID: 7562698826375535872}
   - component: {fileID: 2495957591478166334}
+  - component: {fileID: 4483833632460374490}
   m_Layer: 5
   m_Name: UndoChestStateButton
   m_TagString: Untagged
@@ -5846,6 +5925,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4483833632460374490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4586013423736834256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4616560664406317597
 GameObject:
   m_ObjectHideFlags: 0
@@ -7550,6 +7641,7 @@ GameObject:
   - component: {fileID: 2296707858048595509}
   - component: {fileID: 5669096610870126937}
   - component: {fileID: 1639135674835868468}
+  - component: {fileID: 5981863716978534286}
   m_Layer: 5
   m_Name: UnlockWithGemsButton
   m_TagString: Untagged
@@ -7661,6 +7753,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5981863716978534286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6664693811116750157}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6856640435538369309
 GameObject:
   m_ObjectHideFlags: 0
@@ -8019,6 +8123,7 @@ GameObject:
   - component: {fileID: 4365580224329055630}
   - component: {fileID: 5193617026471697390}
   - component: {fileID: 4251622021741979472}
+  - component: {fileID: 3583740642773399898}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -8129,6 +8234,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3583740642773399898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7161434423712105573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7200458306040326116
 GameObject:
   m_ObjectHideFlags: 0
@@ -8141,6 +8258,7 @@ GameObject:
   - component: {fileID: 674710365489987336}
   - component: {fileID: 8299662603396148538}
   - component: {fileID: 7986377849552652090}
+  - component: {fileID: 5502741139125543225}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -8251,6 +8369,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5502741139125543225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7200458306040326116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7318643580280046491
 GameObject:
   m_ObjectHideFlags: 0
@@ -8368,7 +8498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c84bac9b957d544a4dc1877e2f94c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiGameplayViewController: {fileID: 1580032035739492709}
+  cursorDataSO: {fileID: 11400000, guid: 38daabf9d36de074dbe1e73027e8eae3, type: 2}
 --- !u!1 &7366853031089937754
 GameObject:
   m_ObjectHideFlags: 0
@@ -9094,6 +9224,7 @@ GameObject:
   - component: {fileID: 1580280071573445941}
   - component: {fileID: 1941140576091023121}
   - component: {fileID: 2759453072710864954}
+  - component: {fileID: 8392780306689111228}
   m_Layer: 5
   m_Name: ClosePopupButton
   m_TagString: Untagged
@@ -9204,6 +9335,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8392780306689111228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7872190181796452506}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7887301615980096256
 GameObject:
   m_ObjectHideFlags: 0
@@ -9942,6 +10085,7 @@ GameObject:
   - component: {fileID: 1956897665032051322}
   - component: {fileID: 4782481608038320885}
   - component: {fileID: 2365340834020216791}
+  - component: {fileID: 3703496727062333346}
   m_Layer: 5
   m_Name: GenerateChestButton
   m_TagString: Untagged
@@ -10052,6 +10196,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3703496727062333346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811015787254186136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8921112300002486322
 GameObject:
   m_ObjectHideFlags: 0

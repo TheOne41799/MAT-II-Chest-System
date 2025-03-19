@@ -39,14 +39,9 @@ namespace ChestSystem.Events
         public GameEventController<ChestController, UIPopups> OnUIPopupCollectRewardsOrUndoChestUnlock { get; private set; }
         public GameEventController OnCloseUIPopups { get; private set; }
 
-
-
         //temp method for chest queue text
         public GameEventController<ChestController> OnChestQueuedToUnlock {  get; private set; }
 
-
-
-        // command pattern
         public GameEventController<ChestController> OnUndoChestUnlockWithGems { get; private set; }
         public GameEventController<ChestController> OnUndoChestUnlockWithGemsAddBackPlayerGems { get; private set; }
 
@@ -74,15 +69,9 @@ namespace ChestSystem.Events
 
             OnCloseUIPopups = new GameEventController();
 
-
-
-
             //temp method for chest queue text
             OnChestQueuedToUnlock = new GameEventController<ChestController>();
 
-
-
-            // command pattern
             OnUndoChestUnlockWithGems = new GameEventController<ChestController>();
             OnUndoChestUnlockWithGemsAddBackPlayerGems = new GameEventController<ChestController>();
         }

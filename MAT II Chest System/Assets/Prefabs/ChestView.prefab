@@ -558,6 +558,7 @@ GameObject:
   - component: {fileID: 1647707771252359818}
   - component: {fileID: 5892087934822849770}
   - component: {fileID: 3239589156258964394}
+  - component: {fileID: 7631939554472216916}
   m_Layer: 5
   m_Name: ChestSpriteandButton
   m_TagString: Untagged
@@ -667,6 +668,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &7631939554472216916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2371978217010551865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 294a52b0c20837042a894070966a3915, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4838598882547294017
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,13 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db1cddfd56edaa64b86c46916a36a2de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  unlockButton: {fileID: 3239589156258964394}
-  chestImage: {fileID: 5892087934822849770}
-  chestTypeText: {fileID: 1708330956}
-  chestStateText: {fileID: 1609373605014504916}
-  timeToUnlockChestText: {fileID: 2117478640}
-  numberOfCoinsInChestText: {fileID: 1643229076093622175}
-  numberOfGemsInChestText: {fileID: 3110001144122685072}
 --- !u!1 &8002114610654326084
 GameObject:
   m_ObjectHideFlags: 0

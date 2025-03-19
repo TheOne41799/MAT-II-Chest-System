@@ -7,6 +7,13 @@ namespace ChestSystem.UI
 {
     public class UIManager : MonoBehaviour
     {
-        [SerializeField] private UIGameplayViewController uiGameplayViewController;
+        [SerializeField] private CursorDataSO cursorDataSO;
+        private CursorManager cursorManager;
+
+        private void Awake()
+        {
+            cursorManager = new CursorManager(cursorDataSO);
+            CursorHoverHandler.Initialize(cursorManager);
+        }
     }
 }

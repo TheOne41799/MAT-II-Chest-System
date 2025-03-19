@@ -446,6 +446,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 257176850884843762, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7318643580280046491, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
       propertyPath: m_Name
       value: UIManager (Canvas)
@@ -533,6 +537,10 @@ PrefabInstance:
     - target: {fileID: 7318643580280046495, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7887301615980096256, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ec53b82d2fffe4488324106de881949, type: 3}

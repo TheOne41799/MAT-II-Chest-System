@@ -15,13 +15,13 @@ namespace ChestSystem.Audio
 
             this.audioDatabase = audioDatabase;
 
-            //InitializeAudioServices();
+            InitializeAudioServices();
         }
 
-        /*private void InitializeAudioServices()
+        private void InitializeAudioServices()
         {
-            PlaybackgroundMusic(AudioType.BACKGROUND_MUSIC, true);
-        }*/
+            PlaybackgroundMusic(AudioTypes.BACKGROUND_MUSIC, true);
+        }
 
         public void PlaySoundEffects(AudioTypes audioType, bool loopSound = false)
         {
@@ -42,8 +42,9 @@ namespace ChestSystem.Audio
             AudioClip clip = GetSoundClip(audioType);
             if (clip != null)
             {
+                audioView.backgroundMusic.clip = clip;
                 audioView.backgroundMusic.loop = loopSound;
-                audioView.backgroundMusic.PlayOneShot(clip);
+                audioView.backgroundMusic.Play();
             }
             else
             {

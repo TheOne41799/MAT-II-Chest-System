@@ -1,3 +1,4 @@
+using ChestSystem.Audio;
 using ChestSystem.Events;
 using System.Collections;
 using System.Collections.Generic;
@@ -21,5 +22,7 @@ public class UIPopupsClose : MonoBehaviour
     private void CloseAllUIPopups()
     {
         EventService.Instance.OnCloseUIPopups.InvokeEvent();
+
+        EventService.Instance.OnAudioEffectPlay.InvokeEvent(AudioTypes.BUTTON_CLICKED, false);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 using static UnityEditor.Progress;
 using ChestSystem.Chests;
 using ChestSystem.UI;
+using ChestSystem.Audio;
 
 namespace ChestSystem.Events
 {
@@ -44,6 +45,8 @@ namespace ChestSystem.Events
 
         public GameEventController<ChestController> OnUndoChestUnlockWithGems { get; private set; }
         public GameEventController<ChestController> OnUndoChestUnlockWithGemsAddBackPlayerGems { get; private set; }
+        public GameEventController<AudioTypes, bool> OnBackgroundMusicPlay { get; }
+        public GameEventController<AudioTypes, bool> OnAudioEffectPlay { get; }
 
 
         public EventService()
@@ -74,6 +77,9 @@ namespace ChestSystem.Events
 
             OnUndoChestUnlockWithGems = new GameEventController<ChestController>();
             OnUndoChestUnlockWithGemsAddBackPlayerGems = new GameEventController<ChestController>();
+
+            OnBackgroundMusicPlay = new GameEventController<AudioTypes, bool>();
+            OnAudioEffectPlay = new GameEventController<AudioTypes, bool>();
         }
     }
 }

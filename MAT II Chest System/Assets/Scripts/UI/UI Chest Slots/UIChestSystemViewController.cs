@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using ChestSystem.Events;
+using ChestSystem.Audio;
 
 namespace ChestSystem.UI
 {
@@ -56,6 +57,8 @@ namespace ChestSystem.UI
                     currentEmptyUIChestSlotViewControllerToBeFilled = controller;
 
                     EventService.Instance.OnGenerateChestButtonClicked.InvokeEvent();
+
+                    EventService.Instance.OnAudioEffectPlay.InvokeEvent(AudioTypes.BUTTON_CLICKED, false);
                                         
                     return;
                 }

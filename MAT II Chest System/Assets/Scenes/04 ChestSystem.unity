@@ -352,7 +352,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chestModelDatabaseSO: {fileID: 11400000, guid: 7df1effda11d96a4f98033fb717350b0, type: 2}
+  audioDatabase: {fileID: 11400000, guid: 4259f06b3979d534aa0506e9a81777a6, type: 2}
   uiManager: {fileID: 1873745494096174996, guid: 4ec53b82d2fffe4488324106de881949, type: 3}
+  audioViewPrefab: {fileID: 4715590325333583321, guid: 6925f938c6c947a4ea2dce06ada027d7, type: 3}
 --- !u!4 &1516508716
 Transform:
   m_ObjectHideFlags: 0

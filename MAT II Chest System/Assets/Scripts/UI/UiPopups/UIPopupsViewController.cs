@@ -1,3 +1,4 @@
+using ChestSystem.Audio;
 using ChestSystem.Chests;
 using ChestSystem.Events;
 using System.Collections;
@@ -85,6 +86,8 @@ namespace ChestSystem.UI
             {
                 allUIPopupsList[i].SetActive(false);
             }
+
+            PlayPopupMusic();
         }
 
         private void OnEnable()
@@ -115,7 +118,9 @@ namespace ChestSystem.UI
 
         private void UIPopupManager(UIPopups uiPopup)
         {
-            switch(uiPopup)
+            PlayPopupMusic();
+
+            switch (uiPopup)
             {
                 case UIPopups.UI_CHEST_UNLOCK_POPUP:
                     DeactivateUIPopups();
@@ -163,6 +168,11 @@ namespace ChestSystem.UI
                     uiCantUndoChestUnlockedWithTimerPopup.SetActive(true);
                     break;
             }
+        }
+
+        private void PlayPopupMusic()
+        {
+            EventService.Instance.OnAudioEffectPlay.InvokeEvent(AudioTypes.BUTTON_CLICKED, false);
         }
 
         private void UIPopupUnlockChestManager(ChestController controller, UIPopups popup)
@@ -265,6 +275,8 @@ namespace ChestSystem.UI
         private void CloseUIPopupCantUndoChestUnlockedWithTimer()
         {
             uiCantUndoChestUnlockedWithTimerPopup.SetActive(false);
+
+            PlayPopupMusic();
         }
     }    
 }

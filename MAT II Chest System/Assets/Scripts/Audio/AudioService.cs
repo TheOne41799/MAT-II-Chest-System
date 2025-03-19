@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ChestSystem.Events;
 
 namespace ChestSystem.Audio
 {
@@ -12,8 +13,8 @@ namespace ChestSystem.Audio
         {
             audioController = new AudioController(audioViewPrefab, database);
 
-            //EventService.Instance.OnBackgroundMusicPlay.AddListener(audioController.PlaybackgroundMusic);
-            //EventService.Instance.OnAudioEffectPlay.AddListener(audioController.PlaySoundEffects);
+            EventService.Instance.OnBackgroundMusicPlay.AddListener(audioController.PlaybackgroundMusic);
+            EventService.Instance.OnAudioEffectPlay.AddListener(audioController.PlaySoundEffects);
         }
     }
 }

@@ -9,6 +9,5 @@ namespace ChestSystem.Audio
         NONE,
         BACKGROUND_MUSIC,
         BUTTON_CLICKED,
-        UI_POPUP_OPEN_CLOSE
     }
 }

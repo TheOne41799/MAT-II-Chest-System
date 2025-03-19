@@ -11,7 +11,7 @@ namespace ChestSystem.Main
     {
         #region services variables
         private ChestService chestService;
-        private PlayerService playerService;
+        private PlayerService playerService;        
         #endregion
 
         #region database variables
@@ -19,11 +19,16 @@ namespace ChestSystem.Main
         [SerializeField] private ChestModelDatabaseSO chestModelDatabaseSO;
         #endregion
 
+        #region manager variables
+        [SerializeField] private UIManager uiManager;
+        #endregion
+
 
         private void Start()
         {
             playerService = new PlayerService();
             chestService = new ChestService(chestModelDatabaseSO, playerService, this);
+            uiManager = GameObject.Instantiate(uiManager);
         }
     }
 }

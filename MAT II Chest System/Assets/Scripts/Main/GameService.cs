@@ -34,6 +34,8 @@ namespace ChestSystem.Main
             chestService = new ChestService(chestModelDatabaseSO, playerService, this);
             uiManager = GameObject.Instantiate(uiManager);
             audioService = new AudioService(audioViewPrefab, audioDatabase);
+
+            playerService.PlayerController.PlayerModel.InitializePlayerStats();
         }
     }
 }

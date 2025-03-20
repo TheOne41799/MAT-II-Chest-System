@@ -21,6 +21,7 @@ namespace ChestSystem.Chests
 
         private ChestCommandInvoker commandInvoker = new ChestCommandInvoker();
         
+        //These are only chests which are unlocked with gems
         private List<ChestController> unlockedChestsWithGemsHistory = new List<ChestController>();
 
         public ChestService(ChestModelDatabaseSO chestModelDatabaseSO, PlayerService playerService, MonoBehaviour coroutineRunner)
@@ -66,6 +67,7 @@ namespace ChestSystem.Chests
             }
         }
 
+        // check how the chest is being unlocked - through timer or by using gems
         private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
         {
             if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
@@ -75,7 +77,6 @@ namespace ChestSystem.Chests
                     EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_ALREADY_QUEUED);
                     return;
                 }
-
 
                 EnqueueChestForUnlock(controller);
             }
@@ -170,6 +171,7 @@ namespace ChestSystem.Chests
             chestPool.ReturnChest(controller);
         }
 
+        // using command pattern for undo
         public void UndoLastChestAction(ChestController controller)
         {
             if (unlockedChestsWithGemsHistory.Contains(controller))

@@ -21,6 +21,8 @@ namespace ChestSystem.Chests
 
         private ChestModelSO chestModelSO;
 
+        // this is the dynaamic amount of gems required based on time left if chest has been unlocking using a timer
+        // in any case, you will need a minimum number of gems to unlock the chest directly
         private int updatedGemsRequiredToUnlockChest;
         public int UpdatedGemsRequiredToUnlockChest { get { return updatedGemsRequiredToUnlockChest; } }
 

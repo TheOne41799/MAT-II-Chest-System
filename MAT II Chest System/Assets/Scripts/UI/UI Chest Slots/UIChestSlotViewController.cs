@@ -10,8 +10,11 @@ namespace ChestSystem.UI
 {
     public class UIChestSlotViewController : MonoBehaviour
     {
-        [SerializeField] private GameObject uiChestSlotEmpty;
-        [SerializeField] private GameObject uiChestSlotFilled;
+        // this script contains information of a single chest controller
+        // doesnot perform any control logic at the moment but you do it if needed
+
+        [SerializeField] private GameObject uiChestSlotEmpty; // graphic for empty slot
+        [SerializeField] private GameObject uiChestSlotFilled; // graphic for filled slot
 
         [SerializeField] private Image chestImage;
         [SerializeField] private Button chestButton;
@@ -68,6 +71,7 @@ namespace ChestSystem.UI
             ActivateDeactivateChestSlotViewChildrenGameObjects();
         }
 
+        // checking chest states and fire appropriate events based on the chest state
         private void ChestButtonClicked()
         {
             if (chestController != null)
@@ -105,6 +109,7 @@ namespace ChestSystem.UI
             timer.gameObject.SetActive(false);
         }
 
+        // chest added to timer queue
         public void OnChestAddedToQueue(ChestController controller)
         {
             if (chestController == null || chestController.ChestID != controller.ChestID) return;

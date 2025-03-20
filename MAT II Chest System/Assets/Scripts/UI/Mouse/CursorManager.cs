@@ -6,6 +6,7 @@ namespace ChestSystem.UI
 {
     public class CursorManager
     {
+        // to change the cursor graphic when mouse is hovering over certain ui elements
         private CursorDataSO cursorData;
 
         public CursorManager(CursorDataSO cursorData)

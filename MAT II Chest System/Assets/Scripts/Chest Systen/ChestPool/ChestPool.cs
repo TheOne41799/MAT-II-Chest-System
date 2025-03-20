@@ -23,6 +23,9 @@ namespace ChestSystem.Chests
             InitializeChestPool();
         }
 
+        // To make sure initial chest pool has chests of every type
+        // otherwise there is a possibility for some chests may not be created initially
+        // you can change the initial number for each chest type by changing the varibale - initialChestsPerType
         private void InitializeChestPool()
         {
             for (int i = 0; i < initialChestsPerType; i++)

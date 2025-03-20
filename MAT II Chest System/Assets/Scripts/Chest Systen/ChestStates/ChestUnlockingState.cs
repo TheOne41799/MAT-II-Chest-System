@@ -20,6 +20,8 @@ namespace ChestSystem.Chests
 
         public ChestState ChestState => ChestState.UNLOCKING;
 
+        //Passed in a monobehaviour to run a coroutine
+        //Otherwise an Update loop can be used
         private MonoBehaviour coroutineRunner;
 
         private Coroutine chestUnlockingCoroutine;

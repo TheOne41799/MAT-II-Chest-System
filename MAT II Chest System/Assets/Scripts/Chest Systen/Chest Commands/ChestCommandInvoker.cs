@@ -6,6 +6,9 @@ namespace ChestSystem.Chests
 {
     public class ChestCommandInvoker
     {
+        // Used a list instead of stack to make sure that data can be easily accessed in a list
+        // because chestControllers can be unlocked in any order and undo can also be done in any order
+
         private List<IChestCommand> commandHistory = new List<IChestCommand>();
 
         public void ExecuteCommand(IChestCommand command)

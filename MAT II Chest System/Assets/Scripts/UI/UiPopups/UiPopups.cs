@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace ChestSystem.UI
 {
+    // using enum to check which popup needs to be active
+    // this enum is used in combination with EventService
     public enum UIPopups
     {
         NONE,

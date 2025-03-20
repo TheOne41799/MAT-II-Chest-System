@@ -19,16 +19,9 @@ namespace ChestSystem.Chests
 
         private MonoBehaviour coroutineRunner;
 
-
-
-        //command pattern
         private ChestCommandInvoker commandInvoker = new ChestCommandInvoker();
         
-
-
         private List<ChestController> unlockedChestsWithGemsHistory = new List<ChestController>();
-
-
 
         public ChestService(ChestModelDatabaseSO chestModelDatabaseSO, PlayerService playerService, MonoBehaviour coroutineRunner)
         {
@@ -47,8 +40,6 @@ namespace ChestSystem.Chests
             EventService.Instance.OnQueuedChestUnlocked.AddListener(HandleChestUnlocked);
             EventService.Instance.OnQueuedChestUnlockedWithGems.AddListener(RemoveChestUnlockedWithGemsFromTimerQueue);
 
-
-            //command pattern
             EventService.Instance.OnUndoChestUnlockWithGems.AddListener(UndoLastChestAction);
         }
 
@@ -75,7 +66,6 @@ namespace ChestSystem.Chests
             }
         }
 
-
         private void UnlockChest(ChestController controller, ChestUnlockMethod chestUnlockMethod)
         {
             if (chestUnlockMethod == ChestUnlockMethod.WITH_TIMER)
@@ -91,9 +81,6 @@ namespace ChestSystem.Chests
             }
             else if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
             {
-                // i think this is the client
-                // command pattern
-
                 if (chestUnlockMethod == ChestUnlockMethod.WITH_GEMS)
                 {
                     UnlockChestCommand unlockCommand = new UnlockChestCommand(controller);
@@ -111,10 +98,7 @@ namespace ChestSystem.Chests
                 chestUnlockQueue.Enqueue(controller);
 
                 controller.IsChestQueuedToUnlockWithTimer = true;
-
-
-
-                //temp method for chest queue text                
+                
                 if (chestUnlockQueue.Count > 0 && currentlyUnlockingChest != null)
                 {
                     EventService.Instance.OnChestQueuedToUnlock.InvokeEvent(controller);
@@ -136,7 +120,6 @@ namespace ChestSystem.Chests
             }
         }
 
-
         private void HandleChestUnlocked(ChestController chest)
         {
             if (currentlyUnlockingChest == chest)
@@ -146,7 +129,6 @@ namespace ChestSystem.Chests
                 StartNextChestUnlock();
             }
         }
-
 
         private void RemoveChestUnlockedWithGemsFromTimerQueue(ChestController controller)
         {
@@ -171,7 +153,6 @@ namespace ChestSystem.Chests
             chestUnlockQueue = tempQueue;
         }
 
-
         private void ReturnChestToPool(ChestController controller)
         {
             if (activeChests.ContainsKey(controller.ChestID))
@@ -188,8 +169,6 @@ namespace ChestSystem.Chests
 
             chestPool.ReturnChest(controller);
         }
-
-        // command pattern
 
         public void UndoLastChestAction(ChestController controller)
         {

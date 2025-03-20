@@ -28,7 +28,6 @@ namespace ChestSystem.Main
         [SerializeField] private AudioView audioViewPrefab;
         #endregion
 
-
         private void Start()
         {
             playerService = new PlayerService();

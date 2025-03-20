@@ -26,7 +26,6 @@ namespace ChestSystem.UI
         private ChestController chestController;
         public ChestController ChestController { get { return chestController; } }
 
-
         private void Awake()
         {
             ClearSlot();
@@ -40,10 +39,6 @@ namespace ChestSystem.UI
             EventService.Instance.OnChestAdded.AddListener(UIChestSlotViewLockedState);
             EventService.Instance.OnUnlockingChest.AddListener(UIChestSlotViewUnlockingState);
             EventService.Instance.OnChestUnlocked.AddListener(UIChestSlotViewUnlockedState);
-
-
-
-            //temp method for chest queue text
             EventService.Instance.OnChestQueuedToUnlock.AddListener(OnChestAddedToQueue);
         }
 
@@ -110,8 +105,6 @@ namespace ChestSystem.UI
             timer.gameObject.SetActive(false);
         }
 
-
-        //temp method for chest queue text
         public void OnChestAddedToQueue(ChestController controller)
         {
             if (chestController == null || chestController.ChestID != controller.ChestID) return;
@@ -120,7 +113,6 @@ namespace ChestSystem.UI
 
             EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_ADDED_TO_QUEUE);
         }
-
 
         public void UIChestSlotViewUnlockingState(ChestController controller, int timeRemainingToUnlockChest)
         {
@@ -131,7 +123,6 @@ namespace ChestSystem.UI
 
             chestState.text = chestController.ChestStateMachine.CurrentState.ChestState.ToString();
         }
-
 
         public void UIChestSlotViewUnlockedState(ChestController controller)
         {

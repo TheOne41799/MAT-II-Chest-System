@@ -9,7 +9,6 @@ namespace ChestSystem.Chests
         private IChestState currentState;
         public IChestState CurrentState { get { return currentState; } }
 
-
         public void Initialize(IChestState initialState)
         {
             currentState = initialState;

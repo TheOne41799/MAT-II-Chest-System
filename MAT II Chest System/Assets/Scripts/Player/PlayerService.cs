@@ -11,7 +11,6 @@ namespace ChestSystem.Player
         private PlayerController playerController;
         public PlayerController PlayerController { get { return playerController; } }
 
-
         public PlayerService()
         {
             this.playerController = new PlayerController();

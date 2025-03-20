@@ -58,7 +58,6 @@ namespace ChestSystem.UI
 
         private ChestController activeChestController;
 
-
         private void Awake()
         {
             InitializeAllUIPopupsList();

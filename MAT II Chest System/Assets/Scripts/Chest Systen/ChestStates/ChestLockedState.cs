@@ -12,15 +12,11 @@ namespace ChestSystem.Chests
 
         public ChestLockedState(ChestController chest) { this.chestController = chest; }
 
-
         public void EnterState() 
         {
             EventService.Instance.OnChestAdded.InvokeEvent(chestController);
         }
 
-        public void ExitState() 
-        {
-            
-        }
+        public void ExitState() {}
     }
 }

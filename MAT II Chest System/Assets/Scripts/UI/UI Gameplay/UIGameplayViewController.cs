@@ -14,7 +14,6 @@ namespace ChestSystem.UI
         [SerializeField] private TextMeshProUGUI playerCoinsText;
         [SerializeField] private TextMeshProUGUI playerGemsText;
 
-
         private void OnEnable()
         {
             EventService.Instance.OnPlayerStatsUpdated.AddListener(UpdatePlayerDetails);

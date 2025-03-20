@@ -92,9 +92,6 @@ namespace ChestSystem.Chests
         {
             if(playerService.PlayerController.PlayerModel.PlayerGems >= updatedGemsRequiredToUnlockChest)
             {
-
-                // i think this is the receiver
-
                 playerService.PlayerController.PlayerModel.DeductPlayerGemsOnChestPurchase(updatedGemsRequiredToUnlockChest);
 
                 EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_UNLOCKED_WITH_GEMS);
@@ -106,7 +103,6 @@ namespace ChestSystem.Chests
                 EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_PLAYER_HAS_INSUFFICIENT_GEMS);
             }
         }
-
 
         private void CalculateTimeAndGemsRequiredToUnlockTheChest()
         {
@@ -144,7 +140,6 @@ namespace ChestSystem.Chests
 
             EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.InvokeEvent(this);
         }
-
 
         private void ChestUnlockingState()
         {

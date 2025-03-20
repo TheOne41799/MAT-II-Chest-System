@@ -15,7 +15,6 @@ namespace ChestSystem.Chests
 
         private int initialChestsPerType = 3;
 
-
         public ChestPool(ChestModelDatabaseSO chestModelDatabaseSO, PlayerService playerService)
         {
             this.chestModelDatabaseSO = chestModelDatabaseSO;

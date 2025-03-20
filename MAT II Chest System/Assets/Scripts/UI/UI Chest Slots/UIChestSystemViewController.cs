@@ -21,7 +21,6 @@ namespace ChestSystem.UI
         private UIChestSlotViewController currentEmptyUIChestSlotViewControllerToBeFilled;
         private Dictionary<int, UIChestSlotViewController> chestSlotDictionary;
 
-
         private void Awake()
         {
             uIChestSlotViewControllers = new List<UIChestSlotViewController>();

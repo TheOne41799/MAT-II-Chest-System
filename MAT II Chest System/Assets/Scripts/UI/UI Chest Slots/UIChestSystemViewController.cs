@@ -10,17 +10,23 @@ namespace ChestSystem.UI
 {
     public class UIChestSystemViewController : MonoBehaviour
     {
+        // this script controlls all the chest slots
+        // essentially an UI part which tracks all the chests
+        // doesnot perform any control logic at the moment but you do it if needed
         [SerializeField] private int totalChestSlots;
 
         [SerializeField] private Button generateChestButton;
 
         [SerializeField] private UIChestSlotViewController chestSlotViewControllerPrefab;
+
+        //game object under which all the chest controllers will be added as childrem
         [SerializeField] private GameObject uiChestSlotViewHolder;
 
         private List<UIChestSlotViewController> uIChestSlotViewControllers;
+
+        //tracking what is the first available empty slot in the scene
         private UIChestSlotViewController currentEmptyUIChestSlotViewControllerToBeFilled;
         private Dictionary<int, UIChestSlotViewController> chestSlotDictionary;
-
 
         private void Awake()
         {

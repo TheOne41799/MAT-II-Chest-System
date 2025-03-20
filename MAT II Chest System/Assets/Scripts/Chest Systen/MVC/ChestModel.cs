@@ -13,7 +13,6 @@ namespace ChestSystem.Chests
         public int TimeRequiredToUnlockChest { get; }
         public int MinimumGemsRequiredToUnlockChest { get; }
 
-
         public ChestModel(ChestModelSO chestModelSO, int coins, int gems)
         {
             this.ChestType = chestModelSO.ChestType;

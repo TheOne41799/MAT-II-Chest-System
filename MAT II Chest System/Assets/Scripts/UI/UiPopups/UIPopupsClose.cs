@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class UIPopupsClose : MonoBehaviour
 {
+    // a separate button prefab for some of the UI popup prefab
     [SerializeField] private Button uiPopupsCloseButton;
 
     private void OnEnable()

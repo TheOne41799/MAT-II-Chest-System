@@ -21,6 +21,8 @@ namespace ChestSystem.Chests
 
         private ChestModelSO chestModelSO;
 
+        // this is the dynaamic amount of gems required based on time left if chest has been unlocking using a timer
+        // in any case, you will need a minimum number of gems to unlock the chest directly
         private int updatedGemsRequiredToUnlockChest;
         public int UpdatedGemsRequiredToUnlockChest { get { return updatedGemsRequiredToUnlockChest; } }
 
@@ -92,9 +94,6 @@ namespace ChestSystem.Chests
         {
             if(playerService.PlayerController.PlayerModel.PlayerGems >= updatedGemsRequiredToUnlockChest)
             {
-
-                // i think this is the receiver
-
                 playerService.PlayerController.PlayerModel.DeductPlayerGemsOnChestPurchase(updatedGemsRequiredToUnlockChest);
 
                 EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_UNLOCKED_WITH_GEMS);
@@ -107,7 +106,6 @@ namespace ChestSystem.Chests
             }
         }
 
-
         private void CalculateTimeAndGemsRequiredToUnlockTheChest()
         {
             if (chestStateMachine.CurrentState is ChestLockedState lockedState)
@@ -119,6 +117,22 @@ namespace ChestSystem.Chests
                 updatedTimeRemainingToUnlockChest = unlockingState.UnlockTimeRemaining;
             }
 
+
+            // If we need time in formats other than seconds we can use the below code
+            // We also need some extra modifications in other parts of code
+
+            /*// Convert time to minutes and seconds
+            int minutes = (int)(updatedTimeRemainingToUnlockChest / 60);
+            int seconds = (int)(updatedTimeRemainingToUnlockChest % 60);
+            // fire an event passing the integers for time
+
+            // Convert time to hours, minutes, and seconds
+            int hours = (int)(updatedTimeRemainingToUnlockChest / 3600);
+            int remainingMinutes = (int)((updatedTimeRemainingToUnlockChest % 3600) / 60);
+            int remainingSeconds = (int)(updatedTimeRemainingToUnlockChest % 60);
+            // fire an event passing the integers for time;*/
+
+
             updatedGemsRequiredToUnlockChest = Mathf.CeilToInt(updatedTimeRemainingToUnlockChest / 10f) + ChestModel.MinimumGemsRequiredToUnlockChest;
         }
 
@@ -128,7 +142,6 @@ namespace ChestSystem.Chests
 
             EventService.Instance.OnUpdateGemsAndTimeRequiredToUnlockChest.InvokeEvent(this);
         }
-
 
         private void ChestUnlockingState()
         {

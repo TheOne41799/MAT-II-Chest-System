@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca5d2f84d7915b04f93b5ea75c4d4f2f, type: 3}
-  m_Name: CommonChest
+  m_Name: RareChest
   m_EditorClassIdentifier: 
-  chestType: 1
-  chestSprite: {fileID: 21300000, guid: 259127dc68f67ef49b73b628a6bbf988, type: 3}
-  minimumCoinsInChest: 50
-  maximumCoinsInChest: 100
-  minimumGemsInChest: 2
-  maximumGemsInChest: 5
-  timeRequiredToUnlockChest: 6
-  minimumGemsRequiredToUnlockChest: 5
+  chestType: 2
+  chestSprite: {fileID: 21300000, guid: af6e3cd7b20a63b438573a6e6e1e5887, type: 3}
+  minimumCoinsInChest: 100
+  maximumCoinsInChest: 150
+  minimumGemsInChest: 3
+  maximumGemsInChest: 6
+  timeRequiredToUnlockChest: 80
+  minimumGemsRequiredToUnlockChest: 10

@@ -20,11 +20,12 @@ namespace ChestSystem.Chests
 
         public ChestState ChestState => ChestState.UNLOCKING;
 
+        //Passed in a monobehaviour to run a coroutine
+        //Otherwise an Update loop can be used
         private MonoBehaviour coroutineRunner;
 
         private Coroutine chestUnlockingCoroutine;
         public Coroutine ChestUnlockingCoroutine { get { return chestUnlockingCoroutine; } }
-
 
         public ChestUnlockingState(ChestController chest, MonoBehaviour coroutineRunner) 
         { 
@@ -34,14 +35,12 @@ namespace ChestSystem.Chests
             this.coroutineRunner = coroutineRunner;
         }
 
-
         public void EnterState() 
         {
             EventService.Instance.OnUnlockingChest.InvokeEvent(chestController, unlockTimeRemaining);
 
             chestUnlockingCoroutine = coroutineRunner.StartCoroutine(UnlockChestRoutine());
         }
-
 
         private IEnumerator UnlockChestRoutine()
         {

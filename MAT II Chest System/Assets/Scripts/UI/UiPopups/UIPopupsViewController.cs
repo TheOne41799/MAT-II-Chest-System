@@ -11,6 +11,7 @@ namespace ChestSystem.UI
 {
     public class UIPopupsViewController : MonoBehaviour
     {
+        // list of all the ui popup gameobjects
         [SerializeField] private GameObject uiChestUnlockPopup;
         [SerializeField] private GameObject uiChestSlotsFullPopup;
         [SerializeField] private GameObject uiChestAlreadyUnlockingPopup;
@@ -27,6 +28,7 @@ namespace ChestSystem.UI
 
         private List<GameObject> allUIPopupsList = new List<GameObject>();
 
+        // list of all the buttons for closing any uipop
         #region UI Popups Close Buttons
         [SerializeField] private Button uiPopupUnlockChestWithTimerButton;
         [SerializeField] private Button uiPopupUnlockChestWithGemsButton;
@@ -56,8 +58,8 @@ namespace ChestSystem.UI
         [SerializeField] private Button uiPopupCantUndoChestUnlockedWithTimerCloseButton;
         #endregion
 
+        // we need to track this to make sure only the data related to current ui popup is displayed
         private ChestController activeChestController;
-
 
         private void Awake()
         {
@@ -116,6 +118,7 @@ namespace ChestSystem.UI
             EventService.Instance.OnCloseUIPopups.AddListener(DeactivateUIPopups);
         }
 
+        // a method which uses an enum to check which uipopup should be activated
         private void UIPopupManager(UIPopups uiPopup)
         {
             PlayPopupMusic();
@@ -175,6 +178,8 @@ namespace ChestSystem.UI
             EventService.Instance.OnAudioEffectPlay.InvokeEvent(AudioTypes.BUTTON_CLICKED, false);
         }
 
+        // an uipop which is about how to unlock the chest
+        // needs a separate method because we need to track the corresponding controller associated with the popup
         private void UIPopupUnlockChestManager(ChestController controller, UIPopups popup)
         {
             activeChestController = controller;
@@ -184,12 +189,15 @@ namespace ChestSystem.UI
             UIPopupManager(popup);
         }
 
+        // updating the text on uipop when chest is locked
+        // this are the same stats about the chest controller but on the popup
         private void UpdateTimeAndGemsRequiredTextOnChestLocked(ChestController chestController)
         {            
             uiPopupUnlockChestWithTimerText.text = activeChestController.UpdatedTimeRemainingToUnlockChest.ToString() + " secs";
             uiPopupUnlockChestWithGemsText.text = activeChestController.UpdatedGemsRequiredToUnlockChest.ToString() + " gems";
         }
 
+        // updating the text on uipop when chest is unlocking
         private void UpdateTimeAndGemsRequiredTextOnChestLocking(ChestController controller)
         {
             if (activeChestController != controller) return;
@@ -198,7 +206,8 @@ namespace ChestSystem.UI
             uiPopupUnlockChestWithGemsText.text = activeChestController.UpdatedGemsRequiredToUnlockChest.ToString() + " gems";
         }
 
-
+        // to unlock a chest with timer - the different possible states the chest could be in must be tracked
+        // like locked, unlocking, or already unlocked in case the chest unlocks when ui pop up to unlock the chest is still open
         private void UnlockChestWithTimer()
         {
             DeactivateUIPopups();
@@ -217,6 +226,7 @@ namespace ChestSystem.UI
             }
         }
 
+        // just the same as above method but in case of unlocking with gems
         private void UnlockChestWithGems()
         {
             DeactivateUIPopups();
@@ -272,6 +282,7 @@ namespace ChestSystem.UI
             EventService.Instance.OnChestRemoved.InvokeEvent(activeChestController);
         }        
 
+        // this is a popup that says you cannot undo a chest unlock that is unlocked using a timer
         private void CloseUIPopupCantUndoChestUnlockedWithTimer()
         {
             uiCantUndoChestUnlockedWithTimerPopup.SetActive(false);

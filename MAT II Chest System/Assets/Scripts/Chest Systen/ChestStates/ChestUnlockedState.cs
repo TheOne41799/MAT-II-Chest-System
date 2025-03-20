@@ -12,7 +12,6 @@ namespace ChestSystem.Chests
 
         public ChestUnlockedState(ChestController chest) { this.chestController = chest; }
 
-
         public void EnterState() 
         { 
             EventService.Instance.OnChestUnlocked.InvokeEvent(chestController);
@@ -25,10 +24,6 @@ namespace ChestSystem.Chests
             chestController.IsChestQueuedToUnlockWithTimer = false;
         }
 
-
-        public void ExitState() 
-        { 
-            
-        }
+        public void ExitState() {}
     }
 }

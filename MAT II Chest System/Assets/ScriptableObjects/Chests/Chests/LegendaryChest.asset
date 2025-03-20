@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca5d2f84d7915b04f93b5ea75c4d4f2f, type: 3}
-  m_Name: EpicChest
+  m_Name: LegendaryChest
   m_EditorClassIdentifier: 
-  chestType: 3
-  chestSprite: {fileID: 21300000, guid: f8d5126ff1d408e4695b7aca517cf057, type: 3}
-  minimumCoinsInChest: 200
-  maximumCoinsInChest: 300
-  minimumGemsInChest: 4
-  maximumGemsInChest: 7
-  timeRequiredToUnlockChest: 10
-  minimumGemsRequiredToUnlockChest: 15
+  chestType: 4
+  chestSprite: {fileID: 21300000, guid: 916edaf6979dbfa47b39221188f736f3, type: 3}
+  minimumCoinsInChest: 300
+  maximumCoinsInChest: 500
+  minimumGemsInChest: 5
+  maximumGemsInChest: 10
+  timeRequiredToUnlockChest: 120
+  minimumGemsRequiredToUnlockChest: 20

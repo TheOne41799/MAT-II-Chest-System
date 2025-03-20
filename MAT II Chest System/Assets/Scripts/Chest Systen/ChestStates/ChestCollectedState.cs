@@ -11,16 +11,9 @@ namespace ChestSystem.Chests
 
         public ChestCollectedState(ChestController chest) { this.chestController = chest; }
 
-
-        public void EnterState() 
-        {
-            
-        }
+        public void EnterState() {}
 
 
-        public void ExitState() 
-        { 
-            
-        }
+        public void ExitState() {}
     }
 }

@@ -10,8 +10,11 @@ namespace ChestSystem.UI
 {
     public class UIChestSlotViewController : MonoBehaviour
     {
-        [SerializeField] private GameObject uiChestSlotEmpty;
-        [SerializeField] private GameObject uiChestSlotFilled;
+        // this script contains information of a single chest controller
+        // doesnot perform any control logic at the moment but you do it if needed
+
+        [SerializeField] private GameObject uiChestSlotEmpty; // graphic for empty slot
+        [SerializeField] private GameObject uiChestSlotFilled; // graphic for filled slot
 
         [SerializeField] private Image chestImage;
         [SerializeField] private Button chestButton;
@@ -26,7 +29,6 @@ namespace ChestSystem.UI
         private ChestController chestController;
         public ChestController ChestController { get { return chestController; } }
 
-
         private void Awake()
         {
             ClearSlot();
@@ -40,10 +42,6 @@ namespace ChestSystem.UI
             EventService.Instance.OnChestAdded.AddListener(UIChestSlotViewLockedState);
             EventService.Instance.OnUnlockingChest.AddListener(UIChestSlotViewUnlockingState);
             EventService.Instance.OnChestUnlocked.AddListener(UIChestSlotViewUnlockedState);
-
-
-
-            //temp method for chest queue text
             EventService.Instance.OnChestQueuedToUnlock.AddListener(OnChestAddedToQueue);
         }
 
@@ -73,6 +71,7 @@ namespace ChestSystem.UI
             ActivateDeactivateChestSlotViewChildrenGameObjects();
         }
 
+        // checking chest states and fire appropriate events based on the chest state
         private void ChestButtonClicked()
         {
             if (chestController != null)
@@ -110,8 +109,7 @@ namespace ChestSystem.UI
             timer.gameObject.SetActive(false);
         }
 
-
-        //temp method for chest queue text
+        // chest added to timer queue
         public void OnChestAddedToQueue(ChestController controller)
         {
             if (chestController == null || chestController.ChestID != controller.ChestID) return;
@@ -120,7 +118,6 @@ namespace ChestSystem.UI
 
             EventService.Instance.OnUIPopupActivate.InvokeEvent(UIPopups.UI_CHEST_ADDED_TO_QUEUE);
         }
-
 
         public void UIChestSlotViewUnlockingState(ChestController controller, int timeRemainingToUnlockChest)
         {
@@ -131,7 +128,6 @@ namespace ChestSystem.UI
 
             chestState.text = chestController.ChestStateMachine.CurrentState.ChestState.ToString();
         }
-
 
         public void UIChestSlotViewUnlockedState(ChestController controller)
         {

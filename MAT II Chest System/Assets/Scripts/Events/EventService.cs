@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 using ChestSystem.Chests;
 using ChestSystem.UI;
 using ChestSystem.Audio;
@@ -39,10 +38,7 @@ namespace ChestSystem.Events
         public GameEventController<ChestController> OnChestRemoved { get; private set; }
         public GameEventController<ChestController, UIPopups> OnUIPopupCollectRewardsOrUndoChestUnlock { get; private set; }
         public GameEventController OnCloseUIPopups { get; private set; }
-
-        //temp method for chest queue text
         public GameEventController<ChestController> OnChestQueuedToUnlock {  get; private set; }
-
         public GameEventController<ChestController> OnUndoChestUnlockWithGems { get; private set; }
         public GameEventController<ChestController> OnUndoChestUnlockWithGemsAddBackPlayerGems { get; private set; }
         public GameEventController<AudioTypes, bool> OnBackgroundMusicPlay { get; }
@@ -72,7 +68,6 @@ namespace ChestSystem.Events
 
             OnCloseUIPopups = new GameEventController();
 
-            //temp method for chest queue text
             OnChestQueuedToUnlock = new GameEventController<ChestController>();
 
             OnUndoChestUnlockWithGems = new GameEventController<ChestController>();

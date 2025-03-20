@@ -16,7 +16,7 @@ namespace ChestSystem.Player
             InitializePlayerStats();
         }
 
-        private void InitializePlayerStats()
+        public void InitializePlayerStats()
         {
             EventService.Instance.OnPlayerStatsUpdated.InvokeEvent(playerCoins, playerGems);
         }

@@ -8,6 +8,9 @@ using ChestSystem.Audio;
 
 namespace ChestSystem.Main
 {
+    // Note - I just used different assets to check the UX
+    // The chest assets I am finding are not really that good
+    // I just replaced them with character busts
     public class GameService : MonoBehaviour
     {
         #region services variables

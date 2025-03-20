@@ -6,7 +6,7 @@
 ---
 
 ## Playable Link
-place holder for now
+[Outscal](https://outscal.com/anudeepramadugu/game/play-module-assessment-test-ii-gda-game-1)
 
 ## 🎮 Description
 
